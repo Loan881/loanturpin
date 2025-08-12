@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Art Of Greatness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --bg-alt:#f7f7f7;
+      --text:#111111;
+      --muted:#2d2d2d;
+      --border:#000000;
+      --accent:#1E155C;
+      --accent-2:#181451;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Playfair Display", serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.55;
+    }
+    img{max-width:100%;height:auto;display:block}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(1200px, 92%);margin-inline:auto}
+
+    /* Topbar */
+    header{
+      background:var(--bg);
+      position:sticky;top:0;z-index:40;
+      border-bottom:1px solid rgba(0,0,0,.05);
+      backdrop-filter:saturate(160%) blur(6px);
+    }
+    .topbar{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 8px;}
+    .back{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+    .back a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:999px;font-size:14px}
+    .title{font-weight:700;font-size:22px;letter-spacing:.3px}
+
+    /* Hero – carousel (CSS scroll-snap) */
+    .hero{background:var(--bg-alt)}
+    .carousel{position:relative}
+    .slides{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px;scrollbar-width:none}
+    .slides::-webkit-scrollbar{display:none}
+    .slide{flex:0 0 100%;height:500px;scroll-snap-align:center;border-radius:12px;overflow:hidden}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .dots{display:flex;gap:10px;justify-content:center;align-items:center;padding:10px 0 18px}
+    .dots a{width:10px;height:10px;border-radius:999px;border:1px solid #111;display:inline-block}
+
+    /* Sections */
+    section{padding:40px 0}
+    .h2{font-weight:700}
+    .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
+    .prose{font-weight:400}
+
+    /* Content blocks */
+    .block{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin:28px 0}
+    .block.reverse{grid-template-columns:.8fr 1.2fr}
+    .block .card{background:var(--bg);padding:14px 16px;border-radius:12px;border:1px solid rgba(0,0,0,.08)}
+    .block h3{margin:0 0 6px 0;font-weight:700}
+
+    /* CTA */
+    .cta{display:flex;justify-content:center}
+    .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:10px 18px;border-radius:10px;font-size:14px}
+
+    /* Footer */
+    footer{background:var(--bg-alt);}
+    .footer-top{padding:30px 0;border-top:1px solid rgba(0,0,0,.7)}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .cols h4{margin:0 0 6px 0;font-weight:700}
+    .thin{height:1px;background:#000;width:30px;margin:6px 0 10px}
+    .footer-bottom{width:min(800px, 92%);margin:0 auto 20px auto;padding:0 20px}
+    .legal{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .legal .divider{height:.5px;background:#000;width:100%}
+    .legal small{font-weight:300}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .block,.block.reverse{grid-template-columns:1fr;}
+      .back{position:static;transform:none}
+      .topbar{justify-content:space-between}
+      .title{font-size:18px}
+      .slide{height:380px}
+      .cols{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header>
+    <div class="container topbar">
+      <div class="back"><a href="index.html" aria-label="Retour">← Retour</a></div>
+      <div class="title">The Art Of Greatness</div>
+      <div style="width:80px"></div>
+    </div>
+  </header>
+
+  <!-- HERO / CAROUSEL -->
+  <div class="hero">
+    <div class="container carousel">
+      <div class="slides" id="slides">
+        <figure class="slide" id="s1"><img src="https://picsum.photos/seed/762/1600/900" alt="Œuvre 1" /></figure>
+        <figure class="slide" id="s2"><img src="https://picsum.photos/seed/184/1600/900" alt="Œuvre 2" /></figure>
+        <figure class="slide" id="s3"><img src="https://picsum.photos/seed/931/1600/900" alt="Œuvre 3" /></figure>
+        <figure class="slide" id="s4"><img src="https://picsum.photos/seed/576/1600/900" alt="Œuvre 4" /></figure>
+        <figure class="slide" id="s5"><img src="https://picsum.photos/seed/176/1600/900" alt="Œuvre 5" /></figure>
+      </div>
+      <nav class="dots" aria-label="Navigation du carrousel">
+        <a href="#s1" aria-label="Aller à la slide 1"></a>
+        <a href="#s2" aria-label="Aller à la slide 2"></a>
+        <a href="#s3" aria-label="Aller à la slide 3"></a>
+        <a href="#s4" aria-label="Aller à la slide 4"></a>
+        <a href="#s5" aria-label="Aller à la slide 5"></a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <section>
+    <div class="container">
+      <h2 class="h2">The Art Of Greatness Description</h2>
+      <div class="rule"></div>
+      <p class="prose">
+        « The Art of Greatness » est plus qu’une œuvre : c’est un itinéraire intérieur. Chaque matière, chaque lumière et
+        chaque contraste dialoguent avec le regardeur pour lui rappeler que la grandeur n’est pas un sommet figé mais un
+        mouvement continu – une volonté de rendre le monde un peu plus beau que nous ne l’avons trouvé.
+      </p>
+
+      <div class="card" style="padding:0;background:transparent;border:none">
+        <h3 style="margin:22px 0 6px 0">Story</h3>
+        <div class="thin" style="width:35px"></div>
+        <p class="prose" style="margin:10px 0 0 0">
+          Puissiez‑vous, à travers ces mots et ces images, sentir la patience des heures, la quête du geste juste et
+          le désir d’ordre dans le désordre – là où se cache souvent la beauté.
+        </p>
+      </div>
+
+      <!-- Block 1: text + image (right) -->
+      <div class="block">
+        <div class="card">
+          <h3>Design & Conception</h3>
+          <p class="prose">
+            L’idée est née comme une vision : une composition qui tiendrait par l’équilibre des tensions. Les esquisses ont
+            cadré les masses, la couleur a trouvé sa respiration, et le rythme des formes a posé la structure d’ensemble.
+          </p>
+        </div>
+        <div>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Étude – Design & Conception" style="border-radius:12px"/>
+        </div>
+      </div>
+
+      <!-- Block 2: image (left) + text -->
+      <div class="block reverse">
+        <div>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation" style="border-radius:12px"/>
+        </div>
+        <div class="card">
+          <h3>Réalisation</h3>
+          <p class="prose">
+            Chaque coup de pinceau a été posé avec intention. Superpositions, retraits, reprises – la matière s’est faite
+            mémoire du geste jusqu’à ce que la surface parle d’elle‑même : ni trop ni pas assez.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 3: text + image (right) -->
+      <div class="block">
+        <div class="card">
+          <h3>Final Touch</h3>
+          <p class="prose">
+            La dernière étape, presque cérémonielle : clarifier les valeurs, affiner les lisières, signer le silence.
+            C’est là que l’œuvre cesse d’être un travail et devient une présence.
+          </p>
+        </div>
+        <div>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Détail – Final Touch" style="border-radius:12px"/>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta" style="margin-top:22px">
+        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demande By E‑Mail</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER LINKS -->
+  <footer>
+    <div class="footer-top">
+      <div class="container cols">
+        <div>
+          <h4>Page</h4>
+          <div class="thin"></div>
+          <div style="display:grid;gap:10px">
+            <a href="index.html">Home</a>
+            <a href="my-artworks.html">My Art Galery</a>
+            <a href="the-art-story.html">The Art Story</a>
+            <a href="contact-me.html">Contact Me</a>
+          </div>
+        </div>
+        <div>
+          <h4>Social Media</h4>
+          <div class="thin" style="width:82px"></div>
+          <div style="display:grid;gap:12px">
+            <div>Instagram : <a href="#" class="muted">turpinloanart</a></div>
+            <div>TikTok : <a href="#" class="muted">turpinloanart</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="legal">
+        <div style="align-self:flex-start">Contact Me</div>
+        <div class="divider"></div>
+        <div>
+          <span class="muted">E‑Mail : </span>
+          <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a>
+        </div>
+        <small>© 2025 TURPIN Loan</small>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
