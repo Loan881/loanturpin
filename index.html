@@ -24,8 +24,17 @@
       color:var(--ink);
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;
     }
-    img{ max-width:100%; display:block }
-    a{ color:inherit; text-decoration:none }
+    img {
+        width: 100vw;   /* largeur de l'écran */
+        height: 100vh;  /* hauteur de l'écran */
+        object-fit: cover; /* recadre l'image pour remplir sans déformation */
+        display: block;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 
     /* ===== AppBar ===== */
     .appbar{
