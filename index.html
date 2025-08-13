@@ -2,354 +2,324 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Loan Art — HomePage (HTML & CSS)</title>
-
-  <!-- Police semblable à FlutterFlow (Playfair Display) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loan Art – Home</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
   <style>
-    /* =================== Thème & utilitaires =================== */
     :root{
       --bg: #ffffff;
-      --text: #111;
+      --bg-2: #f6f7fb;            /* secondaryBackground */
+      --text: #1d1d1f;
       --muted: #2d2d2d;
-      --brand: #181162;                  /* bouton / lien principal */
-      --alternate: #eef2f7;              /* équivalent 'alternate' */
-      --secondary: #f7f8fb;              /* secondaryBackground */
+      --brand: #181162;           /* bleu boutons */
+      --alt: #f2f4f8;             /* alternate pour le dégradé */
       --gap: 20px;
-      --radius: 8px;
-      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 10px;
+      --maxw: 1200px;
+      --shadow: 0 8px 30px rgba(0,0,0,.06);
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Playfair Display",serif}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{max-width:1100px;margin:0 auto;padding:0 20px}
 
-    /* =================== AppBar + Drawer (sans JS) =================== */
+    * { box-sizing: border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); }
+    body{ font-family: "Playfair Display", serif; letter-spacing:.1px; }
+
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width:100%; display:block; }
+
+    /* ====== APP BAR ====== */
     .appbar{
-      position:sticky; top:0; z-index:20;
-      background:#fff; color:#000; box-shadow:0 1px 4px rgba(0,0,0,.07);
-    }
-    .appbar-inner{
+      position: sticky; top:0; z-index:50;
+      background: var(--bg);
       display:flex; align-items:center; justify-content:center;
-      height:64px; position:relative;
+      height:64px; border-bottom:1px solid #eaeaea;
     }
-    /* bouton hamburger (label pour checkbox) */
-    #drawer-toggle{display:none}
-    .hamburger{
-      position:absolute; left:8px; top:50%; transform:translateY(-50%);
-      width:46px;height:46px;border-radius:999px;border:1px solid transparent;
-      display:grid;place-items:center;cursor:pointer;
-    }
-    .hamburger span,
-    .hamburger span::before,
-    .hamburger span::after{
-      content:"";display:block;width:22px;height:2px;background:#000;border-radius:2px;position:relative
-    }
-    .hamburger span::before{position:absolute;top:-6px}
-    .hamburger span::after{position:absolute;top:6px}
-    .title{font-weight:800;font-size:22px;letter-spacing:.3px}
+    .appbar-inner{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; padding:0 12px; }
+    .brand{ font-weight:700; font-size:22px; color:#000; }
 
-    /* Drawer */
-    .drawer-backdrop,
+    /* ====== DRAWER CSS-ONLY (checkbox hack) ====== */
+    #nav-toggle{ display:none; }
+    .burger{ width:44px; height:44px; display:grid; place-items:center; border-radius:50%; cursor:pointer; }
+    .burger span{ width:22px; height:2px; background:#000; position:relative; display:block; }
+    .burger span::before,
+    .burger span::after{ content:""; position:absolute; left:0; right:0; height:2px; background:#000; }
+    .burger span::before{ top:-6px; }
+    .burger span::after{ top:6px; }
+
     .drawer{
-      position:fixed;inset:0;z-index:30;pointer-events:none;
+      position: fixed; inset:0 auto 0 0; width:320px; background:#fff;
+      transform: translateX(-110%); transition: .35s ease; box-shadow: var(--shadow);
+      padding:20px; z-index:60; overflow:auto;
     }
-    .drawer{display:flex}
-    .drawer-panel{
-      width:min(320px,85vw);background:#fff;height:100%;
-      transform:translateX(-100%);transition:transform .26s ease;
-      box-shadow:var(--shadow);overflow:auto
+    .scrim{
+      position: fixed; inset:0; background: rgba(0,0,0,.28);
+      opacity:0; pointer-events:none; transition:.3s; z-index:55;
     }
-    .drawer-backdrop{background:rgba(0,0,0,.28);opacity:0;transition:opacity .26s ease}
-    /* toggle */
-    #drawer-toggle:checked ~ .drawer .drawer-panel{transform:none;pointer-events:auto}
-    #drawer-toggle:checked ~ .drawer-backdrop{opacity:1;pointer-events:auto}
-    /* contenu du drawer */
-    .drawer-content{padding:20px 20px 40px}
-    .brand{font-weight:900;font-size:32px;margin:60px 0 8px}
-    .divider{height:1px;background:#000;width:210px;opacity:.6}
-    .drawer-nav{margin-top:40px;display:grid;gap:40px}
-    .drawer-link{font-weight:600;font-size:24px}
-    .drawer-social-title{margin:300px 0 6px;font-weight:600}
-    .list-row{display:flex;gap:30px;justify-content:center;margin:8px 0}
+    #nav-toggle:checked ~ .drawer{ transform: translateX(0); }
+    #nav-toggle:checked ~ .scrim{ opacity:1; pointer-events:auto; }
 
-    /* =================== Hero =================== */
+    .drawer h3{ margin:60px 0 6px; font-weight:900; font-size:32px; }
+    .divider{ height:1px; background:#000; opacity:.6; margin:10px 0 0; width:210px; }
+
+    .drawer .navlink{ display:block; font-weight:600; font-size:24px; margin:40px 0 0; }
+    .drawer .navlink:first-of-type{ margin-top:40px; }
+
+    .drawer .social-title{ margin:300px 0 6px; font-weight:600; }
+    .drawer .row{ display:flex; align-items:center; gap:30px; justify-content:center; height:30px; }
+    .drawer .row span{ font-weight:500; }
+
+    /* ====== HERO ====== */
     .hero{
-      height:800px; position:relative; display:grid; place-items:center; text-align:center;
-      background:url('https://images.unsplash.com/photo-1627306052213-164736646fe5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw5fHxTYWxsZSUyMGRlJTIwcGVpbnR1cmV8ZW58MHx8fHwxNzUzODI0NTU1fDA&ixlib=rb-4.1.0&q=80&w=1920') center/cover no-repeat;
+      position:relative; height:800px; width:100%; display:grid; place-items:center; overflow:hidden;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background:url("https://images.unsplash.com/photo-1627306052213-164736646fe5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw5fHxTYWxsZSUyMGRlJTIwcGVpbnR1cmV8ZW58MHx8fHwxNzUzODI0NTU1fDA&ixlib=rb-4.1.0&q=80&w=1600") center/cover no-repeat;
+      filter: saturate(1) contrast(1.05);
     }
     .hero h1{
-      color:#fff; font-weight:600; font-size:40px; margin:0 40px;
-      text-shadow:2px 2px 2px rgba(0,0,0,.9);
-      opacity:0; animation:fadeIn 2s ease-out 980ms forwards;
+      position:relative; margin:0 40px; text-align:center; color:#fff; font-size:40px; font-weight:600;
+      text-shadow: 2px 2px 2px rgba(0,0,0,.75);
+      opacity:0; animation: fadeIn 2s ease-out 1s forwards;
     }
-    @keyframes fadeIn{to{opacity:1}}
+    @keyframes fadeIn { to { opacity:1; } }
 
-    /* =================== Section principale =================== */
-    .main-card{
-      margin-top:-20px; background:var(--secondary);
-      border-radius:20px 20px 0 0; padding:20px 0 40px;
+    /* ====== WRAPPER SECTIONS ====== */
+    .surface{
+      background: var(--bg-2);
+      border-top-left-radius:20px; border-top-right-radius:20px;
+      padding:20px;
     }
-    .section-title{
-      text-align:center; font-weight:800;margin:0 0 20px
-    }
-    .lead{max-width:820px;margin:0 auto;text-align:center;line-height:1.7}
-    .link-main{color:var(--brand);font-weight:600;display:inline-block;margin-top:20px}
+    .container{ max-width:var(--maxw); margin:0 auto; }
 
-    /* ----- Feature 1 : image à droite, texte haut gauche, bouton bas droit ----- */
+    .title-center{ text-align:center; font-weight:700; margin:0 0 20px; }
+    .text-center{ text-align:center; }
+    .lead{ max-width:900px; margin:0 auto; line-height:1.7; }
+    .link{
+      color: var(--brand); font-weight:600;
+    }
+
+    /* ====== FEATURE BLOCKS (image + texte) ====== */
     .feature{
-      position:relative; max-width:1000px; margin:50px auto 0;
-      min-height:520px;
+      position:relative; width:100%; max-width:1000px; margin:50px auto 0; min-height:520px;
     }
-    .feature .feat-img{
-      position:absolute; right:20px; top:20px;
-      width:400px; height:500px; border-radius:var(--radius); overflow:hidden;
-      box-shadow:var(--shadow);
-      background:url('https://images.unsplash.com/photo-1732481126884-9c6b3d560ed6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxM3x8VGFibGVhdXxlbnwwfHx8fDE3NTM4MjU1NDd8MA&ixlib=rb-4.1.0&q=80&w=1080') center/cover no-repeat;
+    .feature .img{
+      position:absolute; right:0; top:0; width:400px; height:500px; border-radius:8px; overflow:hidden; box-shadow:var(--shadow);
     }
-    .feature .feat-text{
-      position:absolute; left:40px; top:5%; max-width:520px;
-      line-height:1.7; font-weight:500; font-size:16px;
+    .feature .img img{ width:100%; height:100%; object-fit:cover; }
+    .feature .copy{
+      position:absolute; left:0; right:420px; top:0; padding:40px 20px 0 40px; font-size:20px; line-height:1.7;
     }
-    .btn{
-      display:inline-block; background:var(--brand); color:#fff;
-      padding:10px 16px; border-radius:10px; font-size:14px; font-weight:700;
-    }
-    .feature .feat-cta{
+    .feature .cta{
       position:absolute; right:30px; bottom:30px;
+      background: var(--brand); color:#fff; border:none; border-radius:10px; height:40px; padding:0 16px; cursor:pointer; font-weight:600; font-size:14px;
     }
 
-    /* ----- Feature 2 : image à droite, texte à gauche ----- */
-    .split{
-      position:relative; max-width:1000px; margin:20px auto 0; min-height:420px;
-    }
-    .split .split-img{
-      position:absolute; right:0; top:0; width:300px; height:400px;
-      border-radius:var(--radius); overflow:hidden;
-      background:url('https://picsum.photos/seed/121/900/1200') center/cover no-repeat;
-      box-shadow:var(--shadow);
-    }
-    .split .split-text{
-      position:absolute; left:0; right:340px; top:0;
-      text-align:justify; line-height:1.7;
-    }
+    .feature.reverse .img{ left:0; right:auto; width:300px; height:400px; }
+    .feature.reverse .copy{ left:320px; right:0; padding-right:100px; }
 
-    /* =================== Bande masonry (StaggeredView) =================== */
-    .strip-bg{
-      background: linear-gradient(180deg,#fff 0%, var(--alternate) 50%, #fff 100%);
+    /* ====== MASONRY (StaggeredView) ====== */
+    .gallery-wrap{
+      position:relative; width:100%; background: linear-gradient(180deg,#fff 0%, var(--alt) 50%, #fff 100%);
+      padding:20px 20px 0;
     }
-    .staggered-strip{
-      position:relative; height:240px; overflow:hidden;
-    }
-    .masonry{
-      height:100%; padding:20px; column-gap:20px; column-count:6;
-    }
-    .masonry > figure{margin:0 0 20px; break-inside:avoid; border-radius:8px; overflow:hidden}
-    .staggered-strip::after{
+    .masonry{ max-width:var(--maxw); margin:0 auto; column-gap:20px; }
+    .masonry > figure{ break-inside: avoid; margin:0 0 20px; border-radius:8px; overflow:hidden; }
+    .masonry img{ width:100%; height:auto; object-fit:cover; display:block; }
+    /* overlay dégradé comme dans le Container superposé */
+    .gallery-wrap::after{
       content:""; position:absolute; inset:0; pointer-events:none;
-      background:linear-gradient(180deg,#fff 0%, rgba(57,210,192,0) 20%, rgba(255,255,255,0) 80%, #fff 100%);
+      background: linear-gradient(180deg,#fff 0%, rgba(57,210,192,0) 20%, rgba(255,255,255,0) 80%, #fff 100%);
     }
+    @media (min-width:1200px){ .masonry{ column-count:6; } }
+    @media (min-width:900px) and (max-width:1199px){ .masonry{ column-count:4; } }
+    @media (min-width:600px) and (max-width:899px){ .masonry{ column-count:3; } }
+    @media (max-width:599px){ .masonry{ column-count:2; } }
 
-    /* =================== Section texte simple =================== */
-    .simple{
-      padding:30px 0 10px; text-align:center;
-    }
-    .simple p{max-width:800px;margin:30px auto 0;line-height:1.7}
+    /* ====== HELLO WORLD SECTION ====== */
+    .hello{ background:#fff; padding:40px 20px; }
+    .hello .inner{ max-width:900px; margin:0 auto; text-align:center; line-height:1.7; }
 
-    /* =================== Footer blocs : pages & réseaux =================== */
+    /* ====== FOOTER ====== */
     .footer-top{
-      background:var(--bg); padding:20px 0;
+      background: var(--bg); padding:20px 20px 0;
     }
-    .footer-columns{
-      display:flex; gap:40px; justify-content:space-around; align-items:flex-start;
-      max-width:1100px; margin:0 auto; padding:20px;
+    .footer-grid{
+      max-width:var(--maxw); margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:start;
+      border-top:1px solid transparent;
     }
-    .footer-col h4{margin:0;font-weight:800}
-    .footer-col .mini-divider{width:30px;height:1px;background:#000;margin:8px 0}
-    .footer-link{display:block;margin:10px 0}
-    .social .mini-divider{width:82px}
-    .social-row{display:flex;gap:10px;align-items:center;margin-top:20px}
+    .footer-block h4{ margin:0; font-weight:700; }
+    .foot-divider{ width:30px; height:1px; background:#000; margin:10px 0 0; }
+    .footer-link{ display:block; margin:20px 0 10px; }
+    .footer-row{ display:flex; gap:8px; align-items:center; margin-top:20px; }
+    .footer-bottom{
+      max-width:800px; margin:0 auto; padding:0 20px 20px;
+      text-align:left;
+    }
+    .footer-bottom .bar{ height:.5px; background:#000; margin:50px auto 10px; width:220px; }
+    .copyright{ text-align:center; font-weight:100; }
 
-    /* =================== Contact & copyright =================== */
-    .contact{
-      max-width:800px;margin:0 auto;padding:0 20px 20px
-    }
-    .contact h4{margin-top:20px;font-weight:800}
-    .contact .line{height:1px;background:#000;margin:8px 0}
-    .copyright{width:220px;margin:50px auto 0;text-align:center}
-    .copyright .line{height:.5px;background:#000;margin-bottom:8px}
-    .muted{font-weight:100}
-
-    /* =================== Responsive =================== */
-    @media (max-width:1200px){
-      .masonry{column-count:4}
-    }
-    @media (max-width:900px){
-      .masonry{column-count:3}
-      .feature{min-height:auto;padding-bottom:100px}
-      .feature .feat-img{position:relative;right:auto;top:auto;margin:0 auto}
-      .feature .feat-text{position:relative;left:auto;top:auto;margin:20px auto 0}
-      .feature .feat-cta{position:relative;right:auto;bottom:auto;margin-top:16px;display:flex;justify-content:flex-end}
-      .split{min-height:auto;padding-bottom:20px}
-      .split .split-img{position:relative;margin:20px auto 0;right:auto}
-      .split .split-text{position:relative;left:auto;right:auto}
-    }
-    @media (max-width:600px){
-      .masonry{column-count:2}
-      .drawer-content{padding-bottom:80px}
-      .footer-columns{flex-direction:column;gap:24px}
+    /* ====== RESPONSIVE TWEAKS ====== */
+    @media (max-width:1024px){
+      .feature{ min-height:560px; }
+      .feature .img{ position:relative; width:100%; height:360px; right:auto; }
+      .feature .copy{ position:relative; left:auto; right:auto; padding:20px 0 0; }
+      .feature .cta{ position:relative; right:auto; bottom:auto; margin-top:12px; }
+      .feature.reverse .img{ width:100%; height:320px; }
+      .feature.reverse .copy{ left:auto; right:auto; padding-right:0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ======== AppBar + Drawer (checkbox hack) ======== -->
+  <!-- Toggle Drawer -->
+  <input type="checkbox" id="nav-toggle" />
+  <!-- Drawer -->
+  <aside class="drawer">
+    <h3>TURPIN Loan</h3>
+    <div class="divider"></div>
+
+    <a class="navlink" href="#">Home</a>
+    <a class="navlink" href="#galerie">My ArtWorks</a>
+    <a class="navlink" href="#story">The Art Storys</a>
+    <a class="navlink" href="#contact">Contact Me.</a>
+
+    <div class="social-title">Social Media</div>
+    <div class="divider" style="width:100%; opacity:1;"></div>
+
+    <div class="row" style="margin-top:12px;">
+      <span>Instagram :</span>
+      <a href="#" target="_blank" rel="noopener">turpinloanart</a>
+    </div>
+    <div class="row">
+      <span>TikTok :</span>
+      <a href="#" target="_blank" rel="noopener">turpinloanart</a>
+    </div>
+  </aside>
+  <label class="scrim" for="nav-toggle" aria-label="Fermer le menu"></label>
+
+  <!-- App Bar -->
   <header class="appbar">
-    <div class="appbar-inner container">
-      <input id="drawer-toggle" type="checkbox" aria-label="Ouvrir le menu" />
-      <label class="hamburger" for="drawer-toggle" aria-hidden="true"><span></span></label>
-      <div class="title">Loan Art</div>
+    <div class="appbar-inner">
+      <label class="burger" for="nav-toggle" aria-label="Ouvrir le menu">
+        <span></span>
+      </label>
+      <div class="brand">Loan Art</div>
+      <div style="width:44px;"></div>
     </div>
   </header>
 
-  <!-- Drawer -->
-  <div class="drawer">
-    <aside class="drawer-panel">
-      <div class="drawer-content">
-        <div class="brand">TURPIN Loan</div>
-        <div class="divider"></div>
-
-        <nav class="drawer-nav">
-          <a class="drawer-link" href="#">Home</a>
-          <a class="drawer-link" href="#">My ArtWorks</a>
-          <a class="drawer-link" href="#">The Art Storys</a>
-          <a class="drawer-link" href="#">Contact Me.</a>
-        </nav>
-
-        <div class="drawer-social-title">Social Media</div>
-        <div class="divider" style="width:100%"></div>
-
-        <div class="list-row">
-          <div>Instagram :</div>
-          <a href="#" class="underline">turpinloanart</a>
-        </div>
-        <div class="list-row">
-          <div>TikTok :</div>
-          <a href="#" class="underline">turpinloanart</a>
-        </div>
-      </div>
-    </aside>
-  </div>
-  <label class="drawer-backdrop" for="drawer-toggle" aria-hidden="true"></label>
-
-  <!-- ======== Hero ======== -->
-  <section class="hero">
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
     <h1>One Thing BETTER</h1>
   </section>
 
-  <!-- ======== Section principale ======== -->
-  <section class="main-card">
+  <!-- Surface main -->
+  <section class="surface">
     <div class="container">
-      <h3 class="section-title">The Art</h3>
-      <p class="lead">
-        Dans l’immensité de ce monde qui nous enveloppe, l’art devient le fil invisible qui relie
-        nos regards aux choses simples, leur donnant une âme…
+
+      <h2 class="title-center">The Art</h2>
+      <p class="lead text-center">
+        Dans l’immensité de ce monde qui bouge sans cesse, l’art nous offre un lieu où l’on respire, où l’on se retrouve.
+        C’est ici que commencent mes histoires — entre lumière et matière.
       </p>
-      <a class="link-main" href="#">Voir les œuvres →</a>
 
-      <!-- Feature 1 -->
-      <div class="feature">
-        <div class="feat-img" aria-hidden="true"></div>
-        <div class="feat-text">
-          Dans l’immensité de ce monde qui nous enveloppe, l’art devient le fil invisible qui relie
-          nos regards aux choses simples, leur donnant une âme, une profondeur, une vérité…
+      <p class="text-center" style="margin-top:20px;">
+        <a class="link" href="#galerie">Voir les œuvres →</a>
+      </p>
+
+      <!-- Feature 1 (image droite + bouton) -->
+      <div class="feature" id="story">
+        <div class="img">
+          <img src="https://images.unsplash.com/photo-1732481126884-9c6b3d560ed6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxM3x8VGFibGVhdXxlbnwwfHx8fDE3NTM4MjU1NDd8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Tableau">
         </div>
-        <div class="feat-cta">
-          <a class="btn" href="#">En savoir plus..</a>
+        <div class="copy">
+          Dans l’immensité de ce monde qui s’accélère, la peinture devient un geste simple et puissant :
+          un rappel que la beauté se cache dans les détails.
+        </div>
+        <a class="cta" href="#greatness">En savoir plus..</a>
+      </div>
+
+      <!-- Feature 2 (image gauche + texte à droite) -->
+      <div class="feature reverse" style="margin-top:20px;">
+        <div class="img">
+          <img src="https://picsum.photos/seed/121/1200/1200" alt="Œuvre">
+        </div>
+        <div class="copy">
+          RichText allows for various styling within a single paragraph. Ici, simplement du texte fluide et soigné,
+          justifié et agréable à lire sur toutes tailles d’écran.
         </div>
       </div>
 
-      <!-- Feature 2 -->
-      <div class="split">
-        <div class="split-img" aria-hidden="true"></div>
-        <div class="split-text">
-          RichText allows for various styles within the same paragraph. Ici on aligne
-          le texte à gauche et l’image à droite comme dans ta vue Flutter.
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- ======== Bande Masonry (StaggeredView) ======== -->
-  <section class="strip-bg">
-    <div class="staggered-strip">
-      <div class="masonry">
-        <figure><img src="https://picsum.photos/seed/503/800/900"  alt=""></figure>
-        <figure><img src="https://picsum.photos/seed/514/800/700"  alt=""></figure>
-        <figure><img src="https://picsum.photos/seed/982/800/1100" alt=""></figure>
-        <figure><img src="https://picsum.photos/seed/849/800/800"  alt=""></figure>
-        <figure><img src="https://picsum.photos/seed/70/800/950"   alt=""></figure>
-        <figure><img src="https://picsum.photos/seed/287/800/650"  alt=""></figure>
-      </div>
+  <!-- Masonry Gallery -->
+  <section class="gallery-wrap" id="galerie" aria-label="Galerie">
+    <div class="masonry">
+      <figure><img src="https://picsum.photos/seed/503/800/900" alt="Artwork 1"></figure>
+      <figure><img src="https://picsum.photos/seed/514/800/700" alt="Artwork 2"></figure>
+      <figure><img src="https://picsum.photos/seed/982/800/1100" alt="Artwork 3"></figure>
+      <figure><img src="https://picsum.photos/seed/849/800/800" alt="Artwork 4"></figure>
+      <figure><img src="https://picsum.photos/seed/70/800/950" alt="Artwork 5"></figure>
+      <figure><img src="https://picsum.photos/seed/287/800/650" alt="Artwork 6"></figure>
     </div>
   </section>
 
-  <!-- ======== Bloc texte simple ======== -->
-  <section class="simple">
-    <div class="container">
-      <h4>Hello World</h4>
-      <p>
-        RichText allows for various styles within a single block. Ce paragraphe
-        reprend la mise en forme centrée et l’espacement de ta version Flutter.
+  <!-- Hello World -->
+  <section class="hello" aria-label="Texte">
+    <div class="inner">
+      <h3 style="margin:0;">Hello World</h3>
+      <p style="margin-top:30px;">
+        RichText allows for various styling within a single paragraph. Ce bloc démontre une mise en page
+        simple et centrée, fidèle à la structure d’origine.
       </p>
     </div>
   </section>
 
-  <!-- ======== Footer blocs : pages & réseaux ======== -->
+  <!-- Footer -->
   <section class="footer-top">
-    <div class="footer-columns">
-      <div class="footer-col">
+    <div class="footer-grid">
+      <div class="footer-block">
         <h4>Page</h4>
-        <div class="mini-divider"></div>
+        <div class="foot-divider"></div>
+
         <a class="footer-link" href="#">Home</a>
-        <a class="footer-link" href="#">My Art Galery</a>
-        <a class="footer-link" href="#">The Art Story</a>
-        <a class="footer-link" href="#">Contact Me</a>
+        <a class="footer-link" href="#galerie">My Art Galery</a>
+        <a class="footer-link" href="#story">The Art Story</a>
+        <a class="footer-link" href="#contact">Contact Me</a>
       </div>
 
-      <div class="footer-col social">
+      <div class="footer-block">
         <h4>Social Media</h4>
-        <div class="mini-divider"></div>
+        <div class="foot-divider" style="width:82px;"></div>
 
-        <div class="social-row">
-          <div>Instagram :</div>
-          <a href="#" class="underline">turpinloanart</a>
+        <div class="footer-row">
+          <span>Instagram :</span>
+          <a class="link" href="#" target="_blank" rel="noopener">turpinloanart</a>
         </div>
-        <div class="social-row">
-          <div>TikTok :</div>
-          <a href="#" class="underline">turpinloanart</a>
+        <div class="footer-row">
+          <span>TikTok :</span>
+          <a class="link" href="#" target="_blank" rel="noopener">turpinloanart</a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ======== Contact & Copyright ======== -->
-  <section class="contact">
-    <h4>Contact Me</h4>
-    <div class="line"></div>
-    <div style="display:flex;gap:8px;justify-content:center;align-items:center;margin-top:20px">
-      <div>E-Mail :</div>
-      <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a>
-    </div>
+    <div class="footer-bottom" id="contact">
+      <h4>Contact Me</h4>
+      <div class="foot-divider" style="width:100%;"></div>
+      <div style="display:flex; gap:8px; justify-content:center; margin-top:20px;">
+        <span>E-Mail :</span>
+        <a class="link" href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a>
+      </div>
 
-    <div class="copyright">
-      <div class="line"></div>
-      <div class="muted">© 2025 TURPIN Loan</div>
+      <div class="bar"></div>
+      <p class="copyright">© 2025 TURPIN Loan</p>
     </div>
   </section>
+
+  <!-- Ancre vers "Greatness" (placeholder) -->
+  <div id="greatness" style="height:1px;"></div>
 
 </body>
 </html>
+
