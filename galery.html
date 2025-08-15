@@ -19,7 +19,7 @@
       --line:#d7d9e0;
       --accent:#222;
       --radius:16px;
-      --container: 1100px;  /* ⟵ largeur max desktop (modifie-la si besoin) */
+      --container: 1100px;
       --pad-x: 20px;
     }
 
@@ -34,7 +34,7 @@
     img{ max-width:100%; display:block }
     a{ color: inherit; text-decoration: none }
 
-    /* Conteneur central (tous les éléments SAUF le footer l'utilisent) */
+    /* Conteneur centré pour toutes sections sauf hero, navbar et footer */
     .container{
       width:100%;
       max-width: var(--container);
@@ -43,17 +43,20 @@
       padding-right: var(--pad-x);
     }
 
-    /* AppBar (barre pleine largeur, contenu centré) */
+    /* AppBar */
     .appbar{
       position:sticky; top:0; z-index:20;
       background: var(--paper);
       border-bottom: 1px solid var(--line);
+      width: 100%; /* toujours pleine largeur */
     }
     .bar{
       height:64px;
       display:grid;
       grid-template-columns:1fr auto 1fr;
       align-items:center;
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
     }
     .title{ font: 600 22px/1.2 "Playfair Display", ui-serif, serif; text-align:center }
     .icon-btn{ width:44px; height:44px; display:inline-grid; place-items:center; border-radius:50%; border:1px solid transparent; cursor:pointer }
@@ -62,7 +65,7 @@
     .left{ display:flex; gap:6px; align-items:center }
     .right{ justify-self:end }
 
-    /* Drawer (sans JS) */
+    /* Drawer */
     .drawer{ position:fixed; inset:0 auto 0 0; width:320px; background:#fff; border-right:1px solid var(--line); transform: translateX(-100%); transition: transform .25s ease; z-index:30; }
     #drawer-toggle:checked ~ .drawer{ transform: translateX(0) }
     #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto }
@@ -79,24 +82,17 @@
     .close-drawer{ margin-top:16px; align-self:flex-start; display:inline-block; padding:8px 12px; border:1px solid #ddd; border-radius:10px; cursor:pointer; }
     .backdrop{ position:fixed; inset:0; background: rgba(0,0,0,.25); z-index:25; opacity:0; pointer-events:none; transition:.25s }
 
-    /* Page */
-    .page{ min-height:100%; display:flex; flex-direction:column }
-    .content{ display:block }
+    /* Hero pleine hauteur et largeur */
+    .hero{ margin:0; }
+    .hero img{
+      width:100%;
+      height:100vh;        /* pleine hauteur écran */
+      object-fit:cover;    /* remplit sans déformer */
+      border-radius:0;     /* pas d'arrondis */
+      display:block;
+    }
 
-    /* Hero (limité en largeur) */
-.hero {
-  margin: 0;
-}
-
-.hero img {
-  width: 100%;
-  height: 100vh;        /* hauteur = 100% de l'écran */
-  object-fit: cover;    /* couvre toute la surface */
-  border-radius: 0;     /* pas d'arrondi */
-  display: block;
-}
-
-    /* Sections (vertical seulement, les paddings latéraux sont gérés par .container) */
+    /* Sections */
     .section{ padding: 0 0 40px }
     .centered{ margin: 0 auto; text-align:center }
     .w200{ max-width:200px }
@@ -109,7 +105,7 @@
     .w30{ max-width:30px }
     .section-title{ font: 600 18px/1.2 "Lora", ui-serif, serif; margin: 50px 0 6px }
 
-    /* Grille stack (texte / carousel) */
+    /* Stack grid */
     .stack-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items:center; padding: 10px 0 30px }
     @media (max-width: 920px){ .stack-grid{ grid-template-columns: 1fr; } }
     .stack-text{ padding-right: 12px }
@@ -117,7 +113,7 @@
     .link{ font: 400 16px/1.4 "Lora"; text-decoration: underline }
     .muted{ color:#666 }
 
-    /* Carrousel (CSS seulement) */
+    /* Carrousel */
     .carousel{ position:relative; border:1px solid #e6e8ef; border-radius:16px; overflow:hidden; background:#fafbff }
     .slides{ display:flex; overflow:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth }
     .slides::-webkit-scrollbar{ display:none }
@@ -129,7 +125,7 @@
     /* Coming soon */
     .coming{ text-align:center; font: 100 12px/1.2 "Playfair Display", ui-serif, serif; padding: 30px }
 
-    /* Footer (pleine largeur, PAS de .container ici pour respecter ta demande) */
+    /* Footer */
     .site-footer{ padding: 20px; background:#fff }
     .site-footer .divider{ background:#000; opacity:.4 }
     .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding: 10px 0 20px }
@@ -143,7 +139,6 @@
 </head>
 <body>
 
-  <!-- Toggle du tiroir (drawer) sans JS -->
   <input id="drawer-toggle" type="checkbox" hidden>
 
   <!-- Drawer -->
@@ -151,41 +146,31 @@
     <div class="drawer-inner">
       <h1 class="brand">TURPIN Loan</h1>
       <hr class="divider">
-
-      <!-- Liens transformés en ancres internes pour fonctionner sans routeur -->
       <nav class="drawer-nav" aria-label="Navigation principale">
         <a href="#home" class="nav-link">Home</a>
         <a href="#gallery" class="nav-link is-active">Gallery</a>
         <a href="#the-art-story" class="nav-link">The Art Story</a>
         <a href="#contact" class="nav-link">Contact Me.</a>
       </nav>
-
       <div class="drawer-spacer"></div>
-
       <h2 class="sub">Social Media</h2>
       <hr class="divider">
       <div class="social-lines">
         <div class="line"><span>Instagram :</span><span class="value"><a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
         <div class="line"><span>TikTok :</span><span class="value"><a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
       </div>
-
       <label class="close-drawer" for="drawer-toggle" aria-label="Fermer le menu">Fermer</label>
     </div>
   </aside>
 
-  <!-- Fond assombri quand le drawer est ouvert -->
   <label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
 
-  <!-- Page -->
   <div class="page">
-
     <!-- AppBar -->
     <header id="home" class="appbar" aria-label="En-tête">
-      <div class="bar container">
+      <div class="bar">
         <div class="left">
-          <!-- Bouton retour supprimé -->
           <label class="icon-btn" for="drawer-toggle" aria-label="Ouvrir le menu">
-            <!-- hamburger -->
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
           </label>
         </div>
@@ -196,11 +181,9 @@
 
     <main id="gallery" class="content" role="main">
 
-      <!-- Image héro (contenue dans .container) -->
+      <!-- Hero pleine hauteur -->
       <figure class="hero">
-        <div class="container">
-          <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/4iqka4ctqcfg/20250808_1231_Tableau_Centralis%C3%A9_remix_01k24kjvdzeta8q1kmq5yp5wxq.png" alt="Hero artwork" />
-        </div>
+        <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/4iqka4ctqcfg/20250808_1231_Tableau_Centralis%C3%A9_remix_01k24kjvdzeta8q1kmq5yp5wxq.png" alt="Hero artwork" />
       </figure>
 
       <!-- Bloc collection -->
@@ -215,7 +198,6 @@
           <h4 class="section-title">The Art Of Greatness</h4>
           <hr class="divider thin w142" aria-hidden="true">
 
-          <!-- Stack: texte (gauche) + carrousel (droite) -->
           <div class="stack-grid">
             <div class="stack-text">
               <p class="rich">RichText allows for various styles in a single paragraph. Replace this with your story, process and intention.</p>
@@ -238,7 +220,6 @@
           <h4 class="section-title">The Art Of Greatness</h4>
           <hr class="divider thin w142" aria-hidden="true">
 
-          <!-- Second stack -->
           <div class="stack-grid">
             <div class="stack-text">
               <p class="rich">RichText allows for various styles in a single paragraph. Tell more about the work and what viewers should feel.</p>
@@ -262,14 +243,12 @@
         </div>
       </section>
 
-      <!-- Ancre cible pour "The Art Story" -->
       <section id="the-art-story" class="section" aria-label="The Art Story">
         <div class="container">
           <!-- Contenu à venir -->
         </div>
       </section>
 
-      <!-- Footer "pages" + "social" (PLEINE LARGEUR) -->
       <footer id="contact" class="site-footer" role="contentinfo">
         <hr class="divider" aria-hidden="true">
         <div class="footer-top">
@@ -299,13 +278,12 @@
           <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
           <div class="credit">
             <hr class="divider thin" aria-hidden="true">
-            <p>© 2025 TURPIN Loan</p>
+            <p>Made by Loan to present his Art.</p>
           </div>
         </div>
       </footer>
 
     </main>
   </div>
-
 </body>
 </html>
