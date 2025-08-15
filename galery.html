@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galery</title>
+  <title>Gallery</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:wght@100;600;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0f1014;
-      --ink:#0b0c10;         /* texte foncé (titres) */
-      --paper:#ffffff;       /* fond clair */
-      --muted:#636570;       /* texte secondaire */
-      --line:#d7d9e0;        /* séparateurs sur fond clair */
-      --accent:#222;         /* éléments UI */
+      --ink:#0b0c10;
+      --paper:#ffffff;
+      --muted:#636570;
+      --line:#d7d9e0;
+      --accent:#222;
       --radius:16px;
     }
 
-    /* Base */
     *{ box-sizing:border-box }
     html,body{ height:100% }
     body{
@@ -44,11 +47,10 @@
     .left{ display:flex; gap:6px; align-items:center }
     .right{ justify-self:end }
 
-    /* Drawer off-canvas (sans JS) */
+    /* Drawer (sans JS) */
     .drawer{ position:fixed; inset:0 auto 0 0; width:320px; background:#fff; border-right:1px solid var(--line); transform: translateX(-100%); transition: transform .25s ease; z-index:30; }
     #drawer-toggle:checked ~ .drawer{ transform: translateX(0) }
     #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto }
-
     .drawer-inner{ height:100%; padding:20px; display:flex; flex-direction:column }
     .brand{ font: 900 32px/1 "Playfair Display", ui-serif, serif; margin:60px 0 12px }
     .sub{ font: 600 18px/1.2 "Playfair Display", ui-serif, serif; margin:24px 0 6px }
@@ -59,9 +61,7 @@
     .drawer-spacer{ flex:1 }
     .social-lines{ display:grid; gap:10px; font: 400 16px/1.2 "Lora", ui-serif, serif }
     .social-lines .value{ margin-left:12px }
-
     .close-drawer{ margin-top:16px; align-self:flex-start; display:inline-block; padding:8px 12px; border:1px solid #ddd; border-radius:10px; cursor:pointer; }
-
     .backdrop{ position:fixed; inset:0; background: rgba(0,0,0,.25); z-index:25; opacity:0; pointer-events:none; transition:.25s }
 
     /* Page */
@@ -88,13 +88,12 @@
     /* Grille stack (texte / carousel) */
     .stack-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items:center; padding: 10px 0 30px }
     @media (max-width: 920px){ .stack-grid{ grid-template-columns: 1fr; } }
-
     .stack-text{ padding-right: 12px }
     .rich{ font: 400 16px/1.6 "Lora", ui-serif, serif }
     .link{ font: 400 16px/1.4 "Lora"; text-decoration: underline }
     .muted{ color:#666 }
 
-    /* Carrousel (CSS seul via scroll-snap) */
+    /* Carrousel (CSS seulement) */
     .carousel{ position:relative; border:1px solid #e6e8ef; border-radius:16px; overflow:hidden; background:#fafbff }
     .slides{ display:flex; overflow:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth }
     .slides::-webkit-scrollbar{ display:none }
@@ -129,10 +128,11 @@
       <h1 class="brand">TURPIN Loan</h1>
       <hr class="divider">
 
+      <!-- Liens transformés en ancres internes pour fonctionner sans routeur -->
       <nav class="drawer-nav" aria-label="Navigation principale">
         <a href="#home" class="nav-link">Home</a>
-        <a href="#my-artworks" class="nav-link is-active">My ArtWorks</a>
-        <a href="#the-art-story" class="nav-link">The Art Storys</a>
+        <a href="#gallery" class="nav-link is-active">Gallery</a>
+        <a href="#the-art-story" class="nav-link">The Art Story</a>
         <a href="#contact" class="nav-link">Contact Me.</a>
       </nav>
 
@@ -141,8 +141,8 @@
       <h2 class="sub">Social Media</h2>
       <hr class="divider">
       <div class="social-lines">
-        <div class="line"><span>Instagram :</span><span class="value">turpinloanart</span></div>
-        <div class="line"><span>TikTok :</span><span class="value">turpinloanart</span></div>
+        <div class="line"><span>Instagram :</span><span class="value"><a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
+        <div class="line"><span>TikTok :</span><span class="value"><a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
       </div>
 
       <label class="close-drawer" for="drawer-toggle" aria-label="Fermer le menu">Fermer</label>
@@ -156,9 +156,9 @@
   <div class="page">
 
     <!-- AppBar -->
-    <header class="appbar">
+    <header id="home" class="appbar" aria-label="En-tête">
       <div class="left">
-        <a class="icon-btn" href="#" aria-label="Retour">
+        <a class="icon-btn" href="#home" aria-label="Retour en haut">
           <!-- flèche gauche -->
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </a>
@@ -167,11 +167,11 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
         </label>
       </div>
-      <h2 class="title">Galery</h2>
+      <h2 class="title">Gallery</h2>
       <div class="right"></div>
     </header>
 
-    <main id="my-artworks" class="content">
+    <main id="gallery" class="content" role="main">
 
       <!-- Image héro -->
       <figure class="hero">
@@ -182,18 +182,18 @@
       <section class="section">
         <div class="centered w200">
           <h3 class="kicker">All my collection</h3>
-          <hr class="divider strong">
-          <div class="spacer-100"></div>
+          <hr class="divider strong" aria-hidden="true">
+          <div class="spacer-100" aria-hidden="true"></div>
         </div>
 
         <h4 class="section-title">The Art Of Greatness</h4>
-        <hr class="divider thin w142">
+        <hr class="divider thin w142" aria-hidden="true">
 
         <!-- Stack: texte (gauche) + carrousel (droite) -->
         <div class="stack-grid">
           <div class="stack-text">
             <p class="rich">RichText allows for various styles in a single paragraph. Replace this with your story, process and intention.</p>
-            <p><a class="link" href="#the-art-of-greatness">see the art →</a></p>
+            <p><a class="link" href="#the-art-story">see the art →</a></p>
           </div>
           <div class="stack-carousel">
             <div class="carousel" aria-roledescription="carousel" aria-label="Œuvres – série 1">
@@ -210,7 +210,7 @@
         </div>
 
         <h4 class="section-title">The Art Of Greatness</h4>
-        <hr class="divider thin w142">
+        <hr class="divider thin w142" aria-hidden="true">
 
         <!-- Second stack similaire -->
         <div class="stack-grid">
@@ -232,40 +232,45 @@
           </div>
         </div>
 
-        <p class="coming">the nest come soon...</p>
+        <p class="coming">the <em>next</em> comes soon...</p>
+      </section>
+
+      <!-- Ancre cible pour "The Art Story" (placeholder pour navigation locale) -->
+      <section id="the-art-story" class="section" aria-label="The Art Story">
+        <!-- Tu pourras insérer ici ton contenu “The Art Story”. -->
       </section>
 
       <!-- Footer "pages" + "social" -->
       <footer id="contact" class="site-footer" role="contentinfo">
-        <hr class="divider">
+        <hr class="divider" aria-hidden="true">
         <div class="footer-top">
           <div class="col">
             <h5 class="footer-title">Page</h5>
-            <hr class="divider w30">
-            <nav class="footer-links">
+            <hr class="divider w30" aria-hidden="true">
+            <nav class="footer-links" aria-label="Pied de page - navigation">
               <a href="#home">Home</a>
-              <a href="#my-artworks">My Art Galery</a>
+              <a href="#gallery">My Art Gallery</a>
               <a href="#the-art-story">The Art Story</a>
               <a href="#contact">Contact Me</a>
             </nav>
           </div>
           <div class="col">
             <h5 class="footer-title">Social Media</h5>
-            <hr class="divider w82">
+            <hr class="divider w82" aria-hidden="true">
             <div class="social-lines">
-              <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
-              <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+              <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
+              <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
             </div>
           </div>
         </div>
 
         <div class="footer-contact">
           <h5 class="footer-title">Contact Me</h5>
-          <hr class="divider">
-          <p class="line"><span>E‑Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
+          <hr class="divider" aria-hidden="true">
+          <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
           <div class="credit">
-            <hr class="divider thin">
-            <p>Turpin Loan</p>
+            <hr class="divider thin" aria-hidden="true">
+            <p>Made by Loan to present his Art.</p>
           </div>
         </div>
       </footer>
