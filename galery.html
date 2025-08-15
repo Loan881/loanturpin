@@ -84,8 +84,17 @@
     .content{ display:block }
 
     /* Hero (limité en largeur) */
-    .hero{ margin:0; }
-    .hero img{ width:100%; height: min(800px, 70vh); object-fit:cover; border-radius: 12px }
+.hero {
+  margin: 0;
+}
+
+.hero img {
+  width: 100%;
+  height: 100vh;        /* hauteur = 100% de l'écran */
+  object-fit: cover;    /* couvre toute la surface */
+  border-radius: 0;     /* pas d'arrondi */
+  display: block;
+}
 
     /* Sections (vertical seulement, les paddings latéraux sont gérés par .container) */
     .section{ padding: 0 0 40px }
