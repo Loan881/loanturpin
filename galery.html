@@ -19,6 +19,8 @@
       --line:#d7d9e0;
       --accent:#222;
       --radius:16px;
+      --container: 1100px;  /* ⟵ largeur max desktop (modifie-la si besoin) */
+      --pad-x: 20px;
     }
 
     *{ box-sizing:border-box }
@@ -32,22 +34,35 @@
     img{ max-width:100%; display:block }
     a{ color: inherit; text-decoration: none }
 
-    /* AppBar */
+    /* Conteneur central (tous les éléments SAUF le footer l'utilisent) */
+    .container{
+      width:100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding-left: var(--pad-x);
+      padding-right: var(--pad-x);
+    }
+
+    /* AppBar (barre pleine largeur, contenu centré) */
     .appbar{
       position:sticky; top:0; z-index:20;
       background: var(--paper);
       border-bottom: 1px solid var(--line);
-      height:64px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
-      padding:0 10px;
     }
-    .appbar .title{ font: 600 22px/1.2 "Playfair Display", ui-serif, serif; text-align:center }
+    .bar{
+      height:64px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+    }
+    .title{ font: 600 22px/1.2 "Playfair Display", ui-serif, serif; text-align:center }
     .icon-btn{ width:44px; height:44px; display:inline-grid; place-items:center; border-radius:50%; border:1px solid transparent; cursor:pointer }
     .icon-btn:hover{ background:#f2f3f7; border-color:#e6e8ef }
     .icon-btn svg{ width:22px; height:22px; fill:#000 }
     .left{ display:flex; gap:6px; align-items:center }
     .right{ justify-self:end }
 
-    /* Drawer */
+    /* Drawer (sans JS) */
     .drawer{ position:fixed; inset:0 auto 0 0; width:320px; background:#fff; border-right:1px solid var(--line); transform: translateX(-100%); transition: transform .25s ease; z-index:30; }
     #drawer-toggle:checked ~ .drawer{ transform: translateX(0) }
     #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto }
@@ -68,12 +83,12 @@
     .page{ min-height:100%; display:flex; flex-direction:column }
     .content{ display:block }
 
-    /* Hero */
-    .hero{ margin:0 }
-    .hero img{ width:100%; height: min(800px, 70vh); object-fit:cover; border-radius:0 }
+    /* Hero (limité en largeur) */
+    .hero{ margin:0; }
+    .hero img{ width:100%; height: min(800px, 70vh); object-fit:cover; border-radius: 12px }
 
-    /* Sections */
-    .section{ padding: 0 20px 40px }
+    /* Sections (vertical seulement, les paddings latéraux sont gérés par .container) */
+    .section{ padding: 0 0 40px }
     .centered{ margin: 0 auto; text-align:center }
     .w200{ max-width:200px }
     .spacer-100{ height:100px }
@@ -85,25 +100,15 @@
     .w30{ max-width:30px }
     .section-title{ font: 600 18px/1.2 "Lora", ui-serif, serif; margin: 50px 0 6px }
 
-    /* Grille stack */
-    .stack-grid{
-      display:grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 24px;
-      align-items:center;
-      padding: 10px 0 30px;
-      max-width: 1100px; /* limite largeur max */
-      margin: 0 auto; /* centre le contenu */
-    }
-    @media (max-width: 920px){
-      .stack-grid{ grid-template-columns: 1fr; }
-    }
+    /* Grille stack (texte / carousel) */
+    .stack-grid{ display:grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items:center; padding: 10px 0 30px }
+    @media (max-width: 920px){ .stack-grid{ grid-template-columns: 1fr; } }
     .stack-text{ padding-right: 12px }
     .rich{ font: 400 16px/1.6 "Lora", ui-serif, serif }
     .link{ font: 400 16px/1.4 "Lora"; text-decoration: underline }
     .muted{ color:#666 }
 
-    /* Carrousel */
+    /* Carrousel (CSS seulement) */
     .carousel{ position:relative; border:1px solid #e6e8ef; border-radius:16px; overflow:hidden; background:#fafbff }
     .slides{ display:flex; overflow:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth }
     .slides::-webkit-scrollbar{ display:none }
@@ -112,7 +117,10 @@
     .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; justify-content:center; gap:8px }
     .dot{ width:8px; height:8px; border-radius:50%; background:#00000022; border:1px solid #00000050 }
 
-    /* Footer */
+    /* Coming soon */
+    .coming{ text-align:center; font: 100 12px/1.2 "Playfair Display", ui-serif, serif; padding: 30px }
+
+    /* Footer (pleine largeur, PAS de .container ici pour respecter ta demande) */
     .site-footer{ padding: 20px; background:#fff }
     .site-footer .divider{ background:#000; opacity:.4 }
     .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding: 10px 0 20px }
@@ -126,7 +134,7 @@
 </head>
 <body>
 
-  <!-- Toggle du tiroir -->
+  <!-- Toggle du tiroir (drawer) sans JS -->
   <input id="drawer-toggle" type="checkbox" hidden>
 
   <!-- Drawer -->
@@ -134,24 +142,29 @@
     <div class="drawer-inner">
       <h1 class="brand">TURPIN Loan</h1>
       <hr class="divider">
+
+      <!-- Liens transformés en ancres internes pour fonctionner sans routeur -->
       <nav class="drawer-nav" aria-label="Navigation principale">
         <a href="#home" class="nav-link">Home</a>
         <a href="#gallery" class="nav-link is-active">Gallery</a>
         <a href="#the-art-story" class="nav-link">The Art Story</a>
         <a href="#contact" class="nav-link">Contact Me.</a>
       </nav>
+
       <div class="drawer-spacer"></div>
+
       <h2 class="sub">Social Media</h2>
       <hr class="divider">
       <div class="social-lines">
         <div class="line"><span>Instagram :</span><span class="value"><a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
         <div class="line"><span>TikTok :</span><span class="value"><a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></span></div>
       </div>
+
       <label class="close-drawer" for="drawer-toggle" aria-label="Fermer le menu">Fermer</label>
     </div>
   </aside>
 
-  <!-- Backdrop -->
+  <!-- Fond assombri quand le drawer est ouvert -->
   <label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
 
   <!-- Page -->
@@ -159,60 +172,95 @@
 
     <!-- AppBar -->
     <header id="home" class="appbar" aria-label="En-tête">
-      <div class="left">
-        <!-- Bouton menu -->
-        <label class="icon-btn" for="drawer-toggle" aria-label="Ouvrir le menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-          </svg>
-        </label>
+      <div class="bar container">
+        <div class="left">
+          <!-- Bouton retour supprimé -->
+          <label class="icon-btn" for="drawer-toggle" aria-label="Ouvrir le menu">
+            <!-- hamburger -->
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </label>
+        </div>
+        <h2 class="title">Gallery</h2>
+        <div class="right"></div>
       </div>
-      <h2 class="title">Gallery</h2>
-      <div class="right"></div>
     </header>
 
     <main id="gallery" class="content" role="main">
 
-      <!-- Hero -->
+      <!-- Image héro (contenue dans .container) -->
       <figure class="hero">
-        <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/4iqka4ctqcfg/20250808_1231_Tableau_Centralis%C3%A9_remix_01k24kjvdzeta8q1kmq5yp5wxq.png" alt="Hero artwork" />
+        <div class="container">
+          <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/4iqka4ctqcfg/20250808_1231_Tableau_Centralis%C3%A9_remix_01k24kjvdzeta8q1kmq5yp5wxq.png" alt="Hero artwork" />
+        </div>
       </figure>
 
-      <!-- Collection -->
+      <!-- Bloc collection -->
       <section class="section">
-        <div class="centered w200">
-          <h3 class="kicker">All my collection</h3>
-          <hr class="divider strong" aria-hidden="true">
-          <div class="spacer-100" aria-hidden="true"></div>
-        </div>
-
-        <h4 class="section-title">The Art Of Greatness</h4>
-        <hr class="divider thin w142" aria-hidden="true">
-
-        <!-- Stack -->
-        <div class="stack-grid">
-          <div class="stack-text">
-            <p class="rich">RichText allows for various styles in a single paragraph. Replace this with your story, process and intention.</p>
-            <p><a class="link" href="#the-art-story">see the art →</a></p>
+        <div class="container">
+          <div class="centered w200">
+            <h3 class="kicker">All my collection</h3>
+            <hr class="divider strong" aria-hidden="true">
+            <div class="spacer-100" aria-hidden="true"></div>
           </div>
-          <div class="stack-carousel">
-            <div class="carousel" aria-roledescription="carousel" aria-label="Œuvres – série 1">
-              <div class="slides">
-                <div class="slide"><img src="https://images.unsplash.com/photo-1732481126884-9c6b3d560ed6?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 1"></div>
-                <div class="slide"><img src="https://images.unsplash.com/photo-1608371945786-d47d3cdd31da?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 2"></div>
-                <div class="slide"><img src="https://images.unsplash.com/photo-1619199059624-7335464ea7b0?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 3"></div>
-              </div>
-              <div class="dots" aria-hidden="true">
-                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+
+          <h4 class="section-title">The Art Of Greatness</h4>
+          <hr class="divider thin w142" aria-hidden="true">
+
+          <!-- Stack: texte (gauche) + carrousel (droite) -->
+          <div class="stack-grid">
+            <div class="stack-text">
+              <p class="rich">RichText allows for various styles in a single paragraph. Replace this with your story, process and intention.</p>
+              <p><a class="link" href="#the-art-story">see the art →</a></p>
+            </div>
+            <div class="stack-carousel">
+              <div class="carousel" aria-roledescription="carousel" aria-label="Œuvres – série 1">
+                <div class="slides">
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1732481126884-9c6b3d560ed6?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 1"></div>
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1608371945786-d47d3cdd31da?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 2"></div>
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1619199059624-7335464ea7b0?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 3"></div>
+                </div>
+                <div class="dots" aria-hidden="true">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <p class="coming">the <em>next</em> comes soon...</p>
+          <h4 class="section-title">The Art Of Greatness</h4>
+          <hr class="divider thin w142" aria-hidden="true">
+
+          <!-- Second stack -->
+          <div class="stack-grid">
+            <div class="stack-text">
+              <p class="rich">RichText allows for various styles in a single paragraph. Tell more about the work and what viewers should feel.</p>
+              <p class="muted">see the art →</p>
+            </div>
+            <div class="stack-carousel">
+              <div class="carousel" aria-roledescription="carousel" aria-label="Œuvres – série 2">
+                <div class="slides">
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1516417381955-d48008c27a9e?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 1"></div>
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1459908676235-d5f02a50184b?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 2"></div>
+                  <div class="slide"><img src="https://images.unsplash.com/photo-1539975611936-f0d1221cfd16?w=1080&q=80&auto=format&fit=crop" alt="Œuvre 3"></div>
+                </div>
+                <div class="dots" aria-hidden="true">
+                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="coming">the <em>next</em> comes soon...</p>
+        </div>
       </section>
 
-      <!-- Footer -->
+      <!-- Ancre cible pour "The Art Story" -->
+      <section id="the-art-story" class="section" aria-label="The Art Story">
+        <div class="container">
+          <!-- Contenu à venir -->
+        </div>
+      </section>
+
+      <!-- Footer "pages" + "social" (PLEINE LARGEUR) -->
       <footer id="contact" class="site-footer" role="contentinfo">
         <hr class="divider" aria-hidden="true">
         <div class="footer-top">
@@ -235,6 +283,7 @@
             </div>
           </div>
         </div>
+
         <div class="footer-contact">
           <h5 class="footer-title">Contact Me</h5>
           <hr class="divider" aria-hidden="true">
@@ -248,5 +297,6 @@
 
     </main>
   </div>
+
 </body>
 </html>
