@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#ffffff;
@@ -67,13 +68,13 @@
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
+      min-height:var(--tile);
       overflow-x:scroll;overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
-      min-height: var(--tile);
     }
     .marquee::-webkit-scrollbar{display:none}
     .marquee.dragging{cursor:grabbing}
@@ -119,7 +120,7 @@
     .block .card{background:var(--bg);padding:14px 16px;border-radius:12px;border:1px solid rgba(0,0,0,.08)}
     .block h3{margin:0 0 6px 0;font-weight:700}
 
-    /* Images des blocs : taille divisée par 2 (comme demandé) */
+    /* Images des blocs : taille divisée par 2 */
     .block img{
       width:50%;
       height:auto;
@@ -127,9 +128,9 @@
       border-radius:12px;
     }
 
-    /* CTA */
-    .cta{display:flex;justify-content:center}
-    .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:10px 18px;border-radius:10px;font-size:14px}
+    /* CTA : plus d'espace au-dessus + bouton plus confortable */
+    .cta{display:flex;justify-content:center;margin-top:48px}          /* avant ~22px */
+    .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:16px 24px;border-radius:10px;font-size:14px}
 
     /* Footer */
     .site-footer{ padding: 20px; background:#fff }
@@ -146,8 +147,7 @@
     @media (max-width: 900px){
       :root{ --tile: 66.67vh; }   /* 2/3 d’écran */
       .title{font-size:18px}
-      /* On NE repasse plus les .block en 1 colonne : ils restent côte à côte,
-         et défilent horizontalement si besoin (voir règles ci-dessus). */
+      /* Les blocs restent côte à côte et scrollables horizontalement */
     }
   </style>
 </head>
@@ -191,7 +191,8 @@
         mouvement continu – une volonté de rendre le monde un peu plus beau que nous ne l’avons trouvé.
       </p>
 
-      <div class="card" style="padding:0;background:transparent;border:none">
+      <!-- STORY: padding top/bottom augmenté -->
+      <div class="card story" style="background:transparent;border:none">
         <h3 style="margin:22px 0 6px 0">Story</h3>
         <div class="thin" style="width:35px"></div>
         <p class="prose" style="margin:10px 0 0 0">
@@ -242,7 +243,8 @@
         </div>
       </div>
 
-      <div class="cta" style="margin-top:22px">
+      <!-- CTA -->
+      <div class="cta">
         <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demande By E-Mail</a>
       </div>
     </div>
@@ -328,7 +330,7 @@
         rafId = requestAnimationFrame(step);
       }
 
-      // Drag & swipe
+      // Drag & swipe (Pointer Events)
       function onPointerDown(e){
         dragging = true;
         autoplay = false;
@@ -357,11 +359,14 @@
       marquee.addEventListener('pointercancel', onPointerUp);
       marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
 
+      // Pause/reprise auto sur survol (desktop)
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
+      // Recalage si resize (la valeur de --tile peut changer)
       window.addEventListener('resize', ()=> { center(); });
 
+      // Init
       waitImagesLoaded().then(()=>{
         center();
         requestAnimationFrame(step);
