@@ -94,6 +94,13 @@
     .block .card{background:var(--bg);padding:14px 16px;border-radius:12px;border:1px solid rgba(0,0,0,.08)}
     .block h3{margin:0 0 6px 0;font-weight:700}
 
+    /* 👉 Réduit de moitié la taille des images sous le carousel */
+    .block img{
+      width:50%;
+      height:auto;
+      margin:0 auto; /* centre l’image dans sa colonne */
+    }
+
     /* CTA */
     .cta{display:flex;justify-content:center}
     .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:10px 18px;border-radius:10px;font-size:14px}
@@ -114,6 +121,10 @@
       :root{ --tile: 50vh; }
       .title{font-size:18px}
       .block,.block.reverse{grid-template-columns:1fr;}
+      /* Tu veux les garder à 50% aussi sur mobile ? (actuel = oui) */
+      /* Pour les remettre à 100% sur mobile, dé-commente :
+      .block img{ width:100%; }
+      */
     }
   </style>
 </head>
@@ -253,29 +264,17 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois le groupe source pour obtenir 3 groupes consécutifs
+      // Clone 2 fois le groupe source pour 3 groupes en boucle
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
         track.appendChild(clone);
       }
 
-      const groups = track.querySelectorAll('.group');
-      const firstImg = source.querySelector('img');
-
-      // Mesure robuste de la largeur du groupe
       let gw = 0;
-      function measure(){
-        gw = source.getBoundingClientRect().width;
-      }
+      function measure(){ gw = source.getBoundingClientRect().width; }
+      function center(){ measure(); marquee.scrollLeft = gw; }
 
-      // Center: place le scroll au groupe du milieu
-      function center(){
-        measure();
-        marquee.scrollLeft = gw; // 2e groupe (au centre), parfait pour boucler
-      }
-
-      // Attendre le chargement de l'image (sinon gw=0 au tout début)
       function waitImagesLoaded(){
         const imgs = source.querySelectorAll('img');
         return Promise.all([...imgs].map(img=>{
@@ -284,24 +283,16 @@
         }));
       }
 
-      // Bouclage infini : garde le scroll autour du groupe central
+      // Boucle infinie robuste : on reste autour du groupe central
       function wrap(){
         if (gw <= 1) return;
-        // on garde dans [0 .. 3*gw), mais on recale par pas de gw pour rester près du centre
-        const x = marquee.scrollLeft;
-        // si on sort par la gauche
-        while (marquee.scrollLeft < gw * 0.25) {
-          marquee.scrollLeft += gw;
-        }
-        // si on sort par la droite
-        while (marquee.scrollLeft > gw * 1.75) {
-          marquee.scrollLeft -= gw;
-        }
+        while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
+        while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
       }
 
       // Auto défilement
       let dragging = false, startX = 0, startScroll = 0, autoplay = true, rafId = null;
-      const SPEED = 0.5; // px/frame (négatif pour droite->gauche)
+      const SPEED = 0.5; // px/frame (met -0.5 pour droite->gauche)
 
       function step(){
         if (autoplay && !dragging) {
@@ -311,7 +302,7 @@
         rafId = requestAnimationFrame(step);
       }
 
-      // Drag & swipe (Pointer Events)
+      // Drag & swipe
       function onPointerDown(e){
         dragging = true;
         autoplay = false;
@@ -340,14 +331,11 @@
       marquee.addEventListener('pointercancel', onPointerUp);
       marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
 
-      // Pause/reprise auto sur survol (desktop)
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // Recalage si resize (la valeur de --tile change)
       window.addEventListener('resize', ()=> { center(); });
 
-      // Init
       waitImagesLoaded().then(()=>{
         center();
         requestAnimationFrame(step);
@@ -356,5 +344,3 @@
   </script>
 </body>
 </html>
-
-
