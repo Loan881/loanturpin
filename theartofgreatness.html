@@ -25,7 +25,9 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
-      --tile: 70vh; /* taille des carrés 1:1 du carousel */
+
+      /* Taille par défaut des vignettes carrées (desktop) */
+      --tile: 70vh;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -71,6 +73,7 @@
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
+      min-height: var(--tile);
     }
     .marquee::-webkit-scrollbar{display:none}
     .marquee.dragging{cursor:grabbing}
@@ -78,8 +81,12 @@
     .track{display:flex;gap:0;align-items:center}
     .group{display:flex;gap:0;flex-shrink:0}
     .group img{
-      width:var(--tile);height:var(--tile);
-      object-fit:cover;flex:0 0 auto;
+      /* Carré strict 1:1 */
+      height:var(--tile);
+      width:var(--tile);
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      flex:0 0 auto;
     }
 
     /* Sections */
@@ -88,17 +95,36 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Content blocks */
-    .block{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center;margin:28px 0}
-    .block.reverse{grid-template-columns:.8fr 1.2fr}
+    /* ====== Blocs texte + image : TOUJOURS côte à côte ====== */
+    .block{
+      display:flex;               /* remplace la grille */
+      flex-wrap:nowrap;           /* jamais à la ligne */
+      align-items:center;
+      gap:24px;
+      overflow-x:auto;            /* défile horizontal si l’écran est trop étroit */
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding-bottom:10px;        /* un peu d’air pour le scroll */
+      scroll-snap-type:x proximity;
+    }
+    .block::-webkit-scrollbar{display:none}
+    .block > .card,
+    .block > div{
+      flex:1 0 420px;             /* chaque colonne garde une largeur mini */
+      scroll-snap-align:start;
+    }
+    .block.reverse{ flex-direction:row-reverse; } /* inverse l’ordre quand demandé */
+
+    /* Carte + titres dans les blocs */
     .block .card{background:var(--bg);padding:14px 16px;border-radius:12px;border:1px solid rgba(0,0,0,.08)}
     .block h3{margin:0 0 6px 0;font-weight:700}
 
-    /* 👉 Réduit de moitié la taille des images sous le carousel */
+    /* Images des blocs : taille divisée par 2 (comme demandé) */
     .block img{
       width:50%;
       height:auto;
-      margin:0 auto; /* centre l’image dans sa colonne */
+      margin:0 auto;
+      border-radius:12px;
     }
 
     /* CTA */
@@ -116,15 +142,12 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
-    /* Responsive */
+    /* ===== Mobile : min-height = 2/3 d'écran pour la bannière ===== */
     @media (max-width: 900px){
-      :root{ --tile: 50vh; }
+      :root{ --tile: 66.67vh; }   /* 2/3 d’écran */
       .title{font-size:18px}
-      .block,.block.reverse{grid-template-columns:1fr;}
-      /* Tu veux les garder à 50% aussi sur mobile ? (actuel = oui) */
-      /* Pour les remettre à 100% sur mobile, dé-commente :
-      .block img{ width:100%; }
-      */
+      /* On NE repasse plus les .block en 1 colonne : ils restent côte à côte,
+         et défilent horizontalement si besoin (voir règles ci-dessus). */
     }
   </style>
 </head>
@@ -177,6 +200,7 @@
         </p>
       </div>
 
+      <!-- Block 1 -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
@@ -186,13 +210,14 @@
           </p>
         </div>
         <div>
-          <img src="https://picsum.photos/seed/755/900/1200" alt="Étude – Design & Conception" style="border-radius:12px"/>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Étude – Design & Conception"/>
         </div>
       </div>
 
+      <!-- Block 2 (ordre inversé) -->
       <div class="block reverse">
         <div>
-          <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation" style="border-radius:12px"/>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation"/>
         </div>
         <div class="card">
           <h3>Réalisation</h3>
@@ -203,6 +228,7 @@
         </div>
       </div>
 
+      <!-- Block 3 -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
@@ -212,7 +238,7 @@
           </p>
         </div>
         <div>
-          <img src="https://picsum.photos/seed/755/900/1200" alt="Détail – Final Touch" style="border-radius:12px"/>
+          <img src="https://picsum.photos/seed/755/900/1200" alt="Détail – Final Touch"/>
         </div>
       </div>
 
