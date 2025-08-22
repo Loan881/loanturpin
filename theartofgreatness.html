@@ -96,38 +96,37 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* ====== Blocs texte + image : côte à côte, responsive sans scroll ====== */
+    /* ====== Blocs texte + image : côte à côte (desktop), pile (mobile) ====== */
     .block{
       display:grid;
-      grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr); /* 2 colonnes toujours */
+      grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr); /* 2 colonnes sur écrans larges */
       align-items:center;
       gap: clamp(12px, 3vw, 28px);
       margin:28px 0;
     }
-    .block.reverse{ grid-auto-flow:dense; } /* (non utilisé mais dispo) */
 
-    /* Carte + titres dans les blocs (typo fluide) */
+    /* Carte + titres (typo fluide) */
     .block .card{
       background:var(--bg);
       padding:14px 16px;
       border-radius:12px;
       border:1px solid rgba(0,0,0,.08);
-      font-size: clamp(0.95rem, 0.3vw + 0.9rem, 1.05rem);
+      font-size: clamp(0.98rem, 0.4vw + 0.9rem, 1.06rem);
     }
     .block h3{
       margin:0 0 6px 0;
       font-weight:700;
-      font-size: clamp(1.1rem, 1.4vw + 0.9rem, 1.5rem);
+      font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
     }
 
-    /* Wrapper média pour contrôler finement la taille */
+    /* Wrapper média pour contrôler la taille de l’image */
     .media{
       display:flex;
       justify-content:center;
       align-items:center;
     }
     .media img{
-      width: clamp(160px, 38vw, 520px);  /* image fluide, min→max */
+      width: clamp(220px, 38vw, 560px);  /* image fluide, min→max */
       height:auto;
       border-radius:12px;
     }
@@ -150,9 +149,32 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
-    /* ===== Mobile : min-height = 2/3 d'écran pour la bannière ===== */
-    @media (max-width: 900px){
-      :root{ --tile: 66.67vh; }   /* 2/3 d’écran */
+    /* ===== Mobile : bannière 2/3 écran + blocs empilés ===== */
+    @media (max-width: 768px){
+      :root{ --tile: 66.67vh; }   /* 2/3 d’écran pour la bannière */
+
+      /* Les blocs passent en 1 colonne pour éviter de déformer texte/image */
+      .block{
+        grid-template-columns: 1fr;    /* pile : chaque élément sur toute la largeur */
+        gap: 16px;
+        margin: 24px 0;
+      }
+
+      /* Typo un peu plus compacte sur mobile */
+      .block .card{
+        padding: clamp(12px, 3.4vw, 20px);
+        font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem);
+      }
+      .block h3{
+        font-size: clamp(1.05rem, 2vw + 0.9rem, 1.35rem);
+      }
+
+      /* Images : pleine largeur (avec limites) */
+      .media img{
+        width: min(100%, 92vw);
+        max-width: 640px;
+      }
+
       .title{font-size:18px}
     }
   </style>
