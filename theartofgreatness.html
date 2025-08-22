@@ -9,10 +9,8 @@
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
-
   <!-- iOS -->
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
   <!-- Android/Progressive Web App -->
   <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
@@ -52,33 +50,58 @@
     }
     .topbar{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 8px;}
     .back{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
-    /* === Bouton retour : icône seule === */
     .back a{
       display:inline-grid;place-items:center;
       width:40px;height:40px;
       border:1px solid var(--border);
       border-radius:999px;
-      padding:0;
-      line-height:0;
-      cursor:pointer;
-      background:#fff;
+      padding:0;line-height:0;cursor:pointer;background:#fff;
       transition:background .2s ease, transform .05s ease;
     }
     .back a:hover{background:#f1f1f1}
     .back a:active{transform:scale(0.98)}
     .back a svg{width:18px;height:18px;fill:currentColor}
-
     .title{font-weight:700;font-size:22px;letter-spacing:.3px}
 
-    /* Hero – carousel (CSS scroll-snap) */
-    .hero{background:var(--bg-alt)}
-    .carousel{position:relative}
-    .slides{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px;scrollbar-width:none}
-    .slides::-webkit-scrollbar{display:none}
-    .slide{flex:0 0 100%;height:500px;scroll-snap-align:center;border-radius:12px;overflow:hidden}
-    .slide img{width:100%;height:100%;object-fit:cover}
-    .dots{display:flex;gap:10px;justify-content:center;align-items:center;padding:10px 0 18px}
-    .dots a{width:10px;height:10px;border-radius:999px;border:1px solid #111;display:inline-block}
+    /* === HERO – bannière défilante plein écran === */
+    .hero-marquee{
+      position:relative;
+      width:100vw;                  /* plein écran */
+      margin-left:calc(50% - 50vw); /* sort de la grille container */
+      background:var(--bg);
+    }
+    .marquee{
+      overflow:hidden;
+      height:70vh;                  /* hauteur du bandeau */
+      user-select:none;
+    }
+    .marquee__track{
+      display:flex;
+      align-items:center;
+      gap:0;
+      animation:marquee-scroll 40s linear infinite;
+    }
+    .marquee__group{
+      display:flex;
+      gap:0;
+      flex-shrink:0;                /* deux groupes identiques pour la boucle infinie */
+    }
+    .marquee__group img{
+      height:70vh;                  /* remplit la hauteur */
+      width:auto;
+      object-fit:cover;
+      flex:0 0 auto;
+    }
+    /* Pause au survol */
+    .marquee:hover .marquee__track{ animation-play-state: paused; }
+    /* Respecte l’accessibilité */
+    @media (prefers-reduced-motion: reduce){
+      .marquee__track{ animation:none; }
+    }
+    @keyframes marquee-scroll{
+      from{ transform:translateX(0); }
+      to{   transform:translateX(-50%); } /* décale d’un groupe (2 groupes -> 50%) */
+    }
 
     /* Sections */
     section{padding:40px 0}
@@ -117,8 +140,9 @@
       .back{position:static;transform:none}
       .topbar{justify-content:space-between}
       .title{font-size:18px}
-      .slide{height:380px}
       .cols{grid-template-columns:1fr}
+      .marquee{height:50vh}
+      .marquee__group img{height:50vh}
     }
   </style>
 </head>
@@ -128,10 +152,7 @@
     <div class="container topbar">
       <div class="back">
         <a href="index.html" aria-label="Retour" title="Retour">
-          <!-- Icône flèche gauche (SVG) -->
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </a>
       </div>
       <div class="title">The Art Of Greatness</div>
@@ -139,23 +160,27 @@
     </div>
   </header>
 
-  <!-- HERO / CAROUSEL -->
-  <div class="hero">
-    <div class="container carousel">
-      <div class="slides" id="slides">
-        <figure class="slide" id="s1"><img src="https://picsum.photos/seed/762/1600/900" alt="Œuvre 1" /></figure>
-        <figure class="slide" id="s2"><img src="https://picsum.photos/seed/184/1600/900" alt="Œuvre 2" /></figure>
-        <figure class="slide" id="s3"><img src="https://picsum.photos/seed/931/1600/900" alt="Œuvre 3" /></figure>
-        <figure class="slide" id="s4"><img src="https://picsum.photos/seed/576/1600/900" alt="Œuvre 4" /></figure>
-        <figure class="slide" id="s5"><img src="https://picsum.photos/seed/176/1600/900" alt="Œuvre 5" /></figure>
+  <!-- HERO / BANNIÈRE DÉFILANTE -->
+  <div class="hero-marquee" aria-label="Bannière d’images défilantes">
+    <div class="marquee">
+      <div class="marquee__track">
+        <!-- Groupe 1 -->
+        <div class="marquee__group">
+          <img src="https://picsum.photos/seed/762/1600/900" alt="Œuvre 1" />
+          <img src="https://picsum.photos/seed/184/1600/900" alt="Œuvre 2" />
+          <img src="https://picsum.photos/seed/931/1600/900" alt="Œuvre 3" />
+          <img src="https://picsum.photos/seed/576/1600/900" alt="Œuvre 4" />
+          <img src="https://picsum.photos/seed/176/1600/900" alt="Œuvre 5" />
+        </div>
+        <!-- Groupe 2 (copie pour boucle infinie) -->
+        <div class="marquee__group" aria-hidden="true">
+          <img src="https://picsum.photos/seed/762/1600/900" alt="" />
+          <img src="https://picsum.photos/seed/184/1600/900" alt="" />
+          <img src="https://picsum.photos/seed/931/1600/900" alt="" />
+          <img src="https://picsum.photos/seed/576/1600/900" alt="" />
+          <img src="https://picsum.photos/seed/176/1600/900" alt="" />
+        </div>
       </div>
-      <nav class="dots" aria-label="Navigation du carrousel">
-        <a href="#s1" aria-label="Aller à la slide 1"></a>
-        <a href="#s2" aria-label="Aller à la slide 2"></a>
-        <a href="#s3" aria-label="Aller à la slide 3"></a>
-        <a href="#s4" aria-label="Aller à la slide 4"></a>
-        <a href="#s5" aria-label="Aller à la slide 5"></a>
-      </nav>
     </div>
   </div>
 
@@ -179,7 +204,7 @@
         </p>
       </div>
 
-      <!-- Block 1: text + image (right) -->
+      <!-- Block 1 -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
@@ -193,7 +218,7 @@
         </div>
       </div>
 
-      <!-- Block 2: image (left) + text -->
+      <!-- Block 2 -->
       <div class="block reverse">
         <div>
           <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation" style="border-radius:12px"/>
@@ -207,7 +232,7 @@
         </div>
       </div>
 
-      <!-- Block 3: text + image (right) -->
+      <!-- Block 3 -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
@@ -263,3 +288,4 @@
   </footer>
 </body>
 </html>
+
