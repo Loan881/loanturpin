@@ -1,23 +1,26 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Art Story</title>
 
-  <!-- Favicon classique -->
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
 
-<!-- iOS -->
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- iOS -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-<!-- Android/Progressive Web App -->
-<link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
-<link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
+  <!-- Android/Progressive Web App -->
+  <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
   
+  <!-- (Note: a local file:// favicon will not work online) -->
   <link rel="icon" type="image/png" href="file:///Users/loanturpin/Downloads/Illustration_sans_titre%2011.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100;400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
@@ -25,22 +28,26 @@
       --paper:#ffffff;
       --ink:#0b0c10;
       --line:#d8dbe3;
-      --accent:#1B1158; /* bleu lien */
+      --accent:#1B1158;
       --radius:18px;
     }
 
     *{ box-sizing:border-box }
     html,body{ height:100% }
+
+    /* Use Playfair Display everywhere */
     body{
       margin:0;
       background:var(--paper);
       color:var(--ink);
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;
+      font-family: "Playfair Display", serif;
     }
+    button, input, select, textarea { font-family: "Playfair Display", serif; }
+
     img{ max-width:100%; display:block }
     a{ color:inherit; text-decoration:none }
 
-    /* ===== AppBar ===== */
+    /* AppBar */
     .appbar{ position:sticky; top:0; z-index:40; height:64px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 10px; background:#fff; border-bottom:1px solid var(--line) }
     .title{ font:700 22px/1.2 "Playfair Display", ui-serif, serif; text-align:center; color:#000 }
     .icon-btn{ width:44px; height:44px; display:inline-grid; place-items:center; border-radius:50%; border:1px solid transparent; cursor:pointer }
@@ -49,7 +56,7 @@
     .left{ display:flex; gap:6px; align-items:center }
     .right{ justify-self:end }
 
-    /* ===== Drawer (off-canvas) ===== */
+    /* Drawer (off-canvas) */
     #drawer-toggle{ display:none }
     .drawer{ position:fixed; inset:0 auto 0 0; width:320px; background:#fff; border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .25s ease; z-index:50 }
     #drawer-toggle:checked ~ .drawer{ transform:translateX(0) }
@@ -66,7 +73,7 @@
     .close-drawer{ margin-top:16px; align-self:flex-start; display:inline-block; padding:8px 12px; border:1px solid #ddd; border-radius:10px; cursor:pointer }
     .backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.25); z-index:45; opacity:0; pointer-events:none; transition:.25s }
 
-    /* ===== Hero ===== */
+    /* Hero */
     .hero{ position:relative; height:min(800px, 78vh); display:grid; place-items:center; overflow:hidden }
     .hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
     .hero h1{ position:relative; margin:0; padding:0 20px; text-align:center; color:#fff; font:700 24px/1.4 "Playfair Display"; text-shadow:2px 2px 2px rgba(0,0,0,.7); opacity:0; animation:fadeIn 1.6s ease-out .4s forwards }
@@ -74,7 +81,7 @@
     @media (min-width:1024px){ .hero h1{ font-size:32px } }
     @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
 
-    /* ===== Section Story ===== */
+    /* Section Story */
     .section{ background:#fff; padding:20px; }
     .cap{ width:200px; margin:0 auto 12px; text-align:center }
     .cap h3{ font:700 16px/1.2 "Playfair Display"; margin:20px 0 6px }
@@ -108,28 +115,28 @@
 </head>
 <body>
 
-  <!-- Toggle du tiroir -->
+  <!-- Drawer toggle -->
   <input id="drawer-toggle" type="checkbox" hidden>
 
   <!-- Drawer -->
-  <aside class="drawer" aria-label="Menu latéral">
+  <aside class="drawer" aria-label="Side menu">
     <div class="drawer-inner">
       <h1 class="brand">TURPIN Loan</h1>
       <hr class="divider">
       <nav class="drawer-nav">
         <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#my-artworks">My ArtWorks</a>
-        <a class="nav-link" href="#stories">The Art Storys</a>
+        <a class="nav-link" href="#my-artworks">My Artworks</a>
+        <a class="nav-link" href="#stories">The Art Stories</a>
         <a class="nav-link" href="#contact">Contact Me.</a>
       </nav>
       <div class="drawer-spacer"></div>
       <h2 class="sub">Social Media</h2>
       <hr class="divider">
       <div class="social-lines">
-        <div>Instagram : <a class="value" href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
-        <div>TikTok : <a class="value" href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+        <div>Instagram: <a class="value" href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+        <div>TikTok: <a class="value" href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
       </div>
-      <label for="drawer-toggle" class="close-drawer">Fermer</label>
+      <label for="drawer-toggle" class="close-drawer">Close</label>
     </div>
   </aside>
   <label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
@@ -147,77 +154,77 @@
 
   <!-- Hero -->
   <section class="hero" id="home">
-    <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/dvsoabpd1afo/20250810_1013_Atelier_de_Cre%CC%81ation_Artistique_simple_compose_01k29gj7cpewcave8e8c2wz9ey.png" alt="Atelier artistique – fond">
-    <h1>Un voyage entre l’ombre et la lumière</h1>
+    <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/dvsoabpd1afo/20250810_1013_Atelier_de_Cre%CC%81ation_Artistique_simple_compose_01k29gj7cpewcave8e8c2wz9ey.png" alt="Art studio – background">
+    <h1>A journey between shadow and light</h1>
   </section>
 
   <!-- Story Section -->
   <section class="section">
     <div class="cap">
-      <h3>All My Storys</h3>
+      <h3>All My Stories</h3>
       <div class="bar"></div>
     </div>
 
     <div class="container story">
-      <p>Depuis mon plus jeune âge, j’ai cherché la beauté là où d’autres voyaient le chaos. Chaque toile est une tentative d’attraper un instant de vérité – fragile, imparfait, vivant.</p>
-      <p>Je peins pour comprendre. Pour donner une forme à ce qui nous traverse : le doute, l’élan, la peur, l’amour. Quand je travaille, je fais taire le monde. Les couleurs parlent à ma place.</p>
-      <p class="quote">« L’art ne reproduit pas le visible ; il rend visible. »</p>
+      <p>Since childhood, I have looked for beauty where others saw chaos. Each canvas is an attempt to catch a moment of truth—fragile, imperfect, alive.</p>
+      <p>I paint to understand. To give form to what moves through us: doubt, impulse, fear, love. When I work, I quiet the world. Colors speak for me.</p>
+      <p class="quote">“Art does not reproduce the visible; it makes visible.”</p>
 
-      <h4 class="h-sub">Évoluer avec chaque toile</h4>
+      <h4 class="h-sub">Evolving with every canvas</h4>
       <div class="mini"></div>
-      <p>Les années m’ont guidé à travers plusieurs matières et gestes : l’huile, l’acrylique, les collages, les glacis patients et les fulgurances. Je n’ai pas un style, j’ai une quête. Chaque série est une étape, chaque échec un révélateur.</p>
-      <div class="centered"><img src="https://picsum.photos/seed/808/600" alt="détail d’atelier"></div>
-      <p class="quote">« Chaque coup de pinceau est un choix, et chaque choix, une trace de soi. »</p>
+      <p>Years have led me through many materials and gestures: oil, acrylic, collage, patient glazes and sudden bursts. I don’t have a style; I have a quest. Each series is a step, each failure a revelation.</p>
+      <div class="centered"><img src="https://picsum.photos/seed/808/600" alt="studio detail"></div>
+      <p class="quote">“Every brushstroke is a choice, and every choice a trace of oneself.”</p>
 
-      <h4 class="h-sub">Évoluer avec chaque toile</h4>
+      <h4 class="h-sub">Evolving with every canvas</h4>
       <div class="mini"></div>
-      <p>Je reviens souvent sur une pièce des mois plus tard. Rien n’est figé : la lumière change, moi aussi. La toile devient un journal silencieux où je lis mes propres métamorphoses.</p>
-      <div class="centered"><img src="https://picsum.photos/seed/432/600" alt="texture de peinture"></div>
+      <p>I often return to a piece months later. Nothing is fixed: the light changes, and so do I. The canvas becomes a silent journal where I read my own transformations.</p>
+      <div class="centered"><img src="https://picsum.photos/seed/432/600" alt="paint texture"></div>
 
-      <h4 class="h-sub">L’art comme miroir intérieur</h4>
+      <h4 class="h-sub">Art as an inner mirror</h4>
       <div class="mini wide"></div>
-      <p>Mon art est le fruit de l’amour du détail, de la patience et du désir de rendre les choses plus belles qu’elles ne se croient. J’avance avec douceur, même au cœur du désordre.</p>
+      <p>My art grows from a love of detail, patience, and the desire to make things more beautiful than they believe themselves to be. I move gently, even in the heart of disorder.</p>
 
       <div class="cta">
-        <p>Entrez dans ma galerie. Découvrez mes œuvres, mes séries, et l’histoire qui circule entre elles.</p>
-        <a href="#my-artworks">Voir mes oeuvres →</a>
+        <p>Enter my gallery. Discover my works, my series, and the story that flows between them.</p>
+        <a href="#my-artworks">See my artworks →</a>
       </div>
     </div>
   </section>
 
-      <footer id="contact" class="site-footer" role="contentinfo">
-        <hr class="divider" aria-hidden="true">
-        <div class="footer-top">
-          <div class="col">
-            <h5 class="footer-title">Page</h5>
-            <hr class="divider w30" aria-hidden="true">
-            <nav class="footer-links" aria-label="Pied de page - navigation">
-              <a href="#home">Home</a>
-              <a href="#gallery">Gallery</a>
-              <a href="#the-art-story">The Art Story</a>
-              <a href="#contact">Contact Me.</a>
-            </nav>
-          </div>
-          <div class="col">
-            <h5 class="footer-title">Social Media</h5>
-            <hr class="divider w82" aria-hidden="true">
-            <div class="social-lines">
-              <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
-              <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
-            </div>
-          </div>
+  <footer id="contact" class="site-footer" role="contentinfo">
+    <hr class="divider" aria-hidden="true">
+    <div class="footer-top">
+      <div class="col">
+        <h5 class="footer-title">Pages</h5>
+        <hr class="divider w30" aria-hidden="true">
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#home">Home</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#the-art-story">The Art Story</a>
+          <a href="#contact">Contact Me.</a>
+        </nav>
+      </div>
+      <div class="col">
+        <h5 class="footer-title">Social Media</h5>
+        <hr class="divider w82" aria-hidden="true">
+        <div class="social-lines">
+          <div class="line"><span>Instagram:</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
+          <div class="line"><span>TikTok:</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
         </div>
+      </div>
+    </div>
 
-        <div class="footer-contact">
-          <h5 class="footer-title">Contact Me</h5>
-          <hr class="divider" aria-hidden="true">
-          <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
-          <div class="credit">
-            <hr class="divider thin" aria-hidden="true">
-            <p>© 2025 TURPIN Loan</p>
-          </div>
-        </div>
-      </footer>
+    <div class="footer-contact">
+      <h5 class="footer-title">Contact Me</h5>
+      <hr class="divider" aria-hidden="true">
+      <p class="line"><span>E-mail:</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
+      <div class="credit">
+        <hr class="divider thin" aria-hidden="true">
+        <p>© 2025 TURPIN Loan</p>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
