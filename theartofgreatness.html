@@ -149,6 +149,13 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
+    /* ===== Spécifique : Réalisation = texte au-dessus de l'image sur mobile ===== */
+    .block.realisation{
+      grid-template-areas: "media card"; /* desktop : image gauche, texte droite */
+    }
+    .block.realisation .media{ grid-area: media; }
+    .block.realisation .card{  grid-area: card;  }
+
     /* ===== Mobile : bannière 2/3 écran + blocs empilés ===== */
     @media (max-width: 768px){
       :root{ --tile: 66.67vh; }   /* 2/3 d’écran pour la bannière */
@@ -158,6 +165,13 @@
         grid-template-columns: 1fr;    /* pile : chaque élément sur toute la largeur */
         gap: 16px;
         margin: 24px 0;
+      }
+
+      /* Pour Réalisation : texte au-dessus de l'image */
+      .block.realisation{
+        grid-template-areas:
+          "card"
+          "media";
       }
 
       /* Typo un peu plus compacte sur mobile */
@@ -243,8 +257,8 @@
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (image puis texte) -->
-      <div class="block">
+      <!-- Block 2 : Réalisation (image puis texte sur desktop, texte au-dessus sur mobile) -->
+      <div class="block realisation">
         <div class="media">
           <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation"/>
         </div>
