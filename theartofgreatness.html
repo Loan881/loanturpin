@@ -52,13 +52,16 @@
     }
     .topbar{
       position:relative;display:flex;align-items:center;justify-content:center;
-      gap:12px;padding:12px 8px;min-height:56px;
+      gap:12px;padding:12px 0;min-height:60px; /* padding 0 sur les côtés + un peu plus haute */
     }
-    .back{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
-    .back a{display:inline-flex;align-items:center;justify-content:center;padding:8px;border:none;background:transparent;border-radius:8px;line-height:0;cursor:pointer}
+    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)} /* collé à gauche */
+    .back a{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px;border:none;background:transparent;border-radius:8px;line-height:0;cursor:pointer
+    }
     .back a:hover{opacity:.8}
     .back a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-    .back a svg{width:20px;height:20px;fill:currentColor}
+    .back a svg{width:28px;height:28px;fill:currentColor} /* icône x1.4 (avant 20px) */
     .title{
       position:absolute;left:50%;transform:translateX(-50%);
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
@@ -82,7 +85,6 @@
     .track{display:flex;gap:0;align-items:center}
     .group{display:flex;gap:0;flex-shrink:0}
     .group img{
-      /* Carré strict 1:1 */
       height:var(--tile);
       width:var(--tile);
       aspect-ratio:1 / 1;
@@ -105,7 +107,6 @@
       margin:28px 0;
     }
 
-    /* Carte + titres (typo fluide) */
     .block .card{
       background:var(--bg);
       padding:14px 16px;
@@ -119,17 +120,11 @@
       font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
     }
 
-    /* Wrapper média pour contrôler la taille de l’image
-       (MAX DIVISÉ PAR 2 : 560px -> 280px) */
-    .media{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+    /* Wrapper média – MAX divisé par 2 (280px) */
+    .media{display:flex;justify-content:center;align-items:center}
     .media img{
-      width: clamp(220px, 38vw, 280px);  /* <- max 280px au lieu de 560px */
-      height:auto;
-      border-radius:12px;
+      width: clamp(220px, 38vw, 280px);
+      height:auto;border-radius:12px;
     }
 
     /* Story : plus de padding haut/bas */
@@ -157,25 +152,22 @@
     .block.realisation .media{ grid-area: media; }
     .block.realisation .card{  grid-area: card;  }
 
-    /* ===== Mobile : bannière 2/3 écran + blocs empilés ===== */
+    /* ===== Mobile ===== */
     @media (max-width: 768px){
       :root{ --tile: 66.67vh; }
 
-      /* Les blocs passent en 1 colonne */
       .block{
         grid-template-columns: 1fr;
         gap: 16px;
         margin: 24px 0;
       }
-
-      /* Réalisation : texte au-dessus de l'image */
+      /* Réalisation : texte au-dessus */
       .block.realisation{
         grid-template-areas:
           "card"
           "media";
       }
 
-      /* Typo compacte */
       .block .card{
         padding: clamp(12px, 3.4vw, 20px);
         font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem);
@@ -184,10 +176,10 @@
         font-size: clamp(1.05rem, 2vw + 0.9rem, 1.35rem);
       }
 
-      /* Images : pleine largeur mais MAX DIVISÉ PAR 2 (640 -> 320) */
+      /* Images : max divisé par 2 aussi côté mobile (320px) */
       .media img{
         width: min(100%, 92vw);
-        max-width: 320px; /* <- au lieu de 640px */
+        max-width: 320px;
       }
 
       .title{font-size:18px}
@@ -334,6 +326,7 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
+      // Clone 2 fois pour une boucle fluide
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -359,7 +352,7 @@
       }
 
       let dragging = false, startX = 0, startScroll = 0, autoplay = true, rafId = null;
-      const SPEED = 0.5;
+      const SPEED = 0.5; // px/frame
 
       function step(){
         if (autoplay && !dragging) {
