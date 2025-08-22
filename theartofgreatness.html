@@ -99,7 +99,7 @@
     /* ====== Blocs texte + image : côte à côte (desktop), pile (mobile) ====== */
     .block{
       display:grid;
-      grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr); /* 2 colonnes sur écrans larges */
+      grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
       align-items:center;
       gap: clamp(12px, 3vw, 28px);
       margin:28px 0;
@@ -119,14 +119,15 @@
       font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
     }
 
-    /* Wrapper média pour contrôler la taille de l’image */
+    /* Wrapper média pour contrôler la taille de l’image
+       (MAX DIVISÉ PAR 2 : 560px -> 280px) */
     .media{
       display:flex;
       justify-content:center;
       align-items:center;
     }
     .media img{
-      width: clamp(220px, 38vw, 560px);  /* image fluide, min→max */
+      width: clamp(220px, 38vw, 280px);  /* <- max 280px au lieu de 560px */
       height:auto;
       border-radius:12px;
     }
@@ -158,23 +159,23 @@
 
     /* ===== Mobile : bannière 2/3 écran + blocs empilés ===== */
     @media (max-width: 768px){
-      :root{ --tile: 66.67vh; }   /* 2/3 d’écran pour la bannière */
+      :root{ --tile: 66.67vh; }
 
-      /* Les blocs passent en 1 colonne pour éviter de déformer texte/image */
+      /* Les blocs passent en 1 colonne */
       .block{
-        grid-template-columns: 1fr;    /* pile : chaque élément sur toute la largeur */
+        grid-template-columns: 1fr;
         gap: 16px;
         margin: 24px 0;
       }
 
-      /* Pour Réalisation : texte au-dessus de l'image */
+      /* Réalisation : texte au-dessus de l'image */
       .block.realisation{
         grid-template-areas:
           "card"
           "media";
       }
 
-      /* Typo un peu plus compacte sur mobile */
+      /* Typo compacte */
       .block .card{
         padding: clamp(12px, 3.4vw, 20px);
         font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem);
@@ -183,10 +184,10 @@
         font-size: clamp(1.05rem, 2vw + 0.9rem, 1.35rem);
       }
 
-      /* Images : pleine largeur (avec limites) */
+      /* Images : pleine largeur mais MAX DIVISÉ PAR 2 (640 -> 320) */
       .media img{
         width: min(100%, 92vw);
-        max-width: 640px;
+        max-width: 320px; /* <- au lieu de 640px */
       }
 
       .title{font-size:18px}
@@ -210,7 +211,6 @@
   <div class="hero-marquee" aria-label="Bannière d’images 1:1">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
-        <!-- Un seul groupe source. Les deux autres sont clonés en JS pour la boucle infinie -->
         <div class="group" id="group-source">
           <img src="https://picsum.photos/seed/762/1600/900" alt="Œuvre 1" />
           <img src="https://picsum.photos/seed/184/1600/900" alt="Œuvre 2" />
@@ -233,7 +233,7 @@
         mouvement continu – une volonté de rendre le monde un peu plus beau que nous ne l’avons trouvé.
       </p>
 
-      <!-- STORY : padding top/bottom augmenté -->
+      <!-- STORY -->
       <div class="card story" style="background:transparent;border:none">
         <h3 style="margin:22px 0 6px 0">Story</h3>
         <div class="thin" style="width:35px"></div>
@@ -243,7 +243,7 @@
         </p>
       </div>
 
-      <!-- Block 1 : Design & Conception (texte + image) -->
+      <!-- Block 1 : Design & Conception -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
@@ -257,7 +257,7 @@
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (image puis texte sur desktop, texte au-dessus sur mobile) -->
+      <!-- Block 2 : Réalisation -->
       <div class="block realisation">
         <div class="media">
           <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation"/>
@@ -271,7 +271,7 @@
         </div>
       </div>
 
-      <!-- Block 3 : Final Touch (texte + image) -->
+      <!-- Block 3 : Final Touch -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
@@ -334,7 +334,6 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois le groupe source pour 3 groupes en boucle
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -353,16 +352,14 @@
         }));
       }
 
-      // Boucle infinie robuste : on reste autour du groupe central
       function wrap(){
         if (gw <= 1) return;
         while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
         while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
       }
 
-      // Auto défilement
       let dragging = false, startX = 0, startScroll = 0, autoplay = true, rafId = null;
-      const SPEED = 0.5; // px/frame (met -0.5 pour droite->gauche)
+      const SPEED = 0.5;
 
       function step(){
         if (autoplay && !dragging) {
@@ -372,7 +369,6 @@
         rafId = requestAnimationFrame(step);
       }
 
-      // Drag & swipe (Pointer Events)
       function onPointerDown(e){
         dragging = true;
         autoplay = false;
@@ -401,14 +397,11 @@
       marquee.addEventListener('pointercancel', onPointerUp);
       marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
 
-      // Pause/reprise auto sur survol (desktop)
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // Recalage si resize (la valeur de --tile peut changer)
       window.addEventListener('resize', ()=> { center(); });
 
-      // Init
       waitImagesLoaded().then(()=>{
         center();
         requestAnimationFrame(step);
