@@ -5,16 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Art Of Greatness</title>
 
-  <!-- Favicon classique -->
+  <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
-  <!-- iOS -->
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Android/Progressive Web App -->
   <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
@@ -27,6 +25,9 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
+
+      /* Taille des vignettes carrées du carousel */
+      --tile: 70vh;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -48,59 +49,59 @@
       border-bottom:1px solid rgba(0,0,0,.05);
       backdrop-filter:saturate(160%) blur(6px);
     }
-    .topbar{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 8px;}
-    .back{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
-    .back a{
-      display:inline-grid;place-items:center;
-      width:40px;height:40px;
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:0;line-height:0;cursor:pointer;background:#fff;
-      transition:background .2s ease, transform .05s ease;
+    .topbar{
+      position:relative;
+      display:flex;align-items:center;justify-content:center;
+      gap:12px;padding:12px 8px;min-height:56px;
     }
-    .back a:hover{background:#f1f1f1}
-    .back a:active{transform:scale(0.98)}
-    .back a svg{width:18px;height:18px;fill:currentColor}
-    .title{font-weight:700;font-size:22px;letter-spacing:.3px}
+    .back{
+      position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    }
+    .back a{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:8px;border:none;background:transparent;border-radius:8px;
+      line-height:0;cursor:pointer;
+    }
+    .back a:hover{opacity:.8}
+    .back a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+    .back a svg{width:20px;height:20px;fill:currentColor}
+    .title{
+      position:absolute;left:50%;transform:translateX(-50%);
+      margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;
+      white-space:nowrap;text-align:center;
+    }
 
-    /* === HERO – bannière défilante plein écran === */
+    /* === HERO – bannière défilante (images carrées 1:1) === */
     .hero-marquee{
       position:relative;
-      width:100vw;                  /* plein écran */
-      margin-left:calc(50% - 50vw); /* sort de la grille container */
+      width:100vw;
+      margin-left:calc(50% - 50vw);
       background:var(--bg);
     }
     .marquee{
       overflow:hidden;
-      height:70vh;                  /* hauteur du bandeau */
+      height:var(--tile);           /* le conteneur prend la taille carrée */
       user-select:none;
     }
     .marquee__track{
-      display:flex;
-      align-items:center;
-      gap:0;
+      display:flex;align-items:center;gap:0;
       animation:marquee-scroll 40s linear infinite;
     }
     .marquee__group{
-      display:flex;
-      gap:0;
-      flex-shrink:0;                /* deux groupes identiques pour la boucle infinie */
+      display:flex;gap:0;flex-shrink:0;
     }
+    /* Chaque image devient un carré strict 1:1 */
     .marquee__group img{
-      height:70vh;                  /* remplit la hauteur */
-      width:auto;
-      object-fit:cover;
+      width:var(--tile);
+      height:var(--tile);
+      object-fit:cover;             /* recadrage propre au centre */
       flex:0 0 auto;
     }
-    /* Pause au survol */
     .marquee:hover .marquee__track{ animation-play-state: paused; }
-    /* Respecte l’accessibilité */
-    @media (prefers-reduced-motion: reduce){
-      .marquee__track{ animation:none; }
-    }
+    @media (prefers-reduced-motion: reduce){ .marquee__track{ animation:none } }
     @keyframes marquee-scroll{
-      from{ transform:translateX(0); }
-      to{   transform:translateX(-50%); } /* décale d’un groupe (2 groupes -> 50%) */
+      from{ transform:translateX(0) }
+      to{   transform:translateX(-50%) } /* 2 groupes => -50% pour boucler */
     }
 
     /* Sections */
@@ -130,19 +131,11 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
-    /* Utilities */
-    .muted{color:var(--muted)}
-    .center{text-align:center}
-
     /* Responsive */
     @media (max-width: 900px){
-      .block,.block.reverse{grid-template-columns:1fr;}
-      .back{position:static;transform:none}
-      .topbar{justify-content:space-between}
+      :root{ --tile: 50vh; }       /* carrés plus petits sur mobile */
       .title{font-size:18px}
-      .cols{grid-template-columns:1fr}
-      .marquee{height:50vh}
-      .marquee__group img{height:50vh}
+      .block,.block.reverse{grid-template-columns:1fr;}
     }
   </style>
 </head>
@@ -152,16 +145,17 @@
     <div class="container topbar">
       <div class="back">
         <a href="index.html" aria-label="Retour" title="Retour">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+          </svg>
         </a>
       </div>
       <div class="title">The Art Of Greatness</div>
-      <div style="width:80px"></div>
     </div>
   </header>
 
-  <!-- HERO / BANNIÈRE DÉFILANTE -->
-  <div class="hero-marquee" aria-label="Bannière d’images défilantes">
+  <!-- HERO / BANNIÈRE DÉFILANTE 1:1 -->
+  <div class="hero-marquee" aria-label="Bannière d’images défilantes 1:1">
     <div class="marquee">
       <div class="marquee__track">
         <!-- Groupe 1 -->
@@ -204,7 +198,6 @@
         </p>
       </div>
 
-      <!-- Block 1 -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
@@ -218,7 +211,6 @@
         </div>
       </div>
 
-      <!-- Block 2 -->
       <div class="block reverse">
         <div>
           <img src="https://picsum.photos/seed/755/900/1200" alt="Processus – Réalisation" style="border-radius:12px"/>
@@ -232,7 +224,6 @@
         </div>
       </div>
 
-      <!-- Block 3 -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
@@ -246,7 +237,6 @@
         </div>
       </div>
 
-      <!-- CTA -->
       <div class="cta" style="margin-top:22px">
         <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demande By E-Mail</a>
       </div>
