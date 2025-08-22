@@ -97,12 +97,27 @@
     }
 
     /* Hero */
-    .hero{ margin:0; width: 100%; }
+    .hero{ 
+      margin:0; 
+      width: 100%; 
+      position: relative; 
+    }
     .hero img{
       width:100%;
       height:90vh;
       object-fit:cover;
       border-radius:0;
+    }
+    .hero-title{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      color:white;
+      font-size:48px;
+      font-weight:700;
+      text-align:center;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
     }
 
     /* Section */
@@ -178,10 +193,10 @@
     <h1 class="brand">TURPIN Loan</h1>
     <hr class="divider">
     <nav class="drawer-nav">
-      <a href="#" class="https://loan881.github.io/loanturpin/">Home</a>
-      <a href="#" class="https://loan881.github.io/loanturpin/gallery">My ArtWorks</a>
-      <a href="#" class="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
-      <a href="#" class="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
+      <a href="https://loan881.github.io/loanturpin/">Home</a>
+      <a href="https://loan881.github.io/loanturpin/gallery">My ArtWorks</a>
+      <a href="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
+      <a href="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
     </nav>
     <div class="drawer-spacer"></div>
     <h2 class="footer-title">Social Media</h2>
@@ -213,6 +228,7 @@
   <!-- Hero -->
   <figure class="hero">
     <img src="https://images.unsplash.com/photo-1627306052213-164736646fe5?w=1920&q=80&auto=format&fit=crop" alt="Hero Home">
+    <figcaption class="hero-title">Bienvenue dans mon univers</figcaption>
   </figure>
 
   <!-- Intro -->
