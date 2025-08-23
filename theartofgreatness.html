@@ -28,8 +28,12 @@
       --accent-2:#181451;
       --tile: 70vh; /* hauteur du carrousel (desktop) */
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
+    /* ⛔️ Bloque tout scroll horizontal global */
+    html,body{overflow-x:hidden}
+
     body{
       margin:0;
       font-family:"Playfair Display", serif;
@@ -70,12 +74,15 @@
     .marquee{
       height:var(--tile);
       min-height:var(--tile);
-      overflow-x:scroll;overflow-y:hidden;
+      overflow-x:auto; /* le carrousel peut défiler horizontalement */
+      overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
+      /* Empêche le scroll de se propager à la page */
+      overscroll-behavior: contain;
     }
     .marquee::-webkit-scrollbar{display:none}
     .marquee.dragging{cursor:grabbing}
@@ -92,13 +99,13 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image (PLUS D'ESPACEMENT) */
+    /* Blocs texte + image (plus d'espacement) */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
       align-items:center;
-      gap: clamp(16px, 4vw, 36px);         /* + d'espace entre texte/visuel */
-      margin: clamp(36px, 6vw, 72px) 0;    /* + d'espace autour de chaque ensemble */
+      gap: clamp(16px, 4vw, 36px);
+      margin: clamp(36px, 6vw, 72px) 0;
     }
     .block .card{
       background:var(--bg);
@@ -140,7 +147,7 @@
       .block{
         grid-template-columns: 1fr;
         gap: clamp(14px, 4.5vw, 24px);
-        margin: clamp(28px, 8vw, 48px) 0; /* plus d'air aussi sur mobile */
+        margin: clamp(28px, 8vw, 48px) 0;
       }
       .block.realisation{ grid-template-areas:"card" "media"; }
       .block .card{ padding: clamp(12px, 3.4vw, 20px); font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem); }
@@ -167,7 +174,6 @@
   <div class="hero-marquee" aria-label="Bannière d’images 1:1">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
-        <!-- IMG_9449 est la première image affichée du carrousel -->
         <div class="group" id="group-source">
           <img src="/loanturpin/images/IMG_9449-2000.jpg"
                srcset="/loanturpin/images/IMG_9449-1000.jpg 1000w, /loanturpin/images/IMG_9449-2000.jpg 2000w"
@@ -215,7 +221,7 @@ Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d
         </p>
       </div>
 
-      <!-- Block 1 : Design & Conception (1ère image fournie) -->
+      <!-- Block 1 : Design & Conception -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
@@ -229,7 +235,7 @@ Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (2e image fournie) -->
+      <!-- Block 2 : Réalisation -->
       <div class="block realisation">
         <div class="media">
           <img src="/loanturpin/images/IMG_65845.jpeg" alt="Réalisation – texture bleue en cours" loading="lazy" decoding="async">
@@ -243,7 +249,7 @@ Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d
         </div>
       </div>
 
-      <!-- Block 3 : Final Touch (3e image fournie) -->
+      <!-- Block 3 : Final Touch -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
@@ -298,7 +304,7 @@ Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d
     </div>
   </footer>
 
-  <!-- JS : auto + boucle infinie + drag/swipe -->
+  <!-- JS : auto + boucle infinie + drag/swipe + molette horizontale -->
   <script>
     (function(){
       const marquee = document.getElementById('marquee');
@@ -372,6 +378,14 @@ Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d
 
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
+
+      // 🖱 Convertit la molette verticale en défilement horizontal quand le pointeur est sur le carrousel
+      marquee.addEventListener('wheel', (e) => {
+        const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+        marquee.scrollLeft += delta;
+        wrap();
+        e.preventDefault(); // empêche la page de scroller verticalement pendant cette action
+      }, { passive: false });
 
       window.addEventListener('resize', center);
 
