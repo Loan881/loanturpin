@@ -26,9 +26,7 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
-
-      /* hauteur des vignettes du carrousel (desktop) */
-      --tile: 70vh;
+      --tile: 70vh; /* hauteur du carrousel (desktop) */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -52,22 +50,22 @@
     }
     .topbar{
       position:relative;display:flex;align-items:center;justify-content:center;
-      gap:12px;padding:12px 0;min-height:60px; /* pas de padding latéral */
+      gap:12px;padding:12px 0;min-height:60px;
     }
-    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)} /* collé à gauche */
+    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)}
     .back a{
       display:inline-flex;align-items:center;justify-content:center;
       padding:12px;border:none;background:transparent;border-radius:8px;line-height:0;cursor:pointer
     }
     .back a:hover{opacity:.8}
     .back a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-    .back a svg{width:28px;height:28px;fill:currentColor} /* icône x1.4 */
+    .back a svg{width:28px;height:28px;fill:currentColor}
     .title{
       position:absolute;left:50%;transform:translateX(-50%);
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
     }
 
-    /* === HERO – bannière 1:1, auto + boucle + drag/swipe === */
+    /* HERO – bannière 1:1, auto + boucle + drag/swipe */
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
@@ -84,11 +82,8 @@
     .track{display:flex;gap:0;align-items:center}
     .group{display:flex;gap:0;flex-shrink:0}
     .group img{
-      height:var(--tile);
-      width:var(--tile);
-      aspect-ratio:1 / 1;
-      object-fit:cover;
-      flex:0 0 auto;
+      height:var(--tile); width:var(--tile);
+      aspect-ratio:1 / 1; object-fit:cover; flex:0 0 auto;
     }
 
     /* Sections */
@@ -97,7 +92,7 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* ====== Blocs texte + image : côte à côte (desktop), pile (mobile) ====== */
+    /* Blocs texte + image */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -117,15 +112,10 @@
       font-weight:700;
       font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
     }
-
-    /* Images de contenu – taille max divisée par 2 */
     .media{display:flex;justify-content:center;align-items:center}
     .media img{width: clamp(220px, 38vw, 280px); height:auto; border-radius:12px}
 
-    /* Story : plus de padding haut/bas */
     .card.story { padding-block: 48px !important; }
-
-    /* CTA */
     .cta{display:flex;justify-content:center;margin-top:48px}
     .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:16px 24px;border-radius:10px;font-size:14px}
 
@@ -135,7 +125,6 @@
     .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding: 10px 0 20px }
     .footer-title{ font-weight: 700; font-size: 18px; margin: 6px 0 }
     .footer-links{ display:grid; gap:12px; margin-top:14px }
-    .footer-links a{ font-weight: 600; font-size: 16px }
     .footer-contact{ width:min(800px, 100%); margin: 0 auto; text-align:center; padding: 0 20px 20px }
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
@@ -145,9 +134,9 @@
     .block.realisation .media{ grid-area: media; }
     .block.realisation .card{  grid-area: card;  }
 
-    /* ===== Mobile ===== */
+    /* Mobile */
     @media (max-width: 768px){
-      :root{ --tile: 66.67vh; } /* 2/3 d’écran pour la bannière */
+      :root{ --tile: 66.67vh; } /* 2/3 écran */
       .block{ grid-template-columns: 1fr; gap:16px; margin:24px 0; }
       .block.realisation{ grid-template-areas:"card" "media"; }
       .block .card{ padding: clamp(12px, 3.4vw, 20px); font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem); }
@@ -174,26 +163,23 @@
   <div class="hero-marquee" aria-label="Bannière d’images 1:1">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
-        <!-- Utilise les versions 1000/2000px carrées exportées -->
+        <!-- IMG_9449 est maintenant la PREMIÈRE image du carrousel -->
         <div class="group" id="group-source">
+          <img src="/loanturpin/images/IMG_9449-2000.jpg"
+               srcset="/loanturpin/images/IMG_9449-1000.jpg 1000w, /loanturpin/images/IMG_9449-2000.jpg 2000w"
+               alt="Artwork 9449" decoding="async" fetchpriority="high">
           <img src="/loanturpin/images/IMG_9437-2000.jpg"
                srcset="/loanturpin/images/IMG_9437-1000.jpg 1000w, /loanturpin/images/IMG_9437-2000.jpg 2000w"
-               alt="Artwork 9437" decoding="async" fetchpriority="high">
+               alt="Artwork 9437" decoding="async">
           <img src="/loanturpin/images/IMG_9440-2000.jpg"
                srcset="/loanturpin/images/IMG_9440-1000.jpg 1000w, /loanturpin/images/IMG_9440-2000.jpg 2000w"
                alt="Artwork 9440" decoding="async">
           <img src="/loanturpin/images/IMG_9445-2000.jpg"
                srcset="/loanturpin/images/IMG_9445-1000.jpg 1000w, /loanturpin/images/IMG_9445-2000.jpg 2000w"
                alt="Artwork 9445" decoding="async">
-          <img src="/loanturpin/images/IMG_9446-2000.jpg"
-               srcset="/loanturpin/images/IMG_9446-1000.jpg 1000w, /loanturpin/images/IMG_9446-2000.jpg 2000w"
-               alt="Artwork 9446" decoding="async">
           <img src="/loanturpin/images/IMG_9447-2000.jpg"
                srcset="/loanturpin/images/IMG_9447-1000.jpg 1000w, /loanturpin/images/IMG_9447-2000.jpg 2000w"
                alt="Artwork 9447" decoding="async">
-          <img src="/loanturpin/images/IMG_9449-2000.jpg"
-               srcset="/loanturpin/images/IMG_9449-1000.jpg 1000w, /loanturpin/images/IMG_9449-2000.jpg 2000w"
-               alt="Artwork 9449" decoding="async">
           <img src="/loanturpin/images/IMG_9483-2000.jpg"
                srcset="/loanturpin/images/IMG_9483-1000.jpg 1000w, /loanturpin/images/IMG_9483-2000.jpg 2000w"
                alt="Artwork 9483" decoding="async">
@@ -237,10 +223,10 @@
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (texte au-dessus sur mobile) -->
+      <!-- Block 2 : Réalisation -->
       <div class="block realisation">
         <div class="media">
-          <img src="/loanturpin/images/IMG_9446-1000.jpg" alt="Processus – Réalisation" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_9445-1000.jpg" alt="Processus – Réalisation" loading="lazy" decoding="async">
         </div>
         <div class="card">
           <h3>Réalisation</h3>
@@ -333,14 +319,12 @@
         }));
       }
 
-      // Reste toujours autour du groupe du milieu
       function wrap(){
         if (gw <= 1) return;
         while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
         while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
       }
 
-      // Auto + drag/swipe
       let dragging = false, startX = 0, startScroll = 0, autoplay = true;
       const SPEED = 0.5; // px/frame
 
