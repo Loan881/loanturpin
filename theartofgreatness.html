@@ -31,7 +31,7 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
-    /* ⛔️ Bloque tout scroll horizontal global */
+    /* Bloque tout scroll horizontal global */
     html,body{overflow-x:hidden}
 
     body{
@@ -74,14 +74,14 @@
     .marquee{
       height:var(--tile);
       min-height:var(--tile);
-      overflow-x:auto; /* le carrousel peut défiler horizontalement */
+      overflow-x:auto;
       overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
-      /* Empêche le scroll de se propager à la page */
+      /* Empêche la propagation du scroll à la page */
       overscroll-behavior: contain;
     }
     .marquee::-webkit-scrollbar{display:none}
@@ -215,7 +215,7 @@
         <div class="thin" style="width:35px"></div>
         <p class="prose" style="margin:10px 0 0 0">
           Puissiez-vous, à travers ces mots et ces images, sentir la patience des heures, la quête du geste juste et le désir d’ordre dans le désordre — là où se cache souvent la beauté.
-Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre ; la lumière s’y loge. Chaque passage efface et révèle, chaque reprise ajoute une mémoire. Ce tableau n’est pas une preuve : c’est une trace — la tentative obstinée de rendre visible ce qui nous traverse.
+          J’avance lentement, au rythme de la matière…
         </p>
       </div>
 
@@ -224,8 +224,7 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
         <div class="card">
           <h3>Design & Conception</h3>
           <p class="prose">
-            L’idée est née comme une vision : une composition qui tiendrait par l’équilibre des tensions. Les esquisses ont
-            cadré les masses, la couleur a trouvé sa respiration, et le rythme des formes a posé la structure d’ensemble.
+            L’idée est née comme une vision : une composition qui tiendrait par l’équilibre des tensions…
           </p>
         </div>
         <div class="media">
@@ -241,8 +240,7 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
         <div class="card">
           <h3>Réalisation</h3>
           <p class="prose">
-            Chaque coup de pinceau a été posé avec intention. Superpositions, retraits, reprises – la matière s’est faite
-            mémoire du geste jusqu’à ce que la surface parle d’elle-même : ni trop ni pas assez.
+            Chaque coup de pinceau a été posé avec intention…
           </p>
         </div>
       </div>
@@ -252,8 +250,7 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
         <div class="card">
           <h3>Final Touch</h3>
           <p class="prose">
-            La dernière étape, presque cérémonielle : clarifier les valeurs, affiner les lisières, signer le silence.
-            C’est là que l’œuvre cesse d’être un travail et devient une présence.
+            La dernière étape, presque cérémonielle…
           </p>
         </div>
         <div class="media">
@@ -302,7 +299,7 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
     </div>
   </footer>
 
-  <!-- JS : auto + boucle infinie + drag/swipe + molette horizontale -->
+  <!-- JS : auto + boucle infinie + drag/swipe + molette horizontale + centrage premier visuel -->
   <script>
     (function(){
       const marquee = document.getElementById('marquee');
@@ -319,7 +316,16 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
 
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
-      function center(){ measure(); marquee.scrollLeft = gw; }
+
+      // ➜ Centre vraiment la première image au milieu de l'écran
+      function center(){
+        measure();
+        const first = source.querySelector('img');
+        if(!first) { marquee.scrollLeft = gw; return; }
+        const firstW = first.getBoundingClientRect().width;
+        const viewW  = marquee.clientWidth;
+        marquee.scrollLeft = gw + (firstW / 2) - (viewW / 2);
+      }
 
       function waitImagesLoaded(){
         const imgs = source.querySelectorAll('img');
@@ -377,18 +383,18 @@ Sous les couches, je cherche un souffle. La matière résiste, puis s’ouvre 
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // 🖱 Convertit la molette verticale en défilement horizontal quand le pointeur est sur le carrousel
+      // Molette → défilement horizontal
       marquee.addEventListener('wheel', (e) => {
         const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
         marquee.scrollLeft += delta;
         wrap();
-        e.preventDefault(); // empêche la page de scroller verticalement pendant cette action
+        e.preventDefault();
       }, { passive: false });
 
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();
+        center();              // centre la première image au chargement
         requestAnimationFrame(step);
       });
     })();
