@@ -26,6 +26,8 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
+
+      /* hauteur des vignettes du carrousel (desktop) */
       --tile: 70vh;
     }
     *{box-sizing:border-box}
@@ -50,22 +52,22 @@
     }
     .topbar{
       position:relative;display:flex;align-items:center;justify-content:center;
-      gap:12px;padding:12px 0;min-height:60px;
+      gap:12px;padding:12px 0;min-height:60px; /* pas de padding latéral */
     }
-    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)}
+    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)} /* collé à gauche */
     .back a{
       display:inline-flex;align-items:center;justify-content:center;
       padding:12px;border:none;background:transparent;border-radius:8px;line-height:0;cursor:pointer
     }
     .back a:hover{opacity:.8}
     .back a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-    .back a svg{width:28px;height:28px;fill:currentColor}
+    .back a svg{width:28px;height:28px;fill:currentColor} /* icône x1.4 */
     .title{
       position:absolute;left:50%;transform:translateX(-50%);
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
     }
 
-    /* HERO – bannière 1:1, auto + boucle + drag/swipe */
+    /* === HERO – bannière 1:1, auto + boucle + drag/swipe === */
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
@@ -82,8 +84,11 @@
     .track{display:flex;gap:0;align-items:center}
     .group{display:flex;gap:0;flex-shrink:0}
     .group img{
-      height:var(--tile); width:var(--tile);
-      aspect-ratio:1/1; object-fit:cover; flex:0 0 auto;
+      height:var(--tile);
+      width:var(--tile);
+      aspect-ratio:1 / 1;
+      object-fit:cover;
+      flex:0 0 auto;
     }
 
     /* Sections */
@@ -92,7 +97,7 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image */
+    /* ====== Blocs texte + image : côte à côte (desktop), pile (mobile) ====== */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -112,10 +117,15 @@
       font-weight:700;
       font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
     }
+
+    /* Images de contenu – taille max divisée par 2 */
     .media{display:flex;justify-content:center;align-items:center}
     .media img{width: clamp(220px, 38vw, 280px); height:auto; border-radius:12px}
 
+    /* Story : plus de padding haut/bas */
     .card.story { padding-block: 48px !important; }
+
+    /* CTA */
     .cta{display:flex;justify-content:center;margin-top:48px}
     .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:16px 24px;border-radius:10px;font-size:14px}
 
@@ -135,8 +145,9 @@
     .block.realisation .media{ grid-area: media; }
     .block.realisation .card{  grid-area: card;  }
 
+    /* ===== Mobile ===== */
     @media (max-width: 768px){
-      :root{ --tile: 66.67vh; }
+      :root{ --tile: 66.67vh; } /* 2/3 d’écran pour la bannière */
       .block{ grid-template-columns: 1fr; gap:16px; margin:24px 0; }
       .block.realisation{ grid-template-areas:"card" "media"; }
       .block .card{ padding: clamp(12px, 3.4vw, 20px); font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem); }
@@ -163,21 +174,35 @@
   <div class="hero-marquee" aria-label="Bannière d’images 1:1">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
-        <!-- Utilise tes fichiers (exportés en .jpg/.png) dans ton repo, par ex. /images -->
+        <!-- Utilise les versions 1000/2000px carrées exportées -->
         <div class="group" id="group-source">
-          <img src="images/IMG_9437.jpg" alt="Artwork IMG_9437">
-          <img src="images/IMG_9440.jpg" alt="Artwork IMG_9440">
-          <img src="images/IMG_9445.jpg" alt="Artwork IMG_9445">
-          <img src="images/IMG_9446.jpg" alt="Artwork IMG_9446">
-          <img src="images/IMG_9447.jpg" alt="Artwork IMG_9447">
-          <img src="images/IMG_9449.jpg" alt="Artwork IMG_9449">
-          <img src="images/IMG_9483.jpg" alt="Artwork IMG_9483">
+          <img src="/loanturpin/images/IMG_9437-2000.jpg"
+               srcset="/loanturpin/images/IMG_9437-1000.jpg 1000w, /loanturpin/images/IMG_9437-2000.jpg 2000w"
+               alt="Artwork 9437" decoding="async" fetchpriority="high">
+          <img src="/loanturpin/images/IMG_9440-2000.jpg"
+               srcset="/loanturpin/images/IMG_9440-1000.jpg 1000w, /loanturpin/images/IMG_9440-2000.jpg 2000w"
+               alt="Artwork 9440" decoding="async">
+          <img src="/loanturpin/images/IMG_9445-2000.jpg"
+               srcset="/loanturpin/images/IMG_9445-1000.jpg 1000w, /loanturpin/images/IMG_9445-2000.jpg 2000w"
+               alt="Artwork 9445" decoding="async">
+          <img src="/loanturpin/images/IMG_9446-2000.jpg"
+               srcset="/loanturpin/images/IMG_9446-1000.jpg 1000w, /loanturpin/images/IMG_9446-2000.jpg 2000w"
+               alt="Artwork 9446" decoding="async">
+          <img src="/loanturpin/images/IMG_9447-2000.jpg"
+               srcset="/loanturpin/images/IMG_9447-1000.jpg 1000w, /loanturpin/images/IMG_9447-2000.jpg 2000w"
+               alt="Artwork 9447" decoding="async">
+          <img src="/loanturpin/images/IMG_9449-2000.jpg"
+               srcset="/loanturpin/images/IMG_9449-1000.jpg 1000w, /loanturpin/images/IMG_9449-2000.jpg 2000w"
+               alt="Artwork 9449" decoding="async">
+          <img src="/loanturpin/images/IMG_9483-2000.jpg"
+               srcset="/loanturpin/images/IMG_9483-1000.jpg 1000w, /loanturpin/images/IMG_9483-2000.jpg 2000w"
+               alt="Artwork 9483" decoding="async">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CONTENT -->
+  <!-- CONTENU -->
   <section>
     <div class="container">
       <h2 class="h2">The Art Of Greatness Description</h2>
@@ -208,14 +233,14 @@
           </p>
         </div>
         <div class="media">
-          <img src="images/IMG_9449.jpg" alt="Étude – Design & Conception">
+          <img src="/loanturpin/images/IMG_9449-1000.jpg" alt="Étude – Design & Conception" loading="lazy" decoding="async">
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation -->
+      <!-- Block 2 : Réalisation (texte au-dessus sur mobile) -->
       <div class="block realisation">
         <div class="media">
-          <img src="images/IMG_9446.jpg" alt="Processus – Réalisation">
+          <img src="/loanturpin/images/IMG_9446-1000.jpg" alt="Processus – Réalisation" loading="lazy" decoding="async">
         </div>
         <div class="card">
           <h3>Réalisation</h3>
@@ -236,7 +261,7 @@
           </p>
         </div>
         <div class="media">
-          <img src="images/IMG_9437.jpg" alt="Détail – Final Touch">
+          <img src="/loanturpin/images/IMG_9437-1000.jpg" alt="Détail – Final Touch" loading="lazy" decoding="async">
         </div>
       </div>
 
@@ -308,13 +333,15 @@
         }));
       }
 
+      // Reste toujours autour du groupe du milieu
       function wrap(){
         if (gw <= 1) return;
         while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
         while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
       }
 
-      let dragging = false, startX = 0, startScroll = 0, autoplay = true, rafId = null;
+      // Auto + drag/swipe
+      let dragging = false, startX = 0, startScroll = 0, autoplay = true;
       const SPEED = 0.5; // px/frame
 
       function step(){
@@ -322,7 +349,7 @@
           marquee.scrollLeft += SPEED;
           wrap();
         }
-        rafId = requestAnimationFrame(step);
+        requestAnimationFrame(step);
       }
 
       function onPointerDown(e){
@@ -356,7 +383,7 @@
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      window.addEventListener('resize', ()=> { center(); });
+      window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
         center();
