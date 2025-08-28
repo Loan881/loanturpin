@@ -175,7 +175,7 @@
     <div class="marquee" id="marquee">
       <div class="track" id="track">
         <div class="group" id="group-source">
-          <!-- Seule modification: les 5 images ci-dessous, avec IMG_9497 en premier -->
+          <!-- Seulement 5 images, IMG_9497 en premier -->
           <img src="/loanturpin/images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
           <img src="/loanturpin/images/IMG_9493.jpg" alt="Artwork 9493" decoding="async">
           <img src="/loanturpin/images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
@@ -303,7 +303,7 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois pour une boucle fluide
+      // Clone 2 fois pour une boucle infinie fluide (on garde 5 images dans le groupe source)
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -313,7 +313,7 @@
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
 
-      // Centre la première image au milieu de l'écran
+      // Centre la première image (ici IMG_9497) au milieu de l'écran
       function center(){
         measure();
         const first = source.querySelector('img');
@@ -390,7 +390,7 @@
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();              // centre la première image (IMG_9497)
+        center();              // centre IMG_9497 (première)
         requestAnimationFrame(step);
       });
     })();
