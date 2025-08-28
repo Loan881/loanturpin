@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,12 +26,12 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
-      --tile: 70vh; /* hauteur du carrousel (desktop) */
+      --tile: 70vh; /* carousel height (desktop) */
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
-    /* Bloque tout scroll horizontal global */
+    /* Block any global horizontal scroll */
     html,body{overflow-x:hidden}
 
     body{
@@ -69,7 +69,7 @@
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
     }
 
-    /* HERO – bannière 1:1, auto + boucle + drag/swipe */
+    /* HERO – 1:1 banner, auto + infinite loop + drag/swipe */
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
@@ -81,7 +81,7 @@
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
-      /* Empêche la propagation du scroll à la page */
+      /* Prevent scroll propagation to the page */
       overscroll-behavior: contain;
     }
     .marquee::-webkit-scrollbar{display:none}
@@ -99,7 +99,7 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image (plus d'espacement) */
+    /* Text + image blocks (more spacing) */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -136,14 +136,14 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
-    /* Réalisation : texte au-dessus de l'image sur mobile */
+    /* Realization: text above image on mobile */
     .block.realisation{ grid-template-areas: "media card"; }
     .block.realisation .media{ grid-area: media; }
     .block.realisation .card{  grid-area: card;  }
 
     /* Mobile */
     @media (max-width: 768px){
-      :root{ --tile: 66.67vh; } /* 2/3 écran */
+      :root{ --tile: 66.67vh; } /* 2/3 screen */
       .block{
         grid-template-columns: 1fr;
         gap: clamp(14px, 4.5vw, 24px);
@@ -162,7 +162,7 @@
   <header>
     <div class="container topbar">
       <div class="back">
-        <a href="https://loan881.github.io/loanturpin/gallery" aria-label="Retour" title="Retour">
+        <a href="https://loan881.github.io/loanturpin/gallery" aria-label="Back" title="Back">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </a>
       </div>
@@ -170,8 +170,8 @@
     </div>
   </header>
 
-  <!-- HERO / BANNIÈRE DÉFILANTE 1:1 -->
-  <div class="hero-marquee" aria-label="Bannière d’images 1:1">
+  <!-- HERO / SLIDING 1:1 BANNER -->
+  <div class="hero-marquee" aria-label="1:1 image banner">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
         <div class="group" id="group-source">
@@ -198,77 +198,84 @@
     </div>
   </div>
 
-  <!-- CONTENU -->
+  <!-- CONTENT -->
   <section>
     <div class="container">
       <h2 class="h2">Description</h2>
       <div class="rule"></div>
       <p class="prose">
-        « The Art of Greatness » est plus qu’une œuvre : c’est un itinéraire intérieur. Chaque matière, chaque lumière et
-        chaque contraste dialoguent avec le regardeur pour lui rappeler que la grandeur n’est pas un sommet figé mais un
-        mouvement continu – une volonté de rendre le monde un peu plus beau que nous ne l’avons trouvé.
+        “The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast
+        converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to
+        make the world a little more beautiful than we found it.
       </p>
 
-      <!-- STORY – version longue restaurée -->
+      <!-- STORY -->
       <div class="card story" style="background:transparent;border:none">
         <h3 style="margin:22px 0 6px 0">Story</h3>
         <div class="thin" style="width:35px"></div>
         <p class="prose" style="margin:10px 0 0 0">
-          Puissiez-vous, à travers ces mots et ces images, sentir la patience des heures, la quête du geste juste et le désir d’ordre dans le désordre — là où se cache souvent la beauté.
+          May you, through these words and images, feel the patience of hours, the search for the right gesture, and the
+          desire for order within disorder — where beauty often hides.
           <br><br>
-          J’avance lentement, au rythme de la matière. Le bleu prend, s’épaissit, se cabre ; le blanc fend la surface comme un souffle qui s’échappe. Rien n’est donné d’emblée : il faut attendre que la couleur respire, que la lumière trouve son angle, que la main accepte de perdre pour mieux recommencer.
+          I move slowly, at the pace of the material. The blue takes hold, thickens, rears up; the white cuts through the
+          surface like a breath escaping. Nothing is given at once: you must wait for the color to breathe, for the light to
+          find its angle, for the hand to accept losing in order to begin again better.
           <br><br>
-          Je cherche un équilibre fragile : laisser vivre le chaos de la pâte, mais lui offrir un cadre, un tempo, une retenue. Alors des lignes surgissent, un mouvement naît, et le silence s’organise autour d’un élan. Le tableau devient une conversation — entre l’intention et l’accident, entre la précision et l’abandon.
+          I seek a fragile balance: to let the chaos of the paint live, yet offer it a frame, a tempo, a restraint. Then
+          lines emerge, a movement is born, and silence organizes itself around an impulse. The painting becomes a
+          conversation — between intention and accident, between precision and letting go.
           <br><br>
-          Ce que vous regardez, ce n’est pas seulement une image : c’est le récit d’un passage. Il y a là des hésitations, des retours, des évidences soudaines. Et peut-être, au milieu, cette promesse simple : rendre le monde un peu plus habitable pour les yeux.
+          What you are looking at is not just an image: it is the account of a passage. There are hesitations here, returns,
+          sudden certainties. And perhaps, in the middle of it, this simple promise: to make the world a little more
+          habitable for the eyes.
         </p>
       </div>
 
-      <!-- Block 1 : Design & Conception (texte complet restauré) -->
+      <!-- Block 1 : Design & Conception -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
           <p class="prose">
-            L’idée est née comme une vision : une composition qui tiendrait par l’équilibre des tensions. Les esquisses ont
-            cadré les masses, la couleur a trouvé sa respiration, et le rythme des formes a posé la structure d’ensemble.
+            The idea was born as a vision: a composition held together by the balance of tensions. Sketches framed the
+            masses, color found its breath, and the rhythm of forms set the overall structure.
           </p>
         </div>
         <div class="media">
-          <img src="/loanturpin/images/IMG_9486.jpg" alt="Design & Conception – préparation de la matière" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_9486.jpg" alt="Design & Conception — material preparation" loading="lazy" decoding="async">
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (texte complet restauré) -->
+      <!-- Block 2 : Realization -->
       <div class="block realisation">
         <div class="media">
-          <img src="/loanturpin/images/IMG_65845.jpeg" alt="Réalisation – texture bleue en cours" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_65845.jpeg" alt="Realization — blue texture in progress" loading="lazy" decoding="async">
         </div>
         <div class="card">
-          <h3>Réalisation</h3>
+          <h3>Realization</h3>
           <p class="prose">
-            Chaque coup de pinceau a été posé avec intention. Superpositions, retraits, reprises – la matière s’est faite
-            mémoire du geste jusqu’à ce que la surface parle d’elle-même : ni trop ni pas assez.
+            Every brushstroke was laid with intent. Layering, scraping, revisiting — the material became the memory of the
+            gesture until the surface spoke for itself: neither too much nor too little.
           </p>
         </div>
       </div>
 
-      <!-- Block 3 : Final Touch (texte complet restauré) -->
+      <!-- Block 3 : Final Touch -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
           <p class="prose">
-            La dernière étape, presque cérémonielle : clarifier les valeurs, affiner les lisières, signer le silence.
-            C’est là que l’œuvre cesse d’être un travail et devient une présence.
+            The last step, almost ceremonial: clarifying values, refining edges, signing the silence. That is where the work
+            ceases to be labor and becomes a presence.
           </p>
         </div>
         <div class="media">
-          <img src="/loanturpin/images/IMG_9436.jpeg" alt="Final Touch – détails au pinceau" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_9436.jpeg" alt="Final Touch — brush details" loading="lazy" decoding="async">
         </div>
       </div>
 
       <!-- CTA -->
       <div class="cta">
-        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demande By E-Mail</a>
+        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demand By E-Mail</a>
       </div>
     </div>
   </section>
@@ -279,7 +286,7 @@
       <div class="col">
         <h5 class="footer-title">Page</h5>
         <hr class="divider w30" aria-hidden="true">
-        <nav class="footer-links" aria-label="Pied de page - navigation">
+        <nav class="footer-links" aria-label="Footer navigation">
           <a href="#home">Home</a>
           <a href="#gallery">Gallery</a>
           <a href="#the-art-story">The Art Story</a>
@@ -307,7 +314,7 @@
     </div>
   </footer>
 
-  <!-- JS : auto + boucle infinie + drag/swipe + molette horizontale + centrage premier visuel -->
+  <!-- JS : auto + infinite loop + drag/swipe + horizontal wheel + center first visual -->
   <script>
     (function(){
       const marquee = document.getElementById('marquee');
@@ -315,7 +322,7 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois pour une boucle fluide
+      // Clone twice for a smooth loop
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -325,7 +332,7 @@
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
 
-      // Centre la première image au milieu de l'écran
+      // Center the first image in the middle of the screen
       function center(){
         measure();
         const first = source.querySelector('img');
@@ -391,7 +398,7 @@
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // Molette → défilement horizontal
+      // Mouse wheel → horizontal scroll
       marquee.addEventListener('wheel', (e) => {
         const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
         marquee.scrollLeft += delta;
@@ -402,7 +409,7 @@
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();              // centre la première image au chargement
+        center();              // center the first image on load
         requestAnimationFrame(step);
       });
     })();
