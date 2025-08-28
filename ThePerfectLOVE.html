@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Perfect LOVE</title>
+  <title>The Art Of Greatness</title>
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
@@ -99,7 +99,7 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image (plus d’espacement) */
+    /* Blocs texte + image (plus d'espacement) */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -166,25 +166,29 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </a>
       </div>
-      <div class="title">The Perfect LOVE</div>
+      <div class="title">The Art Of Greatness</div>
     </div>
   </header>
 
   <!-- HERO / BANNIÈRE DÉFILANTE 1:1 -->
   <div class="hero-marquee" aria-label="Bannière d’images 1:1">
-    <div class="marquee" id="marquee">
-      <div class="track" id="track">
-        <div class="group" id="group-source">
-          <!-- Seulement 5 images, IMG_9497 en premier -->
-          <img src="images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
-          <img src="/loanturpin/images/IMG_9493.jpg" alt="Artwork 9493" decoding="async">
-          <img src="/loanturpin/images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
-          <img src="/loanturpin/images/IMG_9495.jpg" alt="Artwork 9495" decoding="async">
-          <img src="/loanturpin/images/IMG_9496.jpg" alt="Artwork 9496" decoding="async">
-        </div>
+  <div class="marquee" id="marquee">
+    <div class="track" id="track">
+      <div class="group" id="group-source">
+        <img src="/loanturpin/images/IMG_9497.jpg"
+             alt="Artwork 9497" decoding="async" fetchpriority="high">
+        <img src="/loanturpin/images/IMG_9491.jpg"
+             alt="Artwork 9491" decoding="async">
+        <img src="/loanturpin/images/IMG_9493.HEIC"
+             alt="Artwork 9493" decoding="async">
+        <img src="/loanturpin/images/IMG_9494.jpg"
+             alt="Artwork 9494" decoding="async">
+        <img src="/loanturpin/images/IMG_9496.jpg"
+             alt="Artwork 9496" decoding="async">
       </div>
     </div>
   </div>
+</div>
 
   <!-- CONTENU -->
   <section>
@@ -303,7 +307,7 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois pour une boucle infinie fluide (on garde 5 images dans le groupe source)
+      // Clone 2 fois pour une boucle fluide
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -313,7 +317,7 @@
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
 
-      // Centre la première image (ici IMG_9497) au milieu de l'écran
+      // Centre la première image au milieu de l'écran
       function center(){
         measure();
         const first = source.querySelector('img');
@@ -390,7 +394,7 @@
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();              // centre IMG_9497 (première)
+        center();              // centre la première image au chargement
         requestAnimationFrame(step);
       });
     })();
