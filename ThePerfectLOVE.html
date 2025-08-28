@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,12 +26,11 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
-      --tile: 70vh; /* hauteur du carrousel (desktop) */
+      --tile: 70vh; /* carousel height (desktop) */
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
-    /* Bloque tout scroll horizontal global */
     html,body{overflow-x:hidden}
 
     body{
@@ -69,7 +68,7 @@
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
     }
 
-    /* HERO – bannière 1:1, auto + boucle + drag/swipe */
+    /* HERO – banner 1:1, auto + loop + drag/swipe */
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
@@ -81,7 +80,6 @@
       touch-action: pan-x;
       cursor: grab;
       user-select:none;
-      /* Empêche la propagation du scroll à la page */
       overscroll-behavior: contain;
     }
     .marquee::-webkit-scrollbar{display:none}
@@ -99,7 +97,6 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image (plus d'espacement) */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -136,14 +133,12 @@
     .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
     .credit{ width:220px; margin: 20px auto 0 }
 
-    /* Réalisation : texte au-dessus de l'image sur mobile */
     .block.realisation{ grid-template-areas: "media card"; }
     .block.realisation .media{ grid-area: media; }
     .block.realisation .card{  grid-area: card;  }
 
-    /* Mobile */
     @media (max-width: 768px){
-      :root{ --tile: 66.67vh; } /* 2/3 écran */
+      :root{ --tile: 66.67vh; }
       .block{
         grid-template-columns: 1fr;
         gap: clamp(14px, 4.5vw, 24px);
@@ -162,7 +157,7 @@
   <header>
     <div class="container topbar">
       <div class="back">
-        <a href="index.html" aria-label="Retour" title="Retour">
+        <a href="index.html" aria-label="Back" title="Back">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </a>
       </div>
@@ -170,91 +165,83 @@
     </div>
   </header>
 
-  <!-- HERO / BANNIÈRE DÉFILANTE 1:1 -->
-  <div class="hero-marquee" aria-label="Bannière d’images 1:1">
-  <div class="marquee" id="marquee">
-    <div class="track" id="track">
-      <div class="group" id="group-source">
-        <img src="/loanturpin/images/IMG_9497.jpg"
-             alt="Artwork 9497" decoding="async" fetchpriority="high">
-        <img src="/loanturpin/images/IMG_9491.jpg"
-             alt="Artwork 9491" decoding="async">
-        <img src="/loanturpin/images/IMG_9493.jpeg"
-             alt="Artwork 9493" decoding="async">
-        <img src="/loanturpin/images/IMG_9494.jpg"
-             alt="Artwork 9494" decoding="async">
-        <img src="/loanturpin/images/IMG_9496.jpg"
-             alt="Artwork 9496" decoding="async">
+  <!-- HERO -->
+  <div class="hero-marquee" aria-label="1:1 image banner">
+    <div class="marquee" id="marquee">
+      <div class="track" id="track">
+        <div class="group" id="group-source">
+          <img src="/loanturpin/images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
+          <img src="/loanturpin/images/IMG_9491.jpg" alt="Artwork 9491" decoding="async">
+          <img src="/loanturpin/images/IMG_9493.jpeg" alt="Artwork 9493" decoding="async">
+          <img src="/loanturpin/images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
+          <img src="/loanturpin/images/IMG_9496.jpg" alt="Artwork 9496" decoding="async">
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-  <!-- CONTENU -->
+  <!-- CONTENT -->
   <section>
     <div class="container">
       <h2 class="h2">Description</h2>
       <div class="rule"></div>
       <p class="prose">
-        Le tableau représente une femme nue, allongée dans sa bagnoire avec une élégance assumée. Un drap bleuté enveloppe ses cheveux, symbole d’intimité et de naturel. Ses lèvres rouges, ses lunettes noires et son téléphone écarlate deviennent les accents visuels qui révèlent son désir ardent de plaire et de séduire. Elle tient le combiné d’un vieux téléphone à cadran, elle appel son homme, celui qui occupe toutes ses pensées.
-Les tons rouges dominent et incarnent la passion, l’amour et l’intensité des sentiments, tandis que le contraste avec les gris et les blancs évoque la fidélité, la pureté et la sincérité des émotions.
+        The painting represents a nude woman, lying in her bathtub with an assumed elegance. A bluish cloth wraps her hair, symbolizing intimacy and naturalness. Her red lips, black sunglasses and scarlet phone become the visual accents that reveal her ardent desire to please and seduce. She holds the receiver of an old rotary phone, calling her man, the one who occupies all her thoughts.
+        <br><br>
+        The dominant red tones embody passion, love and the intensity of feelings, while the contrast with grays and whites evokes fidelity, purity and sincerity of emotions.
       </p>
 
-      <!-- STORY – version longue restaurée -->
       <div class="card story" style="background:transparent;border:none">
         <h3 style="margin:22px 0 6px 0">Story</h3>
-        <div class="thin" style="width:35px"></div>
         <p class="prose" style="margin:10px 0 0 0">
-          Dans une chambre baignée d’une lumière douce, elle vient tout juste de sortir du bain. Encore enveloppée dans la chaleur de l’eau, elle pense à lui, à cet homme qui occupe son esprit chaque instant. Avant même de se sécher complètement, elle attrape ce vieux téléphone rouge — un symbole d’urgence et de nécessité. Car pour elle, l’amour est vital, aussi urgent que de respirer.
+          In a room bathed in soft light, she has just stepped out of the bath. Still wrapped in the warmth of the water, she thinks of him, the man who fills her mind every single moment. Before even drying herself completely, she grabs this old red phone — a symbol of urgency and necessity. For her, love is vital, as urgent as breathing.
           <br><br>
-          Elle compose le numéro presque machinalement, comme si ses doigts connaissaient par cœur la mélodie des chiffres. Le cadran tourne lentement, chaque clic résonnant comme un battement de cœur. À l’autre bout du fil, elle imagine déjà sa voix, cette voix rassurante et virile qui la comble.
+          She dials the number almost mechanically, as if her fingers know by heart the melody of the digits. The dial turns slowly, each click echoing like a heartbeat. On the other end, she already imagines his voice, that reassuring and virile voice that fulfills her.
           <br><br>
-          Elle n’a besoin de rien d’autre : ni bijoux, ni artifices, juste lui. Son amour est simple mais profond, fidèle mais ardent. Elle est prête, chaque jour, à lui plaire encore, à lui rappeler qu’il est l’unique, l’éternel.
+          She needs nothing else: no jewels, no artifices, only him. Her love is simple but deep, faithful yet ardent. She is ready, every day, to please him again, to remind him that he is the only one, the eternal one.
           <br><br>
-          Ce coup de fil n’est pas anodin : c’est un appel à l’amour, à la complicité, à la passion qui ne s’éteint jamais. C’est un message silencieux : « Toi et moi, pour toujours, dans la sincérité et le désir. »
+          This call is not trivial: it is a call for love, for complicity, for passion that never fades. It is a silent message: “You and me, forever, in sincerity and desire.”
         </p>
       </div>
 
-      <!-- Block 1 : Design & Conception (texte complet restauré) -->
       <div class="block">
         <div class="card">
           <h3>Design & Conception</h3>
           <p class="prose">
-            J’ai imaginé cette œuvre comme la représentation de la femme idéale : belle, fidèle et passionnée. Le téléphone rouge symbolise le lien amoureux, tandis que les couleurs — rouge, blanc et noir — traduisent respectivement la passion, la pureté et le mystère.
+            I imagined this work as the representation of the ideal woman: beautiful, faithful and passionate. The red phone symbolizes the bond of love, while the colors — red, white and black — respectively express passion, purity and mystery.
           </p>
         </div>
         <div class="media">
-          <img src="/loanturpin/images/IMG_9486.jpg" alt="Design & Conception – préparation de la matière" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_9486.jpg" alt="Design & Conception – material preparation" loading="lazy" decoding="async">
         </div>
       </div>
 
-      <!-- Block 2 : Réalisation (texte complet restauré) -->
       <div class="block realisation">
         <div class="media">
-          <img src="/loanturpin/images/IMG_65845.jpeg" alt="Réalisation – texture bleue en cours" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_65845.jpeg" alt="Realization – blue texture in progress" loading="lazy" decoding="async">
         </div>
         <div class="card">
-          <h3>Réalisation</h3>
+          <h3>Realization</h3>
           <p class="prose">
-            La peinture s’articule en deux toiles, créant un rythme visuel qui attire l’œil. Chaque coup de pinceau a cherché à mêler sensualité et élégance, en mettant le corps et le téléphone au service d’une même histoire d’amour.
+            The painting is built on two canvases, creating a visual rhythm that catches the eye. Each brushstroke sought to blend sensuality and elegance, placing the body and the phone at the service of the same love story.
+          </p>
         </div>
       </div>
 
-      <!-- Block 3 : Final Touch (texte complet restauré) -->
       <div class="block">
         <div class="card">
           <h3>Final Touch</h3>
           <p class="prose">
-            Les détails — lèvres rouges, cadran marqué “Emergency calls for love only”, regard derrière les lunettes — apportent l’émotion finale. Ils incarnent un amour ardent et fidèle : un amour parfait.
+            The details — red lips, dial marked “Emergency calls for love only”, eyes behind the sunglasses — bring the final emotion. They embody a burning and faithful love: a perfect love.
+          </p>
         </div>
         <div class="media">
-          <img src="/loanturpin/images/IMG_9436.jpeg" alt="Final Touch – détails au pinceau" loading="lazy" decoding="async">
+          <img src="/loanturpin/images/IMG_9436.jpeg" alt="Final Touch – brush details" loading="lazy" decoding="async">
         </div>
       </div>
 
-      <!-- CTA -->
       <div class="cta">
-        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demande By E-Mail</a>
+        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demand By E-Mail</a>
       </div>
     </div>
   </section>
@@ -265,7 +252,7 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
       <div class="col">
         <h5 class="footer-title">Page</h5>
         <hr class="divider w30" aria-hidden="true">
-        <nav class="footer-links" aria-label="Pied de page - navigation">
+        <nav class="footer-links" aria-label="Footer navigation">
           <a href="#home">Home</a>
           <a href="#gallery">Gallery</a>
           <a href="#the-art-story">The Art Story</a>
@@ -293,7 +280,7 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
     </div>
   </footer>
 
-  <!-- JS : auto + boucle infinie + drag/swipe + molette horizontale + centrage premier visuel -->
+  <!-- JS -->
   <script>
     (function(){
       const marquee = document.getElementById('marquee');
@@ -301,7 +288,7 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 fois pour une boucle fluide
+      // Clone 2 times for a smooth infinite loop
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -311,7 +298,7 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
 
-      // Centre la première image au milieu de l'écran
+      // Center the first image in the viewport
       function center(){
         measure();
         const first = source.querySelector('img');
@@ -377,7 +364,7 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // Molette → défilement horizontal
+      // Mouse wheel → horizontal scroll
       marquee.addEventListener('wheel', (e) => {
         const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
         marquee.scrollLeft += delta;
@@ -388,11 +375,10 @@ Les tons rouges dominent et incarnent la passion, l’amour et l’intensité de
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();              // centre la première image au chargement
+        center();              // center first image on load
         requestAnimationFrame(step);
       });
     })();
   </script>
 </body>
 </html>
-
