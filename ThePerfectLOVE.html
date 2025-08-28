@@ -99,7 +99,7 @@
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
     .prose{font-weight:400}
 
-    /* Blocs texte + image (plus d'espacement) */
+    /* Blocs texte + image (plus d’espacement) */
     .block{
       display:grid;
       grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
@@ -175,24 +175,12 @@
     <div class="marquee" id="marquee">
       <div class="track" id="track">
         <div class="group" id="group-source">
-          <img src="/loanturpin/images/IMG_9449-2000.jpg"
-               srcset="/loanturpin/images/IMG_9449-1000.jpg 1000w, /loanturpin/images/IMG_9449-2000.jpg 2000w"
-               alt="Artwork 9449" decoding="async" fetchpriority="high">
-          <img src="/loanturpin/images/IMG_9437-2000.jpg"
-               srcset="/loanturpin/images/IMG_9437-1000.jpg 1000w, /loanturpin/images/IMG_9437-2000.jpg 2000w"
-               alt="Artwork 9437" decoding="async">
-          <img src="/loanturpin/images/IMG_9440-2000.jpg"
-               srcset="/loanturpin/images/IMG_9440-1000.jpg 1000w, /loanturpin/images/IMG_9440-2000.jpg 2000w"
-               alt="Artwork 9440" decoding="async">
-          <img src="/loanturpin/images/IMG_9445-2000.jpg"
-               srcset="/loanturpin/images/IMG_9445-1000.jpg 1000w, /loanturpin/images/IMG_9445-2000.jpg 2000w"
-               alt="Artwork 9445" decoding="async">
-          <img src="/loanturpin/images/IMG_9447-2000.jpg"
-               srcset="/loanturpin/images/IMG_9447-1000.jpg 1000w, /loanturpin/images/IMG_9447-2000.jpg 2000w"
-               alt="Artwork 9447" decoding="async">
-          <img src="/loanturpin/images/IMG_9483-2000.jpg"
-               srcset="/loanturpin/images/IMG_9483-1000.jpg 1000w, /loanturpin/images/IMG_9483-2000.jpg 2000w"
-               alt="Artwork 9483" decoding="async">
+          <!-- Seule modification: les 5 images ci-dessous, avec IMG_9497 en premier -->
+          <img src="/loanturpin/images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
+          <img src="/loanturpin/images/IMG_9493.jpg" alt="Artwork 9493" decoding="async">
+          <img src="/loanturpin/images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
+          <img src="/loanturpin/images/IMG_9495.jpg" alt="Artwork 9495" decoding="async">
+          <img src="/loanturpin/images/IMG_9496.jpg" alt="Artwork 9496" decoding="async">
         </div>
       </div>
     </div>
@@ -402,10 +390,11 @@
       window.addEventListener('resize', center);
 
       waitImagesLoaded().then(()=>{
-        center();              // centre la première image au chargement
+        center();              // centre la première image (IMG_9497)
         requestAnimationFrame(step);
       });
     })();
   </script>
 </body>
 </html>
+
