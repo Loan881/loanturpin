@@ -54,22 +54,30 @@
     .left{ display:flex; gap:6px; align-items:center }
     .right{ justify-self:end }
 
-    /* ===== Drawer (off-canvas sans JS) ===== */
-    #drawer-toggle{ display:none }
-    .drawer{ position:fixed; inset:0 auto 0 0; width:320px; background:#fff; border-right:1px solid var(--line); transform:translateX(-100%); transition:transform .25s ease; z-index:50 }
-    #drawer-toggle:checked ~ .drawer{ transform:translateX(0) }
+    /* Drawer */
+    .drawer{
+      position:fixed; inset:0 auto 0 0; width:320px;
+      background:#fff; border-right:1px solid var(--line);
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      z-index:30;
+    }
+    #drawer-toggle:checked ~ .drawer{ transform: translateX(0) }
     #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto }
-    .drawer-inner{ height:100%; padding:20px; display:flex; flex-direction:column }
-    .brand{ font:900 32px/1 "Playfair Display", ui-serif, serif; margin:60px 0 12px }
+    .drawer-inner{
+      height:100%; padding:20px; display:flex; flex-direction:column;
+    }
+    .brand{ font-weight: 900; font-size: 32px; margin:60px 0 12px }
     .divider{ border:0; height:1px; background:#000; opacity:.35; margin:10px 0 }
     .drawer-nav{ display:grid; gap:20px; margin:40px 0 }
-    .nav-link{ font:600 24px/1.1 "Playfair Display", ui-serif, serif }
+    .nav-link {font-weight: 600; font-size: 24px; line-height: 1.3;}
     .drawer-spacer{ flex:1 }
-    .sub{ font:600 18px/1.2 "Playfair Display", ui-serif, serif; margin:24px 0 6px }
-    .social-lines{ display:grid; gap:10px; font:400 16px/1.2 "Playfair Display", ui-serif, serif }
-    .social-lines .value{ margin-left:12px; text-decoration:underline }
-    .close-drawer{ margin-top:16px; align-self:flex-start; display:inline-block; padding:8px 12px; border:1px solid #ddd; border-radius:10px; cursor:pointer }
-    .backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.25); z-index:45; opacity:0; pointer-events:none; transition:.25s }
+    .social-lines{ display:grid; gap:10px; font-size: 16px }
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.25);
+      z-index:25; opacity:0; pointer-events:none; transition:.25s;
+    }
 
     /* ===== Section principale (formulaire) ===== */
     .form-wrap{ background:#fff; padding: 24px 16px 40px }
@@ -108,28 +116,28 @@
   <!-- Toggle du tiroir -->
   <input id="drawer-toggle" type="checkbox" hidden>
 
-  <!-- Drawer -->
-  <aside class="drawer" aria-label="Menu latéral">
-    <div class="drawer-inner">
-      <h1 class="brand">TURPIN Loan</h1>
-      <hr class="divider">
-      <nav class="drawer-nav">
-        <a class="nav-link" href="#home">Home</a>
-        <a class="nav-link" href="#my-artworks">My ArtWorks</a>
-        <a class="nav-link" href="#stories">The Art Storys</a>
-        <a class="nav-link" href="#contact">Contact Me.</a>
-      </nav>
-      <div class="drawer-spacer"></div>
-      <h2 class="sub">Social Media</h2>
-      <hr class="divider">
-      <div class="social-lines">
-        <div>Instagram : <a class="value" href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
-        <div>TikTok : <a class="value" href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
-      </div>
-      <label for="drawer-toggle" class="close-drawer">Fermer</label>
+<!-- Drawer -->
+<aside class="drawer">
+  <div class="drawer-inner">
+    <h1 class="brand">TURPIN Loan</h1>
+    <hr class="divider">
+    <nav class="drawer-nav">
+  <a href="https://loan881.github.io/loanturpin/" class="nav-link">Home</a>
+  <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link">Gallery</a>
+  <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">The Art Story</a>
+  <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Contact Me.</a>
+</nav>
+    <div class="drawer-spacer"></div>
+    <h2 class="footer-title">Social Media</h2>
+    <hr class="divider">
+    <div class="social-lines">
+      <div>Instagram : <a href="#">turpinloanart</a></div>
+      <div>TikTok : <a href="#">turpinloanart</a></div>
     </div>
-  </aside>
-  <label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
+  </div>
+</aside>
+
+<label class="backdrop" for="drawer-toggle"></label>
 
   <!-- AppBar -->
   <header class="appbar">
