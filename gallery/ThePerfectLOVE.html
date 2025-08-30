@@ -171,12 +171,12 @@
     <div class="marquee" id="marquee">
       <div class="track" id="track">
         <div class="group" id="group-source">
-          <!-- ✅ fixed paths -->
-          <img src="loanturpin/images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
-          <img src="loanturpin/images/IMG_9491.jpg" alt="Artwork 9491" decoding="async">
-          <img src="loanturpin/images/IMG_9493.jpeg" alt="Artwork 9493" decoding="async">
-          <img src="loanturpin/images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
-          <img src="loanturpin/images/IMG_9496.jpg" alt="Artwork 9496" decoding="async">
+          <!-- ✅ page is /gallery, images are /images → use ../images/... -->
+          <img src="../images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
+          <img src="../images/IMG_9491.jpg" alt="Artwork 9491" decoding="async">
+          <img src="../images/IMG_9493.jpeg" alt="Artwork 9493" decoding="async">
+          <img src="../images/IMG_9494.jpg" alt="Artwork 9494" decoding="async">
+          <img src="../images/IMG_9496.jpg" alt="Artwork 9496" decoding="async">
         </div>
       </div>
     </div>
@@ -214,13 +214,13 @@
           </p>
         </div>
         <div class="media">
-          <img src="/images/IMG_9486.jpg" alt="Design & Conception – material preparation" loading="lazy" decoding="async">
+          <img src="../images/IMG_9486.jpg" alt="Design & Conception – material preparation" loading="lazy" decoding="async">
         </div>
       </div>
 
       <div class="block realisation">
         <div class="media">
-          <img src="/images/IMG_65845.jpeg" alt="Realization – blue texture in progress" loading="lazy" decoding="async">
+          <img src="../images/IMG_65845.jpeg" alt="Realization – blue texture in progress" loading="lazy" decoding="async">
         </div>
         <div class="card">
           <h3>Realization</h3>
@@ -238,7 +238,7 @@
           </p>
         </div>
         <div class="media">
-          <img src="/images/IMG_9436.jpeg" alt="Final Touch – brush details" loading="lazy" decoding="async">
+          <img src="../images/IMG_9436.jpeg" alt="Final Touch – brush details" loading="lazy" decoding="async">
         </div>
       </div>
 
@@ -328,7 +328,7 @@
       }
 
       let dragging = false, startX = 0, startScroll = 0, autoplay = true;
-      const SPEED = 0.7; // px/frame (slightly faster to make movement obvious)
+      const SPEED = 0.7; // px/frame
 
       function step(){
         if (autoplay && !dragging) {
