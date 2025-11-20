@@ -27,7 +27,7 @@
       --border:#000000;
       --accent:#1E155C;
       --accent-2:#181451;
-      --tile: 70vh; /* carousel height (desktop) */
+      --tile: 70vh;
     }
 
     *{box-sizing:border-box}
@@ -45,7 +45,6 @@
     a{color:inherit;text-decoration:none}
     .container{width:min(1200px, 92%);margin-inline:auto}
 
-    /* Topbar */
     header{
       background:var(--bg);
       position:sticky;top:0;z-index:40;
@@ -69,7 +68,6 @@
       margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
     }
 
-    /* HERO – banner 1:1, auto + loop + drag/swipe */
     .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
     .marquee{
       height:var(--tile);
@@ -92,7 +90,6 @@
       aspect-ratio:1 / 1; object-fit:cover; flex:0 0 auto;
     }
 
-    /* Sections */
     section{padding:40px 0}
     .h2{font-weight:700}
     .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
@@ -124,7 +121,6 @@
     .cta{display:flex;justify-content:center;margin-top:48px}
     .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:16px 24px;border-radius:10px;font-size:14px}
 
-    /* Footer */
     .site-footer{ padding: 20px; background:#fff }
     .site-footer .divider{ background:#000; opacity:.4 }
     .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding: 10px 0 20px }
@@ -154,7 +150,6 @@
   </style>
 </head>
 <body>
-  <!-- Top Bar -->
   <header>
     <div class="container topbar">
       <div class="back">
@@ -166,12 +161,10 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <div class="hero-marquee" aria-label="1:1 image banner">
     <div class="marquee" id="marquee">
       <div class="track" id="track">
         <div class="group" id="group-source">
-          <!-- ✅ page is /gallery, images are /images → use ../images/... -->
           <img src="../images/IMG_9497.jpg" alt="Artwork 9497" decoding="async" fetchpriority="high">
           <img src="../images/IMG_9491.jpg" alt="Artwork 9491" decoding="async">
           <img src="../images/IMG_9493.jpeg" alt="Artwork 9493" decoding="async">
@@ -182,27 +175,38 @@
     </div>
   </div>
 
-  <!-- CONTENT -->
   <section>
     <div class="container">
       <h2 class="h2">Description</h2>
       <div class="rule"></div>
       <p class="prose">
-        The painting represents a nude woman, lying in her bathtub with an assumed elegance. A bluish cloth wraps her hair, symbolizing intimacy and naturalness. Her red lips, black sunglasses and scarlet phone become the visual accents that reveal her ardent desire to please and seduce. She holds the receiver of an old rotary phone, calling her man, the one who occupies all her thoughts.
+        A beautiful naked woman lies in her bathtub, unable to resist the urge to call her man.  
+        The old red phone in her hand becomes the link between longing and silence — the echo of a love that once felt perfect, yet uncertain.  
+        Around her, the warmth of the water meets the chill of solitude.  
         <br><br>
-        The dominant red tones embody passion, love and the intensity of feelings, while the contrast with grays and whites evokes fidelity, purity and sincerity of emotions.
+        The red of the phone burns like the memory of passion, while the blues and whites whisper fragility and loss.  
+        She is beauty, desire, and doubt — all in one single breath.
       </p>
 
       <div class="card story" style="background:transparent;border:none">
         <h3 style="margin:22px 0 6px 0">Story</h3>
         <p class="prose" style="margin:10px 0 0 0">
-          In a room bathed in soft light, she has just stepped out of the bath. Still wrapped in the warmth of the water, she thinks of him, the man who fills her mind every single moment. Before even drying herself completely, she grabs this old red phone — a symbol of urgency and necessity. For her, love is vital, as urgent as breathing.
+          It began as a dream — a perfect love, full of promise and truth.  
+          She loved with sincerity, with faith, with everything she was. But what happens when love flows only one way?  
           <br><br>
-          She dials the number almost mechanically, as if her fingers know by heart the melody of the digits. The dial turns slowly, each click echoing like a heartbeat. On the other end, she already imagines his voice, that reassuring and virile voice that fulfills her.
+          This story is that of a relationship that never truly began.  
+          A love that started beautifully, yet never received an answer — a question left hanging in eternity.  
+          Was she loved in return? Or was she simply the echo of her own hope?  
           <br><br>
-          She needs nothing else: no jewels, no artifices, only him. Her love is simple but deep, faithful yet ardent. She is ready, every day, to please him again, to remind him that he is the only one, the eternal one.
+          The truth will never be known.  
+          She called once more, not to demand, but to remember.  
+          The old red phone, trembling between her hands, became the voice of everything unsaid.  
           <br><br>
-          This call is not trivial: it is a call for love, for complicity, for passion that never fades. It is a silent message: “You and me, forever, in sincerity and desire.”
+          There was no ending — only silence.  
+          No betrayal, no drama — just the quiet ache of what could have been.  
+          <br><br>
+          *The Perfect LOVE* is not the story of love fulfilled,  
+          but of a love that remained pure, untouched — because it never had the chance to exist.
         </p>
       </div>
 
@@ -210,7 +214,8 @@
         <div class="card">
           <h3>Design & Conception</h3>
           <p class="prose">
-            I imagined this work as the representation of the ideal woman: beautiful, faithful and passionate. The red phone symbolizes the bond of love, while the colors — red, white and black — respectively express passion, purity and mystery.
+            The red phone symbolizes connection — a desperate bridge between two hearts that never truly met.  
+            The colors — red for passion, white for purity, blue for doubt — mirror the emotional tension between love and absence.
           </p>
         </div>
         <div class="media">
@@ -225,7 +230,8 @@
         <div class="card">
           <h3>Realization</h3>
           <p class="prose">
-            The painting is built on two canvases, creating a visual rhythm that catches the eye. Each brushstroke sought to blend sensuality and elegance, placing the body and the phone at the service of the same love story.
+            The painting is built on two canvases — two parts that complete each other without ever truly joining.  
+            Every brushstroke captures the fragility of a feeling that lived only in the space between silence and hope.
           </p>
         </div>
       </div>
@@ -234,7 +240,10 @@
         <div class="card">
           <h3>Final Touch</h3>
           <p class="prose">
-            The details — red lips, dial marked “Emergency calls for love only”, eyes behind the sunglasses — bring the final emotion. They embody a burning and faithful love: a perfect love.
+            The red lips, the old phone, the gaze behind the sunglasses — all whisper the same question:  
+            *Could it have worked?*  
+            We will never know.  
+            That is what makes it perfect — because it remains eternal, untouched, unanswered.
           </p>
         </div>
         <div class="media">
@@ -282,7 +291,6 @@
     </div>
   </footer>
 
-  <!-- JS -->
   <script>
     (function(){
       const marquee = document.getElementById('marquee');
@@ -290,7 +298,6 @@
       const source = document.getElementById('group-source');
       if(!marquee || !track || !source) return;
 
-      // Clone 2 times for a smooth infinite loop
       for(let i=0;i<2;i++){
         const clone = source.cloneNode(true);
         clone.id = ""; clone.setAttribute("aria-hidden","true");
@@ -300,7 +307,6 @@
       let gw = 0;
       function measure(){ gw = source.getBoundingClientRect().width; }
 
-      // Center the first image in the viewport
       function center(){
         measure();
         const first = source.querySelector('img');
@@ -316,7 +322,7 @@
           if (img.complete) return Promise.resolve();
           return new Promise(res=>{
             img.addEventListener('load', res, {once:true});
-            img.addEventListener('error', res, {once:true}); // proceed even if an image fails
+            img.addEventListener('error', res, {once:true});
           });
         }));
       }
@@ -328,7 +334,7 @@
       }
 
       let dragging = false, startX = 0, startScroll = 0, autoplay = true;
-      const SPEED = 0.7; // px/frame
+      const SPEED = 0.7;
 
       function step(){
         if (autoplay && !dragging) {
@@ -366,11 +372,9 @@
       marquee.addEventListener('pointercancel', onPointerUp);
       marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
 
-      // Pause on hover (desktop)
       marquee.addEventListener('mouseenter', ()=> autoplay = false);
       marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      // Mouse wheel → horizontal scroll
       marquee.addEventListener('wheel', (e) => {
         const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
         marquee.scrollLeft += delta;
@@ -380,13 +384,11 @@
 
       window.addEventListener('resize', center);
 
-      // Start once images attempted (even if some 404)
       waitImagesLoaded().then(()=>{
         center();
         requestAnimationFrame(step);
       });
 
-      // Fallback: ensure it starts even if onload didn't fire
       setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
     })();
   </script>
