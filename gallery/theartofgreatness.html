@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Art Of Greatness</title>
+  <title>The Art Of Greatness — TURPIN Loan</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
@@ -13,413 +12,518 @@
   <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
   <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
 
-  <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,100;0,400;0,600;0,700;0,900;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#ffffff;
-      --bg-alt:#f7f7f7;
-      --text:#111111;
-      --muted:#2d2d2d;
-      --border:#000000;
-      --accent:#1E155C;
-      --accent-2:#181451;
-      --tile: 70vh; /* carousel height (desktop) */
+      --paper:#FFFFFF;
+      --paper-deep:#EEF0F3;
+      --ink:#151B24;
+      --navy:#132540;
+      --navy-deep:#0B1729;
+      --accent:#7C93B4;
+      --muted:#6B7280;
+      --line: rgba(19,37,64,.14);
+      --radius:14px;
+      --container: 1120px;
+      --pad-x: 24px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+      --tile: 62vh;
     }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html,body{overflow-x:hidden}
-
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html,body{ height:100%; overflow-x:hidden; }
     body{
-      margin:0;
-      font-family:"Playfair Display", serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.55;
+      margin:0; font-family:"Inter", sans-serif;
+      background:var(--paper); color:var(--ink); line-height:1.55;
     }
-    img{max-width:100%;height:auto;display:block}
-    a{color:inherit;text-decoration:none}
-    .container{width:min(1200px, 92%);margin-inline:auto}
+    h1,h2,h3,h4,h5,.display{ font-family:"Playfair Display", serif; }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--pad-x); }
+    ::selection{ background: var(--navy); color:#fff; }
 
-    /* Topbar */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+    }
+
+    /* ---------- Signature : trait d'encre animé ---------- */
+    .brushstroke{ width:100%; height:14px; overflow:visible; display:block; }
+    .brushstroke path{
+      fill:none; stroke:var(--navy); stroke-width:3; stroke-linecap:round;
+      stroke-dasharray:600; stroke-dashoffset:600; transition: stroke-dashoffset 1.1s var(--ease);
+    }
+    .brushstroke.thin path{ stroke-width:1.6; stroke:var(--ink); opacity:.4; }
+    .brushstroke.in-view path{ stroke-dashoffset:0; }
+    .brushstroke.w30{ max-width:110px; }
+    .brushstroke.w225{ max-width:225px; }
+    .site-footer .brushstroke.thin path{ stroke:#fff; opacity:.3; }
+
+    /* ---------- Header ---------- */
     header{
-      background:var(--bg);
-      position:sticky;top:0;z-index:40;
-      border-bottom:1px solid rgba(0,0,0,.05);
-      backdrop-filter:saturate(160%) blur(6px);
+      background:rgba(255,255,255,.86); backdrop-filter:saturate(160%) blur(10px);
+      position:sticky; top:0; z-index:40; border-bottom:1px solid var(--line);
     }
-    .topbar{
-      position:relative;display:flex;align-items:center;justify-content:center;
-      gap:12px;padding:12px 0;min-height:60px;
-    }
-    .back{position:absolute;left:0;top:50%;transform:translateY(-50%)}
+    .topbar{ position:relative; display:flex; align-items:center; justify-content:center; gap:12px; padding:0; min-height:72px; transition:min-height .35s var(--ease); }
+    header.shrink .topbar{ min-height:52px; }
+    .back{ position:absolute; left:0; top:50%; transform:translateY(-50%); }
     .back a{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px;border:none;background:transparent;border-radius:8px;line-height:0;cursor:pointer
+      display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px;
+      border-radius:50%; cursor:pointer; transition:background .2s;
     }
-    .back a:hover{opacity:.8}
-    .back a:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-    .back a svg{width:28px;height:28px;fill:currentColor}
+    .back a:hover{ background:var(--paper-deep); }
+    .back a svg{ width:22px; height:22px; stroke:var(--navy); fill:none; stroke-width:2; }
     .title{
-      position:absolute;left:50%;transform:translateX(-50%);
-      margin:0;font-weight:700;font-size:22px;letter-spacing:.3px;white-space:nowrap;text-align:center;
+      margin:0; font-weight:600; font-size:20px; letter-spacing:.02em; text-align:center;
+      white-space:nowrap; color:var(--navy);
+    }
+    .menu-btn{ position:absolute; right:0; top:50%; transform:translateY(-50%); }
+    .icon-btn{
+      width:44px; height:44px; display:inline-grid; place-items:center; border-radius:50%;
+      border:1px solid transparent; cursor:pointer; background:none;
+    }
+    .icon-btn:hover{ background:var(--paper-deep); border-color:var(--line); }
+    .burger{ position:relative; width:20px; height:14px; }
+    .burger span{
+      position:absolute; left:0; width:100%; height:1.6px; background:var(--navy);
+      transition: transform .3s var(--ease), opacity .2s var(--ease), top .3s var(--ease);
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:6px; }
+    .burger span:nth-child(3){ top:12px; }
+    #drawer-toggle:checked ~ header .burger span:nth-child(1){ top:6px; transform:rotate(45deg); }
+    #drawer-toggle:checked ~ header .burger span:nth-child(2){ opacity:0; }
+    #drawer-toggle:checked ~ header .burger span:nth-child(3){ top:6px; transform:rotate(-45deg); }
+
+    /* ---------- Drawer ---------- */
+    .drawer{
+      position:fixed; inset:0 auto 0 0; width:340px; max-width:86vw;
+      background:var(--paper); border-right:1px solid var(--line);
+      transform: translateX(-100%); transition: transform .45s var(--ease); z-index:60;
+    }
+    #drawer-toggle:checked ~ .drawer{ transform: translateX(0); }
+    #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto; }
+    .drawer-inner{ height:100%; padding:28px; display:flex; flex-direction:column; }
+    .brand{ font-weight:900; font-size:30px; margin:56px 0 4px; color:var(--navy); }
+    .brand-sub{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+    .drawer-nav{ display:grid; gap:6px; margin:36px 0; }
+    .nav-link{
+      font-weight:600; font-size:24px; line-height:1.5; opacity:0; transform:translateX(-14px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease), color .25s;
+    }
+    #drawer-toggle:checked ~ .drawer .nav-link{ opacity:1; transform:translateX(0); }
+    .drawer-nav .nav-link:nth-child(1){ transition-delay:.08s; }
+    .drawer-nav .nav-link:nth-child(2){ transition-delay:.14s; }
+    .drawer-nav .nav-link:nth-child(3){ transition-delay:.20s; }
+    .drawer-nav .nav-link:nth-child(4){ transition-delay:.26s; }
+    .drawer-nav .nav-link:nth-child(5){ transition-delay:.32s; }
+    .nav-link:hover{ color:var(--navy); }
+    .drawer-spacer{ flex:1; }
+    .social-lines{ display:grid; gap:10px; font-size:15px; }
+    .social-lines a:hover{ color:var(--navy); }
+    .backdrop{
+      position:fixed; inset:0; background:rgba(11,23,41,.32); z-index:55;
+      opacity:0; pointer-events:none; transition:opacity .35s;
     }
 
-    /* HERO – 1:1 banner, auto + infinite loop + drag/swipe */
-    .hero-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);background:var(--bg)}
+    /* ---------- Reveal on scroll ---------- */
+    .reveal{ opacity:0; transform:translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+    /* ---------- Marquee ---------- */
+    .hero-marquee{ position:relative; width:100%; background:var(--paper-deep); }
+    .hero-marquee::before, .hero-marquee::after{
+      content:""; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+    }
+    .hero-marquee::before{ left:0; background:linear-gradient(90deg, var(--paper-deep), transparent); }
+    .hero-marquee::after{ right:0; background:linear-gradient(-90deg, var(--paper-deep), transparent); }
     .marquee{
-      height:var(--tile);
-      min-height:var(--tile);
-      overflow-x:auto;
-      overflow-y:hidden;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-      touch-action: pan-x;
-      cursor: grab;
-      user-select:none;
-      overscroll-behavior: contain;
+      height:var(--tile); min-height:var(--tile); overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none; touch-action:pan-x;
+      cursor:grab; user-select:none; overscroll-behavior:contain;
     }
-    .marquee::-webkit-scrollbar{display:none}
-    .marquee.dragging{cursor:grabbing}
-    .track{display:flex;gap:0;align-items:center}
-    .group{display:flex;gap:0;flex-shrink:0}
-    .group img{
-      height:var(--tile); width:var(--tile);
-      aspect-ratio:1 / 1; object-fit:cover; flex:0 0 auto;
+    .marquee::-webkit-scrollbar{ display:none; }
+    .marquee.dragging{ cursor:grabbing; }
+    .track{ display:flex; gap:0; align-items:center; }
+    .group{ display:flex; gap:0; flex-shrink:0; }
+    .group img{ height:var(--tile); width:var(--tile); aspect-ratio:1/1; object-fit:cover; flex:0 0 auto; filter:saturate(.92); }
+
+    /* ---------- Sections ---------- */
+    section.content{ padding:70px 0; }
+    .h2{ font-size:26px; color:var(--navy); margin:0 0 14px; }
+    .kicker{ font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .prose{ font-size:16.5px; line-height:1.9; color:#232A33; max-width:760px; }
+
+    .artwork-meta{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:22px 0 6px; }
+    .badge{ font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:999px; border:1px solid var(--navy); color:var(--navy); }
+    .badge.sold{ border-color:var(--muted); color:var(--muted); }
+    .specs{ font-size:13.5px; color:var(--muted); }
+    .price-row{ display:flex; align-items:center; gap:18px; margin-top:16px; flex-wrap:wrap; }
+    .price{ font-family:"Playfair Display",serif; font-size:22px; color:var(--navy); }
+    .price.strike{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--muted); }
+    .btn-quote{
+      font-family:"Inter",sans-serif; font-size:13.5px; font-weight:600; letter-spacing:.03em;
+      background:var(--navy); color:#fff; border:1px solid var(--navy); padding:11px 22px; border-radius:999px;
+      cursor:pointer; transition: background .25s var(--ease), transform .25s var(--ease);
     }
+    .btn-quote:hover{ background:#0B1729; transform:translateY(-1px); }
+    .btn-quote.ghost{ background:transparent; color:var(--navy); }
+    .btn-quote.ghost:hover{ background:var(--paper-deep); }
 
-    /* Sections */
-    section{padding:40px 0}
-    .h2{font-weight:700}
-    .rule{width:225px;height:1px;background:#000;margin:8px 0 14px}
-    .prose{font-weight:400}
+    .card.story{ padding:44px 0 0; max-width:760px; }
+    .card.story h3{ font-size:21px; color:var(--navy); margin:0 0 10px; }
 
-    /* Text + image blocks */
     .block{
-      display:grid;
-      grid-template-columns: minmax(240px, 1fr) minmax(180px, 1fr);
-      align-items:center;
-      gap: clamp(16px, 4vw, 36px);
-      margin: clamp(36px, 6vw, 72px) 0;
+      display:grid; grid-template-columns:1fr 1fr; align-items:center;
+      gap:clamp(24px,4vw,56px); margin:clamp(50px,7vw,86px) 0;
     }
-    .block .card{
-      background:var(--bg);
-      padding:14px 16px;
-      border-radius:12px;
-      border:1px solid rgba(0,0,0,.08);
-      font-size: clamp(0.98rem, 0.4vw + 0.9rem, 1.06rem);
-    }
-    .block h3{
-      margin:0 0 6px 0;
-      font-weight:700;
-      font-size: clamp(1.15rem, 1.4vw + 0.9rem, 1.55rem);
-    }
-    .media{display:flex;justify-content:center;align-items:center}
-    .media img{width: clamp(220px, 38vw, 280px); height:auto; border-radius:12px}
+    .block h3{ font-size:21px; color:var(--navy); margin:0 0 12px; }
+    .block .prose{ max-width:none; }
+    .media{ display:flex; justify-content:center; }
+    .media img{ border-radius:var(--radius); width:100%; max-width:420px; transition: transform 1s var(--ease); filter:saturate(.92); }
+    .media:hover img{ transform:scale(1.03); }
+    .block.realisation{ grid-template-areas:"media card"; }
+    .block.realisation .media{ grid-area:media; }
+    .block.realisation .card{ grid-area:card; }
 
-    .card.story { padding-block: 48px !important; }
-    .cta{display:flex;justify-content:center;margin-top:48px}
-    .button{display:inline-block;background:var(--accent);color:#fff;border:1px solid #000;padding:16px 24px;border-radius:10px;font-size:14px}
-
-    /* Footer */
-    .site-footer{ padding: 20px; background:#fff }
-    .site-footer .divider{ background:#000; opacity:.4 }
-    .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding: 10px 0 20px }
-    .footer-title{ font-weight: 700; font-size: 18px; margin: 6px 0 }
-    .footer-links{ display:grid; gap:12px; margin-top:14px }
-    .footer-contact{ width:min(800px, 100%); margin: 0 auto; text-align:center; padding: 0 20px 20px }
-    .footer-contact .line{ font-size: 16px; display:flex; gap:8px; justify-content:center }
-    .credit{ width:220px; margin: 20px auto 0 }
-
-    /* Realization: text above image on mobile */
-    .block.realisation{ grid-template-areas: "media card"; }
-    .block.realisation .media{ grid-area: media; }
-    .block.realisation .card{  grid-area: card;  }
-
-    /* Mobile */
-    @media (max-width: 768px){
-      :root{ --tile: 66.67vh; }
-      .block{
-        grid-template-columns: 1fr;
-        gap: clamp(14px, 4.5vw, 24px);
-        margin: clamp(28px, 8vw, 48px) 0;
-      }
+    @media (max-width:768px){
+      :root{ --tile:56vh; }
+      .block{ grid-template-columns:1fr; }
       .block.realisation{ grid-template-areas:"card" "media"; }
-      .block .card{ padding: clamp(12px, 3.4vw, 20px); font-size: clamp(0.98rem, 1.6vw + 0.8rem, 1.05rem); }
-      .block h3{ font-size: clamp(1.05rem, 2vw + 0.9rem, 1.35rem); }
-      .media img{ width: min(100%, 92vw); max-width: 320px; }
-      .title{font-size:18px}
+      .title{ font-size:17px; }
     }
+
+    .cta{ text-align:center; margin-top:60px; padding-top:36px; border-top:1px solid var(--line); }
+    .cta .buttons{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:10px; }
+
+    /* ---------- Footer ---------- */
+    .site-footer{ padding:40px 0 26px; background:var(--navy-deep); color:#EAEEF4; }
+    .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding:14px 0 26px; flex-wrap:wrap; }
+    .footer-title{ font-weight:700; font-size:17px; margin:6px 0; color:#fff; }
+    .footer-links{ display:grid; gap:12px; margin-top:16px; }
+    .footer-links a, .footer .social-lines a{ font-weight:500; font-size:15px; color:#C7D2E0; transition:color .2s; }
+    .footer-links a:hover, .footer .social-lines a:hover{ color:#fff; }
+    .footer-contact{ width:min(760px,100%); margin:0 auto; text-align:center; padding:0 20px 22px; }
+    .footer-contact .line{ font-size:15px; display:flex; gap:8px; justify-content:center; color:#C7D2E0; }
+    .footer-contact a:hover{ color:#fff; }
+    .credit{ width:220px; margin:18px auto 0; text-align:center; }
+    .credit p{ font-size:12.5px; color:#8FA0BC; }
   </style>
 </head>
 <body>
-  <!-- Top Bar -->
-  <header>
-    <div class="container topbar">
-      <div class="back">
-        <a href="https://loan881.github.io/loanturpin/gallery" aria-label="Back" title="Back">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </a>
-      </div>
-      <div class="title">The Art Of Greatness</div>
-    </div>
-  </header>
 
-  <!-- HERO / SLIDING 1:1 BANNER -->
-  <div class="hero-marquee" aria-label="1:1 image banner">
-    <div class="marquee" id="marquee">
-      <div class="track" id="track">
-        <div class="group" id="group-source">
-          <!-- ✅ images are in /images, page is /gallery → use ../images/... -->
-          <img src="../images/IMG_9449-2000.jpg"
-               srcset="../images/IMG_9449-1000.jpg 1000w, ../images/IMG_9449-2000.jpg 2000w"
-               alt="Artwork 9449" decoding="async" fetchpriority="high">
-          <img src="../images/IMG_9437-2000.jpg"
-               srcset="../images/IMG_9437-1000.jpg 1000w, ../images/IMG_9437-2000.jpg 2000w"
-               alt="Artwork 9437" decoding="async">
-          <img src="../images/IMG_9440-2000.jpg"
-               srcset="../images/IMG_9440-1000.jpg 1000w, ../images/IMG_9440-2000.jpg 2000w"
-               alt="Artwork 9440" decoding="async">
-          <img src="../images/IMG_9445-2000.jpg"
-               srcset="../images/IMG_9445-1000.jpg 1000w, ../images/IMG_9445-2000.jpg 2000w"
-               alt="Artwork 9445" decoding="async">
-          <img src="../images/IMG_9447-2000.jpg"
-               srcset="../images/IMG_9447-1000.jpg 1000w, ../images/IMG_9447-2000.jpg 2000w"
-               alt="Artwork 9447" decoding="async">
-          <img src="../images/IMG_9483-2000.jpg"
-               srcset="../images/IMG_9483-1000.jpg 1000w, ../images/IMG_9483-2000.jpg 2000w"
-               alt="Artwork 9483" decoding="async">
-        </div>
+<input id="drawer-toggle" type="checkbox" hidden>
+
+<!-- Drawer -->
+<aside class="drawer" aria-label="Menu latéral">
+  <div class="drawer-inner">
+    <h1 class="brand display">TURPIN Loan</h1>
+    <div class="brand-sub">Peintures &amp; récits visuels</div>
+    <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
+    <nav class="drawer-nav" aria-label="Navigation latérale">
+      <a href="https://loan881.github.io/loanturpin/" class="nav-link">Home</a>
+      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link">Gallery</a>
+      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">The Art Story</a>
+      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Contact Me.</a>
+      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link">Demander un devis</a>
+    </nav>
+    <div class="drawer-spacer"></div>
+    <h2 class="footer-title" style="color:var(--navy)">Social Media</h2>
+    <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
+    <div class="social-lines" style="margin-top:14px">
+      <div>Instagram : <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+      <div>TikTok : <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+    </div>
+  </div>
+</aside>
+<label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
+
+<header id="siteHeader">
+  <div class="container topbar">
+    <div class="back">
+      <a href="https://loan881.github.io/loanturpin/gallery" aria-label="Retour à la galerie" title="Retour à la galerie">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </a>
+    </div>
+    <h1 class="title display">The Art Of Greatness</h1>
+    <div class="menu-btn">
+      <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
+        <span class="burger"><span></span><span></span><span></span></span>
+      </label>
+    </div>
+  </div>
+</header>
+
+<!-- Marquee -->
+<div class="hero-marquee" aria-label="Bandeau d'images 1:1">
+  <div class="marquee" id="marquee">
+    <div class="track" id="track">
+      <div class="group" id="group-source">
+        <img src="../images/IMG_9449-2000.jpg" srcset="../images/IMG_9449-1000.jpg 1000w, ../images/IMG_9449-2000.jpg 2000w" alt="The Art Of Greatness — détail 1" decoding="async" fetchpriority="high">
+        <img src="../images/IMG_9437-2000.jpg" srcset="../images/IMG_9437-1000.jpg 1000w, ../images/IMG_9437-2000.jpg 2000w" alt="The Art Of Greatness — détail 2" decoding="async">
+        <img src="../images/IMG_9440-2000.jpg" srcset="../images/IMG_9440-1000.jpg 1000w, ../images/IMG_9440-2000.jpg 2000w" alt="The Art Of Greatness — détail 3" decoding="async">
+        <img src="../images/IMG_9445-2000.jpg" srcset="../images/IMG_9445-1000.jpg 1000w, ../images/IMG_9445-2000.jpg 2000w" alt="The Art Of Greatness — détail 4" decoding="async">
+        <img src="../images/IMG_9447-2000.jpg" srcset="../images/IMG_9447-1000.jpg 1000w, ../images/IMG_9447-2000.jpg 2000w" alt="The Art Of Greatness — détail 5" decoding="async">
+        <img src="../images/IMG_9483-2000.jpg" srcset="../images/IMG_9483-1000.jpg 1000w, ../images/IMG_9483-2000.jpg 2000w" alt="The Art Of Greatness — détail 6" decoding="async">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container">
+    <div class="kicker reveal">Pièce N°01</div>
+    <h2 class="h2 display reveal">Description</h2>
+    <svg class="brushstroke w225 reveal" viewBox="0 0 225 14"><path d="M4 8 C 60 2, 130 12, 220 7"/></svg>
+
+    <p class="prose reveal">
+      “The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast
+      converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to
+      make the world a little more beautiful than we found it.
+    </p>
+
+    <div class="artwork-meta reveal">
+      <span class="badge">Disponible</span>
+      <span class="specs">Huile sur toile · 80 × 100 cm</span>
+    </div>
+    <div class="price-row reveal">
+      <span class="price">950 €</span>
+      <button type="button" class="btn-quote" id="quoteBtn">Demander ce prix</button>
+    </div>
+
+    <div class="card story reveal">
+      <h3 class="display">Story</h3>
+      <p class="prose">
+        May you, through these words and images, feel the patience of hours, the search for the right gesture, and the
+        desire for order within disorder — where beauty often hides.
+        <br><br>
+        I move slowly, at the pace of the material. The blue takes hold, thickens, rears up; the white cuts through the
+        surface like a breath escaping. Nothing is given at once: you must wait for the color to breathe, for the light to
+        find its angle, for the hand to accept losing in order to begin again better.
+        <br><br>
+        I seek a fragile balance: to let the chaos of the paint live, yet offer it a frame, a tempo, a restraint. Then
+        lines emerge, a movement is born, and silence organizes itself around an impulse. The painting becomes a
+        conversation — between intention and accident, between precision and letting go.
+        <br><br>
+        What you are looking at is not just an image: it is the account of a passage. There are hesitations here, returns,
+        sudden certainties. And perhaps, in the middle of it, this simple promise: to make the world a little more
+        habitable for the eyes.
+      </p>
+    </div>
+
+    <div class="block reveal">
+      <div class="card">
+        <h3 class="display">Design &amp; Conception</h3>
+        <p class="prose">
+          The idea was born as a vision: a composition held together by the balance of tensions. Sketches framed the
+          masses, color found its breath, and the rhythm of forms set the overall structure.
+        </p>
+      </div>
+      <div class="media">
+        <img src="../images/IMG_9486.jpg" alt="Design & Conception — préparation du matériel" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <div class="block realisation reveal">
+      <div class="media">
+        <img src="../images/IMG_65845.jpeg" alt="Réalisation — texture bleue en cours" loading="lazy" decoding="async">
+      </div>
+      <div class="card">
+        <h3 class="display">Realization</h3>
+        <p class="prose">
+          Every brushstroke was laid with intent. Layering, scraping, revisiting — the material became the memory of the
+          gesture until the surface spoke for itself: neither too much nor too little.
+        </p>
+      </div>
+    </div>
+
+    <div class="block reveal">
+      <div class="card">
+        <h3 class="display">Final Touch</h3>
+        <p class="prose">
+          The last step, almost ceremonial: clarifying values, refining edges, signing the silence. That is where the work
+          ceases to be labor and becomes a presence.
+        </p>
+      </div>
+      <div class="media">
+        <img src="../images/IMG_9436.jpeg" alt="Final Touch — détails de pinceau" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <div class="cta reveal">
+      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">Une question, une envie de voir la pièce en vrai, ou une proposition ? Écrivez-moi.</p>
+      <div class="buttons">
+        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis">Faire une demande de devis</a>
+        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Écrire directement par e-mail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="site-footer" role="contentinfo">
+  <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
+  <div class="footer-top">
+    <div class="col">
+      <h5 class="footer-title display">Page</h5>
+      <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
+      <nav class="footer-links" aria-label="Pied de page - navigation">
+        <a href="https://loan881.github.io/loanturpin/">Home</a>
+        <a href="https://loan881.github.io/loanturpin/gallery">Gallery</a>
+        <a href="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
+        <a href="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
+        <a href="https://loan881.github.io/loanturpin/gallery#devis">Demander un devis</a>
+      </nav>
+    </div>
+    <div class="col">
+      <h5 class="footer-title display">Social Media</h5>
+      <svg class="brushstroke thin w82" viewBox="0 0 180 14"><path d="M4 8 C 40 2, 90 12, 176 7"/></svg>
+      <div class="social-lines" style="margin-top:14px">
+        <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
+        <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
       </div>
     </div>
   </div>
 
-  <!-- CONTENT -->
-  <section>
-    <div class="container">
-      <h2 class="h2">Description</h2>
-      <div class="rule"></div>
-      <p class="prose">
-        “The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast
-        converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to
-        make the world a little more beautiful than we found it.
-      </p>
-
-      <!-- STORY -->
-      <div class="card story" style="background:transparent;border:none">
-        <h3 style="margin:22px 0 6px 0">Story</h3>
-        <div class="thin" style="width:35px"></div>
-        <p class="prose" style="margin:10px 0 0 0">
-          May you, through these words and images, feel the patience of hours, the search for the right gesture, and the
-          desire for order within disorder — where beauty often hides.
-          <br><br>
-          I move slowly, at the pace of the material. The blue takes hold, thickens, rears up; the white cuts through the
-          surface like a breath escaping. Nothing is given at once: you must wait for the color to breathe, for the light to
-          find its angle, for the hand to accept losing in order to begin again better.
-          <br><br>
-          I seek a fragile balance: to let the chaos of the paint live, yet offer it a frame, a tempo, a restraint. Then
-          lines emerge, a movement is born, and silence organizes itself around an impulse. The painting becomes a
-          conversation — between intention and accident, between precision and letting go.
-          <br><br>
-          What you are looking at is not just an image: it is the account of a passage. There are hesitations here, returns,
-          sudden certainties. And perhaps, in the middle of it, this simple promise: to make the world a little more
-          habitable for the eyes.
-        </p>
-      </div>
-
-      <!-- Block 1 : Design & Conception -->
-      <div class="block">
-        <div class="card">
-          <h3>Design & Conception</h3>
-          <p class="prose">
-            The idea was born as a vision: a composition held together by the balance of tensions. Sketches framed the
-            masses, color found its breath, and the rhythm of forms set the overall structure.
-          </p>
-        </div>
-        <div class="media">
-          <img src="../images/IMG_9486.jpg" alt="Design & Conception — material preparation" loading="lazy" decoding="async">
-        </div>
-      </div>
-
-      <!-- Block 2 : Realization -->
-      <div class="block realisation">
-        <div class="media">
-          <img src="../images/IMG_65845.jpeg" alt="Realization — blue texture in progress" loading="lazy" decoding="async">
-        </div>
-        <div class="card">
-          <h3>Realization</h3>
-          <p class="prose">
-            Every brushstroke was laid with intent. Layering, scraping, revisiting — the material became the memory of the
-            gesture until the surface spoke for itself: neither too much nor too little.
-          </p>
-        </div>
-      </div>
-
-      <!-- Block 3 : Final Touch -->
-      <div class="block">
-        <div class="card">
-          <h3>Final Touch</h3>
-          <p class="prose">
-            The last step, almost ceremonial: clarifying values, refining edges, signing the silence. That is where the work
-            ceases to be labor and becomes a presence.
-          </p>
-        </div>
-        <div class="media">
-          <img src="../images/IMG_9436.jpeg" alt="Final Touch — brush details" loading="lazy" decoding="async">
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="cta">
-        <a class="button" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Price On Demand By E-Mail</a>
-      </div>
+  <div class="footer-contact">
+    <h5 class="footer-title display">Contact Me</h5>
+    <svg class="brushstroke thin" style="margin:0 auto" viewBox="0 0 200 14"><path d="M4 8 C 50 2, 100 12, 196 7"/></svg>
+    <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
+    <div class="credit">
+      <svg class="brushstroke thin" viewBox="0 0 220 14"><path d="M4 8 C 55 2, 110 12, 216 7"/></svg>
+      <p>© 2025 TURPIN Loan</p>
     </div>
-  </section>
+  </div>
+</footer>
 
-  <footer id="contact" class="site-footer" role="contentinfo">
-    <hr class="divider" aria-hidden="true">
-    <div class="footer-top">
-      <div class="col">
-        <h5 class="footer-title">Page</h5>
-        <hr class="divider w30" aria-hidden="true">
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="https://loan881.github.io/loanturpin/" class="nav-link">Home</a>
-          <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link">Gallery</a>
-          <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">The Art Story</a>
-          <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Contact Me.</a>
-        </nav>
-      </div>
-      <div class="col">
-        <h5 class="footer-title">Social Media</h5>
-        <hr class="divider w82" aria-hidden="true">
-        <div class="social-lines">
-          <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
-          <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
-        </div>
-      </div>
-    </div>
+<script>
+  // Navbar : rétrécit au scroll
+  const siteHeader = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('shrink', window.scrollY > 60);
+  }, { passive:true });
 
-    <div class="footer-contact">
-      <h5 class="footer-title">Contact Me</h5>
-      <hr class="divider" aria-hidden="true">
-      <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
-      <div class="credit">
-        <hr class="divider thin" aria-hidden="true">
-        <p>© 2025 TURPIN Loan</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- JS : auto + infinite loop + drag/swipe + horizontal wheel + center first visual -->
-  <script>
-    (function(){
-      const marquee = document.getElementById('marquee');
-      const track = document.getElementById('track');
-      const source = document.getElementById('group-source');
-      if(!marquee || !track || !source) return;
-
-      // Clone twice for a smooth loop
-      for(let i=0;i<2;i++){
-        const clone = source.cloneNode(true);
-        clone.id = ""; clone.setAttribute("aria-hidden","true");
-        track.appendChild(clone);
+  // Reveal au scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
       }
+    });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal, .brushstroke').forEach(el => io.observe(el));
 
-      let gw = 0;
-      function measure(){ gw = source.getBoundingClientRect().width; }
+  // Bouton "Demander ce prix" → formulaire de devis de la galerie, avec l'œuvre présélectionnée
+  const quoteBtn = document.getElementById('quoteBtn');
+  if (quoteBtn){
+    quoteBtn.addEventListener('click', () => {
+      window.location.href = 'https://loan881.github.io/loanturpin/gallery?oeuvre=' +
+        encodeURIComponent('The Art of Greatness — 950 €') + '#devis';
+    });
+  }
 
-      // Center the first image in the middle of the screen
-      function center(){
-        measure();
-        const first = source.querySelector('img');
-        if(!first) { marquee.scrollLeft = gw; return; }
-        const firstW = first.getBoundingClientRect().width;
-        const viewW  = marquee.clientWidth;
-        marquee.scrollLeft = gw + (firstW / 2) - (viewW / 2);
-      }
+  // Bandeau d'images en défilement continu (logique d'origine conservée)
+  (function(){
+    const marquee = document.getElementById('marquee');
+    const track = document.getElementById('track');
+    const source = document.getElementById('group-source');
+    if(!marquee || !track || !source) return;
 
-      function waitImagesLoaded(){
-        const imgs = source.querySelectorAll('img');
-        return Promise.all([...imgs].map(img=>{
-          if (img.complete) return Promise.resolve();
-          return new Promise(res=>{
-            img.addEventListener('load', res, {once:true});
-            img.addEventListener('error', res, {once:true}); // keep going if an image fails
-          });
-        }));
-      }
+    for(let i=0;i<2;i++){
+      const clone = source.cloneNode(true);
+      clone.id = ""; clone.setAttribute("aria-hidden","true");
+      track.appendChild(clone);
+    }
 
-      function wrap(){
-        if (gw <= 1) return;
-        while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
-        while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
-      }
+    let gw = 0;
+    function measure(){ gw = source.getBoundingClientRect().width; }
 
-      let dragging = false, startX = 0, startScroll = 0, autoplay = true;
-      const SPEED = 0.6; // px/frame
+    function center(){
+      measure();
+      const first = source.querySelector('img');
+      if(!first) { marquee.scrollLeft = gw; return; }
+      const firstW = first.getBoundingClientRect().width;
+      const viewW  = marquee.clientWidth;
+      marquee.scrollLeft = gw + (firstW / 2) - (viewW / 2);
+    }
 
-      function step(){
-        if (autoplay && !dragging) {
-          marquee.scrollLeft += SPEED;
-          wrap();
-        }
-        requestAnimationFrame(step);
-      }
+    function waitImagesLoaded(){
+      const imgs = source.querySelectorAll('img');
+      return Promise.all([...imgs].map(img=>{
+        if (img.complete) return Promise.resolve();
+        return new Promise(res=>{
+          img.addEventListener('load', res, {once:true});
+          img.addEventListener('error', res, {once:true});
+        });
+      }));
+    }
 
-      function onPointerDown(e){
-        dragging = true;
-        autoplay = false;
-        marquee.classList.add('dragging');
-        marquee.setPointerCapture?.(e.pointerId);
-        startX = e.clientX;
-        startScroll = marquee.scrollLeft;
-      }
-      function onPointerMove(e){
-        if(!dragging) return;
-        const dx = startX - e.clientX;
-        marquee.scrollLeft = startScroll + dx;
+    function wrap(){
+      if (gw <= 1) return;
+      while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
+      while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
+    }
+
+    let dragging = false, startX = 0, startScroll = 0, autoplay = true;
+    const SPEED = 0.6;
+
+    function step(){
+      if (autoplay && !dragging) {
+        marquee.scrollLeft += SPEED;
         wrap();
       }
-      function onPointerUp(e){
-        if(!dragging) return;
-        dragging = false;
-        marquee.classList.remove('dragging');
-        marquee.releasePointerCapture?.(e.pointerId);
-        setTimeout(()=>{ autoplay = true; }, 600);
-      }
+      requestAnimationFrame(step);
+    }
 
-      marquee.addEventListener('pointerdown', onPointerDown);
-      marquee.addEventListener('pointermove', onPointerMove);
-      marquee.addEventListener('pointerup', onPointerUp);
-      marquee.addEventListener('pointercancel', onPointerUp);
-      marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
+    function onPointerDown(e){
+      dragging = true;
+      autoplay = false;
+      marquee.classList.add('dragging');
+      marquee.setPointerCapture?.(e.pointerId);
+      startX = e.clientX;
+      startScroll = marquee.scrollLeft;
+    }
+    function onPointerMove(e){
+      if(!dragging) return;
+      const dx = startX - e.clientX;
+      marquee.scrollLeft = startScroll + dx;
+      wrap();
+    }
+    function onPointerUp(e){
+      if(!dragging) return;
+      dragging = false;
+      marquee.classList.remove('dragging');
+      marquee.releasePointerCapture?.(e.pointerId);
+      setTimeout(()=>{ autoplay = true; }, 600);
+    }
 
-      marquee.addEventListener('mouseenter', ()=> autoplay = false);
-      marquee.addEventListener('mouseleave', ()=> autoplay = true);
+    marquee.addEventListener('pointerdown', onPointerDown);
+    marquee.addEventListener('pointermove', onPointerMove);
+    marquee.addEventListener('pointerup', onPointerUp);
+    marquee.addEventListener('pointercancel', onPointerUp);
+    marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
 
-      // Mouse wheel → horizontal scroll
-      marquee.addEventListener('wheel', (e) => {
-        const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-        marquee.scrollLeft += delta;
-        wrap();
-        e.preventDefault();
-      }, { passive: false });
+    marquee.addEventListener('mouseenter', ()=> autoplay = false);
+    marquee.addEventListener('mouseleave', ()=> autoplay = true);
 
-      window.addEventListener('resize', center);
+    marquee.addEventListener('wheel', (e) => {
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      marquee.scrollLeft += delta;
+      wrap();
+      e.preventDefault();
+    }, { passive: false });
 
-      // Start once images attempted (even if some 404)
-      waitImagesLoaded().then(()=>{
-        center();
-        requestAnimationFrame(step);
-      });
+    window.addEventListener('resize', center);
 
-      // Fallback if onload never fires
-      setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
-    })();
-  </script>
+    waitImagesLoaded().then(()=>{
+      center();
+      requestAnimationFrame(step);
+    });
+
+    setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
+  })();
+</script>
 </body>
 </html>
