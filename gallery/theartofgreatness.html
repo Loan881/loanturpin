@@ -210,6 +210,22 @@
     .footer-contact a:hover{ color:#fff; }
     .credit{ width:220px; margin:18px auto 0; text-align:center; }
     .credit p{ font-size:12.5px; color:#8FA0BC; }
+
+    /* ---------- Sélecteur de langue ---------- */
+    .lang-switch{
+      display:flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line);
+      border-radius:999px; background:#fff;
+    }
+    .lang-switch button{
+      font-family:"Inter",sans-serif; font-size:11px; font-weight:600; letter-spacing:.04em;
+      border:none; background:transparent; padding:6px 11px; border-radius:999px; cursor:pointer;
+      color:var(--muted); transition: background .2s, color .2s;
+    }
+    .lang-switch button.active{ background:var(--navy); color:#fff; }
+    html[data-lang="en"] .i18n-fr{ display:none !important; }
+    html:not([data-lang="en"]) .i18n-en{ display:none !important; }
+    .topbar-right{ position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:10px; }
+    .menu-btn{ position:static; }
   </style>
 </head>
 <body>
@@ -220,17 +236,17 @@
 <aside class="drawer" aria-label="Menu latéral">
   <div class="drawer-inner">
     <h1 class="brand display">TURPIN Loan</h1>
-    <div class="brand-sub">Peintures &amp; récits visuels</div>
+    <div class="brand-sub"><span class="i18n-fr">Peintures &amp; récits visuels</span><span class="i18n-en">Paintings &amp; visual stories</span></div>
     <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
     <nav class="drawer-nav" aria-label="Navigation latérale">
-      <a href="https://loan881.github.io/loanturpin/" class="nav-link">Home</a>
-      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link">Gallery</a>
-      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">The Art Story</a>
-      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Contact Me.</a>
-      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link">Demander un devis</a>
+      <a href="https://loan881.github.io/loanturpin/" class="nav-link"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
     </nav>
     <div class="drawer-spacer"></div>
-    <h2 class="footer-title" style="color:var(--navy)">Social Media</h2>
+    <h2 class="footer-title" style="color:var(--navy)"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h2>
     <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
     <div class="social-lines" style="margin-top:14px">
       <div>Instagram : <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
@@ -248,10 +264,16 @@
       </a>
     </div>
     <h1 class="title display">The Art Of Greatness</h1>
-    <div class="menu-btn">
-      <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
-        <span class="burger"><span></span><span></span><span></span></span>
-      </label>
+    <div class="topbar-right">
+      <div class="lang-switch" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="menu-btn">
+        <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
+          <span class="burger"><span></span><span></span><span></span></span>
+        </label>
+      </div>
     </div>
   </div>
 </header>
@@ -274,42 +296,52 @@
 
 <section class="content">
   <div class="container">
-    <div class="kicker reveal">Pièce N°01</div>
+    <div class="kicker reveal"><span class="i18n-fr">Pièce N°01</span><span class="i18n-en">Piece No. 01</span></div>
     <h2 class="h2 display reveal">Description</h2>
     <svg class="brushstroke w225 reveal" viewBox="0 0 225 14"><path d="M4 8 C 60 2, 130 12, 220 7"/></svg>
 
     <p class="prose reveal">
-      “The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast
-      converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to
-      make the world a little more beautiful than we found it.
+      <span class="i18n-fr">« The Art of Greatness » est plus qu'une œuvre : c'est un voyage intérieur. Chaque matière, chaque lumière et chaque contraste dialoguent avec le regardeur pour lui rappeler que la grandeur n'est pas un sommet figé mais un mouvement continu — une volonté de rendre le monde un peu plus beau que nous ne l'avons trouvé.</span>
+      <span class="i18n-en">“The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to make the world a little more beautiful than we found it.</span>
     </p>
 
     <div class="artwork-meta reveal">
-      <span class="badge">Disponible</span>
-      <span class="specs">Huile sur toile · 80 × 100 cm</span>
+      <span class="badge"><span class="i18n-fr">Disponible</span><span class="i18n-en">Available</span></span>
+      <span class="specs"><span class="i18n-fr">Huile sur toile · 80 × 100 cm</span><span class="i18n-en">Oil on canvas · 80 × 100 cm</span></span>
     </div>
     <div class="price-row reveal">
       <span class="price">950 €</span>
-      <button type="button" class="btn-quote" id="quoteBtn">Demander ce prix</button>
+      <button type="button" class="btn-quote" id="quoteBtn"><span class="i18n-fr">Demander ce prix</span><span class="i18n-en">Ask for this price</span></button>
     </div>
 
     <div class="card story reveal">
       <h3 class="display">Story</h3>
       <p class="prose">
-        May you, through these words and images, feel the patience of hours, the search for the right gesture, and the
-        desire for order within disorder — where beauty often hides.
-        <br><br>
-        I move slowly, at the pace of the material. The blue takes hold, thickens, rears up; the white cuts through the
-        surface like a breath escaping. Nothing is given at once: you must wait for the color to breathe, for the light to
-        find its angle, for the hand to accept losing in order to begin again better.
-        <br><br>
-        I seek a fragile balance: to let the chaos of the paint live, yet offer it a frame, a tempo, a restraint. Then
-        lines emerge, a movement is born, and silence organizes itself around an impulse. The painting becomes a
-        conversation — between intention and accident, between precision and letting go.
-        <br><br>
-        What you are looking at is not just an image: it is the account of a passage. There are hesitations here, returns,
-        sudden certainties. And perhaps, in the middle of it, this simple promise: to make the world a little more
-        habitable for the eyes.
+        <span class="i18n-fr">
+          Puissiez-vous, à travers ces mots et ces images, ressentir la patience des heures, la recherche du geste juste, et le désir d'ordre dans le désordre — là où se cache souvent la beauté.
+          <br><br>
+          J'avance lentement, au rythme de la matière. Le bleu prend, s'épaissit, se cabre ; le blanc traverse la surface comme un souffle qui s'échappe. Rien n'est donné d'un coup : il faut attendre que la couleur respire, que la lumière trouve son angle, que la main accepte de perdre pour mieux recommencer.
+          <br><br>
+          Je cherche un équilibre fragile : laisser vivre le chaos de la peinture, tout en lui offrant un cadre, un tempo, une retenue. Alors des lignes émergent, un mouvement naît, et le silence s'organise autour d'une impulsion. Le tableau devient une conversation — entre intention et accident, entre précision et lâcher-prise.
+          <br><br>
+          Ce que vous regardez n'est pas qu'une image : c'est le récit d'un passage. Il y a ici des hésitations, des retours, des certitudes soudaines. Et peut-être, au milieu de tout cela, cette simple promesse : rendre le monde un peu plus habitable pour les yeux.
+        </span>
+        <span class="i18n-en">
+          May you, through these words and images, feel the patience of hours, the search for the right gesture, and the
+          desire for order within disorder — where beauty often hides.
+          <br><br>
+          I move slowly, at the pace of the material. The blue takes hold, thickens, rears up; the white cuts through the
+          surface like a breath escaping. Nothing is given at once: you must wait for the color to breathe, for the light to
+          find its angle, for the hand to accept losing in order to begin again better.
+          <br><br>
+          I seek a fragile balance: to let the chaos of the paint live, yet offer it a frame, a tempo, a restraint. Then
+          lines emerge, a movement is born, and silence organizes itself around an impulse. The painting becomes a
+          conversation — between intention and accident, between precision and letting go.
+          <br><br>
+          What you are looking at is not just an image: it is the account of a passage. There are hesitations here, returns,
+          sudden certainties. And perhaps, in the middle of it, this simple promise: to make the world a little more
+          habitable for the eyes.
+        </span>
       </p>
     </div>
 
@@ -317,8 +349,8 @@
       <div class="card">
         <h3 class="display">Design &amp; Conception</h3>
         <p class="prose">
-          The idea was born as a vision: a composition held together by the balance of tensions. Sketches framed the
-          masses, color found its breath, and the rhythm of forms set the overall structure.
+          <span class="i18n-fr">L'idée est née comme une vision : une composition tenue par l'équilibre des tensions. Les esquisses ont cadré les masses, la couleur a trouvé son souffle, et le rythme des formes a fixé la structure d'ensemble.</span>
+          <span class="i18n-en">The idea was born as a vision: a composition held together by the balance of tensions. Sketches framed the masses, color found its breath, and the rhythm of forms set the overall structure.</span>
         </p>
       </div>
       <div class="media">
@@ -333,8 +365,8 @@
       <div class="card">
         <h3 class="display">Realization</h3>
         <p class="prose">
-          Every brushstroke was laid with intent. Layering, scraping, revisiting — the material became the memory of the
-          gesture until the surface spoke for itself: neither too much nor too little.
+          <span class="i18n-fr">Chaque coup de pinceau a été posé avec intention. Superposer, gratter, revenir — la matière est devenue la mémoire du geste jusqu'à ce que la surface parle d'elle-même : ni trop, ni trop peu.</span>
+          <span class="i18n-en">Every brushstroke was laid with intent. Layering, scraping, revisiting — the material became the memory of the gesture until the surface spoke for itself: neither too much nor too little.</span>
         </p>
       </div>
     </div>
@@ -343,8 +375,8 @@
       <div class="card">
         <h3 class="display">Final Touch</h3>
         <p class="prose">
-          The last step, almost ceremonial: clarifying values, refining edges, signing the silence. That is where the work
-          ceases to be labor and becomes a presence.
+          <span class="i18n-fr">La dernière étape, presque cérémonielle : clarifier les valeurs, affiner les contours, signer le silence. C'est là que l'œuvre cesse d'être un travail et devient une présence.</span>
+          <span class="i18n-en">The last step, almost ceremonial: clarifying values, refining edges, signing the silence. That is where the work ceases to be labor and becomes a presence.</span>
         </p>
       </div>
       <div class="media">
@@ -353,10 +385,13 @@
     </div>
 
     <div class="cta reveal">
-      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">Une question, une envie de voir la pièce en vrai, ou une proposition ? Écrivez-moi.</p>
+      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">
+        <span class="i18n-fr">Une question, une envie de voir la pièce en vrai, ou une proposition ? Écrivez-moi.</span>
+        <span class="i18n-en">A question, a wish to see the piece in person, or an offer? Write to me.</span>
+      </p>
       <div class="buttons">
-        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis">Faire une demande de devis</a>
-        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22">Écrire directement par e-mail</a>
+        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Faire une demande de devis</span><span class="i18n-en">Request a quote</span></a>
+        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Price%20Proposition%20of%20%22The%20Art%20Of%20Greatness%22"><span class="i18n-fr">Écrire directement par e-mail</span><span class="i18n-en">Email me directly</span></a>
       </div>
     </div>
   </div>
@@ -366,18 +401,18 @@
   <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
   <div class="footer-top">
     <div class="col">
-      <h5 class="footer-title display">Page</h5>
+      <h5 class="footer-title display"><span class="i18n-fr">Page</span><span class="i18n-en">Pages</span></h5>
       <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
       <nav class="footer-links" aria-label="Pied de page - navigation">
-        <a href="https://loan881.github.io/loanturpin/">Home</a>
-        <a href="https://loan881.github.io/loanturpin/gallery">Gallery</a>
-        <a href="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
-        <a href="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
-        <a href="https://loan881.github.io/loanturpin/gallery#devis">Demander un devis</a>
+        <a href="https://loan881.github.io/loanturpin/"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+        <a href="https://loan881.github.io/loanturpin/theartstory"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+        <a href="https://loan881.github.io/loanturpin/contactme"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
       </nav>
     </div>
     <div class="col">
-      <h5 class="footer-title display">Social Media</h5>
+      <h5 class="footer-title display"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h5>
       <svg class="brushstroke thin w82" viewBox="0 0 180 14"><path d="M4 8 C 40 2, 90 12, 176 7"/></svg>
       <div class="social-lines" style="margin-top:14px">
         <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
@@ -387,7 +422,7 @@
   </div>
 
   <div class="footer-contact">
-    <h5 class="footer-title display">Contact Me</h5>
+    <h5 class="footer-title display"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></h5>
     <svg class="brushstroke thin" style="margin:0 auto" viewBox="0 0 200 14"><path d="M4 8 C 50 2, 100 12, 196 7"/></svg>
     <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
     <div class="credit">
@@ -525,5 +560,6 @@
     setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
   })();
 </script>
+<script src="../lang.js"></script>
 </body>
 </html>
