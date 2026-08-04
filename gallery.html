@@ -276,6 +276,20 @@
     .footer-contact a:hover{ color:#fff; }
     .credit{ width:220px; margin:18px auto 0; text-align:center; }
     .credit p{ font-size:12.5px; color:#8FA0BC; }
+
+    /* ---------- Sélecteur de langue ---------- */
+    .lang-switch{
+      display:flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line);
+      border-radius:999px; background:#fff;
+    }
+    .lang-switch button{
+      font-family:"Inter",sans-serif; font-size:11px; font-weight:600; letter-spacing:.04em;
+      border:none; background:transparent; padding:6px 11px; border-radius:999px; cursor:pointer;
+      color:var(--muted); transition: background .2s, color .2s;
+    }
+    .lang-switch button.active{ background:var(--navy); color:#fff; }
+    html[data-lang="en"] .i18n-fr{ display:none !important; }
+    html:not([data-lang="en"]) .i18n-en{ display:none !important; }
   </style>
 </head>
 <body>
@@ -286,16 +300,17 @@
 <aside class="drawer" aria-label="Menu latéral">
   <div class="drawer-inner">
     <h1 class="brand display">TURPIN Loan</h1>
-    <div class="brand-sub">Peintures &amp; récits visuels</div>
+    <div class="brand-sub"><span class="i18n-fr">Peintures &amp; récits visuels</span><span class="i18n-en">Paintings &amp; visual stories</span></div>
     <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
     <nav class="drawer-nav" aria-label="Navigation latérale">
-      <a href="https://loan881.github.io/loanturpin/" class="nav-link">Accueil</a>
-      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link current">Gallerie</a>
-      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">Histoire</a>
-      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Me Contacter.</a>
+      <a href="https://loan881.github.io/loanturpin/" class="nav-link"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link current"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+      <a href="#devis" class="nav-link"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
     </nav>
     <div class="drawer-spacer"></div>
-    <h2 class="footer-title" style="color:var(--navy)">Réseaux Sociaux</h2>
+    <h2 class="footer-title" style="color:var(--navy)"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h2>
     <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
     <div class="social-lines" style="margin-top:14px">
       <div>Instagram : <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
@@ -315,8 +330,13 @@
           <span class="burger"><span></span><span></span><span></span></span>
         </label>
       </div>
-      <h2 class="title display">Gallerie</h2>
-      <div class="right"></div>
+      <h2 class="title display"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></h2>
+      <div class="right">
+        <div class="lang-switch" role="group" aria-label="Langue">
+          <button type="button" data-lang="fr">FR</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -327,14 +347,14 @@
         <img src="https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/a-r-t-loan-t7zoc2/assets/4iqka4ctqcfg/20250808_1231_Tableau_Centralis%C3%A9_remix_01k24kjvdzeta8q1kmq5yp5wxq.png" alt="Hero artwork">
       </div>
       <div class="hero-copy">
-        <div class="hero-eyebrow">La collection complète</div>
-        <h1 class="hero-title display"><span>Ma Gallerie</span></h1>
+        <div class="hero-eyebrow"><span class="i18n-fr">La collection complète</span><span class="i18n-en">The complete collection</span></div>
+        <h1 class="hero-title display"><span class="i18n-fr">Toute ma collection</span><span class="i18n-en">All my collection</span></h1>
       </div>
     </section>
 
     <!-- Intro -->
     <div class="collection-intro reveal">
-      <div class="kicker">Séries &amp; œuvres</div>
+      <div class="kicker"><span class="i18n-fr">Séries &amp; œuvres</span><span class="i18n-en">Series &amp; artworks</span></div>
       <svg class="brushstroke w30" style="margin:0 auto" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
     </div>
 
@@ -346,19 +366,21 @@
 
         <div class="stack-grid reveal">
           <div class="stack-text">
-            <p class="rich">“The Art of Greatness” est un voyage au milieu de l'ocean, un surfer face à la grande et la puissance de l'ocean. Chaque matériau, chaque lumière et chaque contraste dialoguent avec le spectateur pour lui rappeler que la grandeur n’est pas un sommet figé, mais un mouvement continu. Une volonté de rendre le monde un peu plus beau que nous ne l’avons trouvé.
-           </p>
+            <p class="rich">
+              <span class="i18n-fr">« The Art of Greatness » est plus qu'une œuvre : c'est un voyage intérieur. Chaque matière, chaque lumière et chaque contraste dialoguent avec le regardeur pour lui rappeler que la grandeur n'est pas un sommet figé mais un mouvement continu — une volonté de rendre le monde un peu plus beau que nous ne l'avons trouvé.</span>
+              <span class="i18n-en">“The Art of Greatness” is more than a work: it is an inner journey. Every material, every light, and every contrast converse with the viewer to remind them that greatness is not a fixed summit but a continuous movement — a will to make the world a little more beautiful than we found it.</span>
+            </p>
 
             <div class="artwork-meta">
-              <span class="badge">Disponible</span>
-              <span class="specs">Acrylique sur toile · 100 × 100 cm</span>
+              <span class="badge"><span class="i18n-fr">Disponible</span><span class="i18n-en">Available</span></span>
+              <span class="specs"><span class="i18n-fr">Huile sur toile · 80 × 100 cm</span><span class="i18n-en">Oil on canvas · 80 × 100 cm</span></span>
             </div>
             <div class="price-row">
-              <span class="price">280 €</span>
-              <button type="button" class="btn-quote" data-artwork="The Art of Greatness — 950 €">Demander ce prix</button>
+              <span class="price">950 €</span>
+              <button type="button" class="btn-quote" data-artwork="The Art of Greatness — 950 €"><span class="i18n-fr">Demander ce prix</span><span class="i18n-en">Ask for this price</span></button>
             </div>
 
-            <p><a class="link" href="/gallery/theartofgreatness.html">Voir l'œuvre en détail</a></p>
+            <p><a class="link" href="/gallery/theartofgreatness.html"><span class="i18n-fr">Voir l'œuvre en détail</span><span class="i18n-en">See artwork details</span></a></p>
           </div>
 
           <div class="stack-carousel">
@@ -383,7 +405,7 @@
     <!-- Série 2 -->
     <section class="series">
       <div class="container">
-        <h4 class="series-title display reveal">L'appel</h4>
+        <h4 class="series-title display reveal">The Perfect LOVE</h4>
         <svg class="brushstroke thin w142 reveal" viewBox="0 0 142 14"><path d="M4 8 C 40 2, 90 12, 138 7"/></svg>
 
         <div class="stack-grid reveal">
@@ -403,21 +425,26 @@
           </div>
 
           <div class="stack-text">
-            <p class="rich">Pour elle, l’amour est vital, aussi impérieux que la respiration. Elle compose le numéro presque machinalement, comme si ses doigts connaissaient par cœur la mélodie des chiffres. Le cadran tourne lentement, chaque déclic résonnant comme un battement de cœur. À l’autre bout du fil, elle imagine déjà sa voix. Elle n’a besoin de rien d’autre : ni bijoux ni artifices, rien que lui. Son amour est simple mais profond, fidèle mais ardent.</p>
+            <p class="rich">
+              <span class="i18n-fr">La toile représente une femme nue, allongée dans sa baignoire avec une élégance assumée. Un tissu bleuté enveloppe ses cheveux, symbole d'intimité et de naturel. Ses lèvres rouges, ses lunettes noires et son téléphone écarlate deviennent les accents visuels qui révèlent son désir ardent de plaire et de séduire. Elle tient le combiné d'un vieux téléphone à cadran, appelant son homme, celui qui occupe toutes ses pensées.</span>
+              <span class="i18n-en">The painting represents a nude woman, lying in her bathtub with an assumed elegance. A bluish cloth wraps her hair, symbolizing intimacy and naturalness. Her red lips, black sunglasses and scarlet phone become the visual accents that reveal her ardent desire to please and seduce. She holds the receiver of an old rotary phone, calling her man, the one who occupies all her thoughts.</span>
+            </p>
 
             <div class="artwork-meta">
-              <span class="badge">Disponible</span>
-              <span class="specs">Acrylique sur toile · 60 × 120 cm</span>
+              <span class="badge sold"><span class="i18n-fr">Vendue</span><span class="i18n-en">Sold</span></span>
+              <span class="specs"><span class="i18n-fr">Acrylique sur toile · 60 × 90 cm</span><span class="i18n-en">Acrylic on canvas · 60 × 90 cm</span></span>
             </div>
             <div class="price-row">
-              <span class="price">190 €</span>
-              <button type="button" class="btn-quote" data-artwork="The Art of Greatness — 950 €">Demander ce prix</button>
+              <span class="price strike">720 €</span>
+              <button type="button" class="btn-quote" disabled><span class="i18n-fr">Œuvre vendue</span><span class="i18n-en">Sold out</span></button>
+              <button type="button" class="btn-quote" data-artwork="Une œuvre similaire à The Perfect LOVE"><span class="i18n-fr">Voir une pièce similaire</span><span class="i18n-en">See a similar piece</span></button>
             </div>
 
-            <p><a class="link" href="/gallery/L'appel.html">Voir l'œuvre en détail</a></p>
+            <p><a class="link" href="/gallery/ThePerfectLOVE.html"><span class="i18n-fr">Voir l'œuvre en détail</span><span class="i18n-en">See artwork details</span></a></p>
           </div>
+        </div>
 
-        <p class="coming reveal">the <em>next</em> Arrive bientôt...</p>
+        <p class="coming reveal"><span class="i18n-fr">la <em>suite</em> arrive bientôt...</span><span class="i18n-en">the <em>next</em> comes soon...</span></p>
       </div>
     </section>
 
@@ -426,15 +453,18 @@
       <div class="container">
         <div class="devis-inner reveal">
           <div class="section-title-wrap">
-            <h3 class="section-title display">Demande de devis</h3>
+            <h3 class="section-title display"><span class="i18n-fr">Demande de devis</span><span class="i18n-en">Request a quote</span></h3>
             <svg class="brushstroke w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
           </div>
-          <p class="devis-lead">Une œuvre vous intéresse ? Laissez-moi vos coordonnées, je reviens vers vous avec le prix, la disponibilité et les modalités.</p>
+          <p class="devis-lead">
+            <span class="i18n-fr">Une œuvre vous intéresse ? Laissez-moi vos coordonnées, je reviens vers vous avec le prix, la disponibilité et les modalités.</span>
+            <span class="i18n-en">Interested in a piece? Leave me your details and I'll get back to you with the price, availability and terms.</span>
+          </p>
 
           <form class="devis-form" id="devisForm">
             <div class="field-row">
               <div class="field">
-                <label for="devisNom">Nom</label>
+                <label for="devisNom"><span class="i18n-fr">Nom</span><span class="i18n-en">Name</span></label>
                 <input id="devisNom" name="nom" type="text" required>
               </div>
               <div class="field">
@@ -445,30 +475,36 @@
 
             <div class="field-row">
               <div class="field">
-                <label for="devisOeuvre">Œuvre concernée</label>
+                <label for="devisOeuvre"><span class="i18n-fr">Œuvre concernée</span><span class="i18n-en">Artwork of interest</span></label>
                 <select id="devisOeuvre" name="oeuvre">
-                  <option value="The Art of Greatness — 950 €">The Art of Greatness</option>
-                  <option value="Une œuvre similaire à The Perfect LOVE">L'appel</option>
-                  <option value="Autre / question générale">Autre / question générale</option>
+                  <option value="The Art of Greatness — 950 €">The Art of Greatness — 950 €</option>
+                  <option value="Une œuvre similaire à The Perfect LOVE" data-i18n-text-fr="Une œuvre similaire à The Perfect LOVE" data-i18n-text-en="A piece similar to The Perfect LOVE">Une œuvre similaire à The Perfect LOVE</option>
+                  <option value="Autre / question générale" data-i18n-text-fr="Autre / question générale" data-i18n-text-en="Other / general question">Autre / question générale</option>
                 </select>
               </div>
               <div class="field">
-                <label for="devisFormat">Format souhaité</label>
+                <label for="devisFormat"><span class="i18n-fr">Format souhaité</span><span class="i18n-en">Preferred format</span></label>
                 <select id="devisFormat" name="format">
-                  <option value="Œuvre originale">Œuvre originale</option>
-                  <option value="Tirage numéroté">Poster</option>
-                  <option value="Je ne sais pas encore">Je ne sais pas encore</option>
+                  <option value="Œuvre originale" data-i18n-text-fr="Œuvre originale" data-i18n-text-en="Original artwork">Œuvre originale</option>
+                  <option value="Tirage numéroté" data-i18n-text-fr="Tirage numéroté" data-i18n-text-en="Numbered print">Tirage numéroté</option>
+                  <option value="Je ne sais pas encore" data-i18n-text-fr="Je ne sais pas encore" data-i18n-text-en="Not sure yet">Je ne sais pas encore</option>
                 </select>
               </div>
             </div>
 
             <div class="field">
               <label for="devisMessage">Message</label>
-              <textarea id="devisMessage" name="message" placeholder="Dites-m'en un peu plus sur votre projet, vos délais, l'endroit où l'œuvre sera installée..."></textarea>
+              <textarea id="devisMessage" name="message"
+                data-i18n-placeholder-fr="Dites-m'en un peu plus sur votre projet, vos délais, l'endroit où l'œuvre sera installée..."
+                data-i18n-placeholder-en="Tell me a bit more about your project, your timeline, where the piece will be displayed..."
+                placeholder="Dites-m'en un peu plus sur votre projet, vos délais, l'endroit où l'œuvre sera installée..."></textarea>
             </div>
 
-            <button type="submit" class="devis-submit">Envoyer ma demande</button>
-            <p class="devis-note">L'envoi ouvre votre messagerie avec le message pré-rempli, à destination de t.loan.contact@gmail.com.</p>
+            <button type="submit" class="devis-submit"><span class="i18n-fr">Envoyer ma demande</span><span class="i18n-en">Send my request</span></button>
+            <p class="devis-note">
+              <span class="i18n-fr">L'envoi ouvre votre messagerie avec le message pré-rempli, à destination de t.loan.contact@gmail.com.</span>
+              <span class="i18n-en">Submitting opens your mail client with the message pre-filled, addressed to t.loan.contact@gmail.com.</span>
+            </p>
           </form>
         </div>
       </div>
@@ -478,18 +514,18 @@
       <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
       <div class="footer-top">
         <div class="col">
-          <h5 class="footer-title display">Page</h5>
+          <h5 class="footer-title display"><span class="i18n-fr">Page</span><span class="i18n-en">Pages</span></h5>
           <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
           <nav class="footer-links" aria-label="Pied de page - navigation">
-            <a href="https://loan881.github.io/loanturpin/">Home</a>
-            <a href="https://loan881.github.io/loanturpin/gallery">Gallery</a>
-            <a href="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
-            <a href="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
-            <a href="#devis">Demander un devis</a>
+            <a href="https://loan881.github.io/loanturpin/"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+            <a href="https://loan881.github.io/loanturpin/gallery"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+            <a href="https://loan881.github.io/loanturpin/theartstory"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+            <a href="https://loan881.github.io/loanturpin/contactme"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+            <a href="#devis"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
           </nav>
         </div>
         <div class="col">
-          <h5 class="footer-title display">Social Media</h5>
+          <h5 class="footer-title display"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h5>
           <svg class="brushstroke thin w82" viewBox="0 0 180 14"><path d="M4 8 C 40 2, 90 12, 176 7"/></svg>
           <div class="social-lines" style="margin-top:14px">
             <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
@@ -499,7 +535,7 @@
       </div>
 
       <div class="footer-contact">
-        <h5 class="footer-title display">Contact Me</h5>
+        <h5 class="footer-title display"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></h5>
         <svg class="brushstroke thin" style="margin:0 auto" viewBox="0 0 200 14"><path d="M4 8 C 50 2, 100 12, 196 7"/></svg>
         <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
         <div class="credit">
@@ -578,6 +614,13 @@
     btn.addEventListener('click', () => goToDevis(btn.dataset.artwork));
   });
 
+  // Préremplissage automatique si on arrive depuis une page de détail (?oeuvre=...#devis)
+  const urlParams = new URLSearchParams(window.location.search);
+  const oeuvreParam = urlParams.get('oeuvre');
+  if (oeuvreParam){
+    goToDevis(oeuvreParam);
+  }
+
   const devisForm = document.getElementById('devisForm');
   if (devisForm){
     devisForm.addEventListener('submit', (e) => {
@@ -601,5 +644,6 @@
     });
   }
 </script>
+<script src="lang.js"></script>
 </body>
 </html>
