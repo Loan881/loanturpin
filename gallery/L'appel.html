@@ -211,6 +211,22 @@
     .footer-contact a:hover{ color:#fff; }
     .credit{ width:220px; margin:18px auto 0; text-align:center; }
     .credit p{ font-size:12.5px; color:#8FA0BC; }
+
+    /* ---------- Sélecteur de langue ---------- */
+    .lang-switch{
+      display:flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line);
+      border-radius:999px; background:#fff;
+    }
+    .lang-switch button{
+      font-family:"Inter",sans-serif; font-size:11px; font-weight:600; letter-spacing:.04em;
+      border:none; background:transparent; padding:6px 11px; border-radius:999px; cursor:pointer;
+      color:var(--muted); transition: background .2s, color .2s;
+    }
+    .lang-switch button.active{ background:var(--navy); color:#fff; }
+    html[data-lang="en"] .i18n-fr{ display:none !important; }
+    html:not([data-lang="en"]) .i18n-en{ display:none !important; }
+    .topbar-right{ position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:10px; }
+    .menu-btn{ position:static; }
   </style>
 </head>
 <body>
@@ -221,17 +237,17 @@
 <aside class="drawer" aria-label="Menu latéral">
   <div class="drawer-inner">
     <h1 class="brand display">TURPIN Loan</h1>
-    <div class="brand-sub">Peintures &amp; récits visuels</div>
+    <div class="brand-sub"><span class="i18n-fr">Peintures &amp; récits visuels</span><span class="i18n-en">Paintings &amp; visual stories</span></div>
     <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
     <nav class="drawer-nav" aria-label="Navigation latérale">
-      <a href="https://loan881.github.io/loanturpin/" class="nav-link">Home</a>
-      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link">Gallery</a>
-      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link">The Art Story</a>
-      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link">Contact Me.</a>
-      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link">Demander un devis</a>
+      <a href="https://loan881.github.io/loanturpin/" class="nav-link"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
     </nav>
     <div class="drawer-spacer"></div>
-    <h2 class="footer-title" style="color:var(--navy)">Social Media</h2>
+    <h2 class="footer-title" style="color:var(--navy)"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h2>
     <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
     <div class="social-lines" style="margin-top:14px">
       <div>Instagram : <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
@@ -249,10 +265,16 @@
       </a>
     </div>
     <h1 class="title display">The Perfect LOVE</h1>
-    <div class="menu-btn">
-      <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
-        <span class="burger"><span></span><span></span><span></span></span>
-      </label>
+    <div class="topbar-right">
+      <div class="lang-switch" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="menu-btn">
+        <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
+          <span class="burger"><span></span><span></span><span></span></span>
+        </label>
+      </div>
     </div>
   </div>
 </header>
@@ -274,46 +296,75 @@
 
 <section class="content">
   <div class="container">
-    <div class="kicker reveal">Pièce N°02</div>
+    <div class="kicker reveal"><span class="i18n-fr">Pièce N°02</span><span class="i18n-en">Piece No. 02</span></div>
     <h2 class="h2 display reveal">Description</h2>
     <svg class="brushstroke w225 reveal" viewBox="0 0 225 14"><path d="M4 8 C 60 2, 130 12, 220 7"/></svg>
 
     <p class="prose reveal">
-      A beautiful naked woman lies in her bathtub, unable to resist the urge to call her man.
-      The old red phone in her hand becomes the link between longing and silence — the echo of a love that once felt perfect, yet uncertain.
-      Around her, the warmth of the water meets the chill of solitude.
-      <br><br>
-      The red of the phone burns like the memory of passion, while the blues and whites whisper fragility and loss.
-      She is beauty, desire, and doubt — all in one single breath.
+      <span class="i18n-fr">
+        Une belle femme nue est allongée dans sa baignoire, incapable de résister à l'envie d'appeler son homme.
+        Le vieux téléphone rouge dans sa main devient le lien entre l'attente et le silence — l'écho d'un amour qui semblait autrefois parfait, mais incertain.
+        Autour d'elle, la chaleur de l'eau rencontre le froid de la solitude.
+        <br><br>
+        Le rouge du téléphone brûle comme le souvenir de la passion, tandis que les bleus et les blancs murmurent la fragilité et la perte.
+        Elle est beauté, désir et doute — le tout en un seul souffle.
+      </span>
+      <span class="i18n-en">
+        A beautiful naked woman lies in her bathtub, unable to resist the urge to call her man.
+        The old red phone in her hand becomes the link between longing and silence — the echo of a love that once felt perfect, yet uncertain.
+        Around her, the warmth of the water meets the chill of solitude.
+        <br><br>
+        The red of the phone burns like the memory of passion, while the blues and whites whisper fragility and loss.
+        She is beauty, desire, and doubt — all in one single breath.
+      </span>
     </p>
 
     <div class="artwork-meta reveal">
-      <span class="badge sold">Vendue</span>
-      <span class="specs">Acrylique sur toile · 60 × 90 cm</span>
+      <span class="badge sold"><span class="i18n-fr">Vendue</span><span class="i18n-en">Sold</span></span>
+      <span class="specs"><span class="i18n-fr">Acrylique sur toile · 60 × 90 cm</span><span class="i18n-en">Acrylic on canvas · 60 × 90 cm</span></span>
     </div>
     <div class="price-row reveal">
       <span class="price strike">720 €</span>
-      <a class="btn-quote ghost" href="https://loan881.github.io/loanturpin/gallery#devis">Voir une pièce similaire</a>
+      <a class="btn-quote ghost" href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Voir une pièce similaire</span><span class="i18n-en">See a similar piece</span></a>
     </div>
 
     <div class="card story reveal">
       <h3 class="display">Story</h3>
       <p class="prose">
-        It began as a dream — a perfect love, full of promise and truth.
-        She loved with sincerity, with faith, with everything she was. But what happens when love flows only one way?
-        <br><br>
-        This story is that of a relationship that never truly began.
-        A love that started beautifully, yet never received an answer — a question left hanging in eternity.
-        Was she loved in return? Or was she simply the echo of her own hope?
-        <br><br>
-        The truth will never be known.
-        She called once more, not to demand, but to remember.
-        The old red phone, trembling between her hands, became the voice of everything unsaid.
-        <br><br>
-        There was no ending — only silence.
-        No betrayal, no drama — just the quiet ache of what could have been.
-        <br><br>
-        <em>The Perfect LOVE</em> is not the story of love fulfilled, but of a love that remained pure, untouched — because it never had the chance to exist.
+        <span class="i18n-fr">
+          Tout a commencé comme un rêve — un amour parfait, plein de promesses et de vérité.
+          Elle a aimé avec sincérité, avec foi, avec tout ce qu'elle était. Mais que se passe-t-il quand l'amour ne circule que dans un sens ?
+          <br><br>
+          Cette histoire est celle d'une relation qui n'a jamais vraiment commencé.
+          Un amour qui a débuté magnifiquement, mais qui n'a jamais reçu de réponse — une question restée en suspens pour l'éternité.
+          Était-elle aimée en retour ? Ou n'était-elle que l'écho de son propre espoir ?
+          <br><br>
+          La vérité ne sera jamais connue.
+          Elle a appelé une fois de plus, non pour exiger, mais pour se souvenir.
+          Le vieux téléphone rouge, tremblant entre ses mains, est devenu la voix de tout ce qui n'a jamais été dit.
+          <br><br>
+          Il n'y a pas eu de fin — seulement le silence.
+          Pas de trahison, pas de drame — juste la douleur tranquille de ce qui aurait pu être.
+          <br><br>
+          <em>The Perfect LOVE</em> n'est pas l'histoire d'un amour accompli, mais celle d'un amour resté pur, intact — parce qu'il n'a jamais eu la chance d'exister.
+        </span>
+        <span class="i18n-en">
+          It began as a dream — a perfect love, full of promise and truth.
+          She loved with sincerity, with faith, with everything she was. But what happens when love flows only one way?
+          <br><br>
+          This story is that of a relationship that never truly began.
+          A love that started beautifully, yet never received an answer — a question left hanging in eternity.
+          Was she loved in return? Or was she simply the echo of her own hope?
+          <br><br>
+          The truth will never be known.
+          She called once more, not to demand, but to remember.
+          The old red phone, trembling between her hands, became the voice of everything unsaid.
+          <br><br>
+          There was no ending — only silence.
+          No betrayal, no drama — just the quiet ache of what could have been.
+          <br><br>
+          <em>The Perfect LOVE</em> is not the story of love fulfilled, but of a love that remained pure, untouched — because it never had the chance to exist.
+        </span>
       </p>
     </div>
 
@@ -321,8 +372,8 @@
       <div class="card">
         <h3 class="display">Design &amp; Conception</h3>
         <p class="prose">
-          The red phone symbolizes connection — a desperate bridge between two hearts that never truly met.
-          The colors — red for passion, white for purity, blue for doubt — mirror the emotional tension between love and absence.
+          <span class="i18n-fr">Le téléphone rouge symbolise le lien — un pont désespéré entre deux cœurs qui ne se sont jamais vraiment rencontrés. Les couleurs — rouge pour la passion, blanc pour la pureté, bleu pour le doute — reflètent la tension émotionnelle entre l'amour et l'absence.</span>
+          <span class="i18n-en">The red phone symbolizes connection — a desperate bridge between two hearts that never truly met. The colors — red for passion, white for purity, blue for doubt — mirror the emotional tension between love and absence.</span>
         </p>
       </div>
       <div class="media">
@@ -337,8 +388,8 @@
       <div class="card">
         <h3 class="display">Realization</h3>
         <p class="prose">
-          The painting is built on two canvases — two parts that complete each other without ever truly joining.
-          Every brushstroke captures the fragility of a feeling that lived only in the space between silence and hope.
+          <span class="i18n-fr">La toile est construite sur deux panneaux — deux parties qui se complètent sans jamais vraiment se rejoindre. Chaque coup de pinceau capture la fragilité d'un sentiment qui n'a vécu que dans l'espace entre le silence et l'espoir.</span>
+          <span class="i18n-en">The painting is built on two canvases — two parts that complete each other without ever truly joining. Every brushstroke captures the fragility of a feeling that lived only in the space between silence and hope.</span>
         </p>
       </div>
     </div>
@@ -347,8 +398,8 @@
       <div class="card">
         <h3 class="display">Final Touch</h3>
         <p class="prose">
-          The red lips, the old phone, the gaze behind the sunglasses — all whisper the same question: could it have worked?
-          We will never know. That is what makes it perfect — because it remains eternal, untouched, unanswered.
+          <span class="i18n-fr">Les lèvres rouges, le vieux téléphone, le regard derrière les lunettes de soleil — tout murmure la même question : aurait-ce pu marcher ? Nous ne le saurons jamais. C'est ce qui le rend parfait — car il reste éternel, intact, sans réponse.</span>
+          <span class="i18n-en">The red lips, the old phone, the gaze behind the sunglasses — all whisper the same question: could it have worked? We will never know. That is what makes it perfect — because it remains eternal, untouched, unanswered.</span>
         </p>
       </div>
       <div class="media">
@@ -357,10 +408,13 @@
     </div>
 
     <div class="cta reveal">
-      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">Cette œuvre a trouvé preneur, mais une pièce dans le même esprit peut être commandée ou une autre peut vous être proposée.</p>
+      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">
+        <span class="i18n-fr">Cette œuvre a trouvé preneur, mais une pièce dans le même esprit peut être commandée ou une autre peut vous être proposée.</span>
+        <span class="i18n-en">This piece has found a buyer, but a work in the same spirit can be commissioned, or another can be suggested to you.</span>
+      </p>
       <div class="buttons">
-        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis">Demander une pièce similaire</a>
-        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Question%20sur%20%22The%20Perfect%20LOVE%22">Poser une question</a>
+        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Demander une pièce similaire</span><span class="i18n-en">Ask for a similar piece</span></a>
+        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Question%20sur%20%22The%20Perfect%20LOVE%22"><span class="i18n-fr">Poser une question</span><span class="i18n-en">Ask a question</span></a>
       </div>
     </div>
   </div>
@@ -370,18 +424,18 @@
   <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
   <div class="footer-top">
     <div class="col">
-      <h5 class="footer-title display">Page</h5>
+      <h5 class="footer-title display"><span class="i18n-fr">Page</span><span class="i18n-en">Pages</span></h5>
       <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
       <nav class="footer-links" aria-label="Pied de page - navigation">
-        <a href="https://loan881.github.io/loanturpin/">Home</a>
-        <a href="https://loan881.github.io/loanturpin/gallery">Gallery</a>
-        <a href="https://loan881.github.io/loanturpin/theartstory">The Art Story</a>
-        <a href="https://loan881.github.io/loanturpin/contactme">Contact Me.</a>
-        <a href="https://loan881.github.io/loanturpin/gallery#devis">Demander un devis</a>
+        <a href="https://loan881.github.io/loanturpin/"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+        <a href="https://loan881.github.io/loanturpin/theartstory"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+        <a href="https://loan881.github.io/loanturpin/contactme"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
       </nav>
     </div>
     <div class="col">
-      <h5 class="footer-title display">Social Media</h5>
+      <h5 class="footer-title display"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h5>
       <svg class="brushstroke thin w82" viewBox="0 0 180 14"><path d="M4 8 C 40 2, 90 12, 176 7"/></svg>
       <div class="social-lines" style="margin-top:14px">
         <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
@@ -391,7 +445,7 @@
   </div>
 
   <div class="footer-contact">
-    <h5 class="footer-title display">Contact Me</h5>
+    <h5 class="footer-title display"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></h5>
     <svg class="brushstroke thin" style="margin:0 auto" viewBox="0 0 200 14"><path d="M4 8 C 50 2, 100 12, 196 7"/></svg>
     <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
     <div class="credit">
@@ -520,5 +574,6 @@
     setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
   })();
 </script>
+<script src="../lang.js"></script>
 </body>
 </html>
