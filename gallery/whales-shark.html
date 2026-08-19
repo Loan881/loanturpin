@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ocean Spirit — TURPIN Loan</title>
+
+  <!-- Favicons (à garder ou remplacer) -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="android-chrome-512x512.png" sizes="512x512">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,100;0,400;0,600;0,700;0,900;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --paper:#FFFFFF;
+      --paper-deep:#EEF0F3;
+      --ink:#151B24;
+      --navy:#132540;
+      --navy-deep:#0B1729;
+      --accent:#7C93B4;
+      --muted:#6B7280;
+      --line: rgba(19,37,64,.14);
+      --radius:14px;
+      --container: 1120px;
+      --pad-x: 24px;
+      --ease: cubic-bezier(.22,.61,.36,1);
+      --tile: 62vh;
+    }
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    html,body{ height:100%; overflow-x:hidden; }
+    body{
+      margin:0; font-family:"Inter", sans-serif;
+      background:var(--paper); color:var(--ink); line-height:1.55;
+    }
+    h1,h2,h3,h4,h5,.display{ font-family:"Playfair Display", serif; }
+    img{ max-width:100%; height:auto; display:block; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--pad-x); }
+    ::selection{ background: var(--navy); color:#fff; }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+    }
+
+    /* Signature : animated ink stroke */
+    .brushstroke{ width:100%; height:14px; overflow:visible; display:block; }
+    .brushstroke path{
+      fill:none; stroke:var(--navy); stroke-width:3; stroke-linecap:round;
+      stroke-dasharray:600; stroke-dashoffset:600; transition: stroke-dashoffset 1.1s var(--ease);
+    }
+    .brushstroke.thin path{ stroke-width:1.6; stroke:var(--ink); opacity:.4; }
+    .brushstroke.in-view path{ stroke-dashoffset:0; }
+    .brushstroke.w30{ max-width:110px; }
+    .brushstroke.w225{ max-width:225px; }
+    .site-footer .brushstroke.thin path{ stroke:#fff; opacity:.3; }
+
+    /* Header */
+    header{
+      background:rgba(255,255,255,.86); backdrop-filter:saturate(160%) blur(10px);
+      position:sticky; top:0; z-index:40; border-bottom:1px solid var(--line);
+    }
+    .topbar{ position:relative; display:flex; align-items:center; justify-content:center; gap:12px; padding:0; min-height:72px; transition:min-height .35s var(--ease); }
+    header.shrink .topbar{ min-height:52px; }
+    .back{ position:absolute; left:0; top:50%; transform:translateY(-50%); }
+    .back a{
+      display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px;
+      border-radius:50%; cursor:pointer; transition:background .2s;
+    }
+    .back a:hover{ background:var(--paper-deep); }
+    .back a svg{ width:22px; height:22px; stroke:var(--navy); fill:none; stroke-width:2; }
+    .title{
+      margin:0; font-weight:600; font-size:20px; letter-spacing:.02em; text-align:center;
+      white-space:nowrap; color:var(--navy);
+    }
+    .menu-btn{ position:absolute; right:0; top:50%; transform:translateY(-50%); }
+    .icon-btn{
+      width:44px; height:44px; display:inline-grid; place-items:center; border-radius:50%;
+      border:1px solid transparent; cursor:pointer; background:none;
+    }
+    .icon-btn:hover{ background:var(--paper-deep); border-color:var(--line); }
+    .burger{ position:relative; width:20px; height:14px; }
+    .burger span{
+      position:absolute; left:0; width:100%; height:1.6px; background:var(--navy);
+      transition: transform .3s var(--ease), opacity .2s var(--ease), top .3s var(--ease);
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:6px; }
+    .burger span:nth-child(3){ top:12px; }
+    #drawer-toggle:checked ~ header .burger span:nth-child(1){ top:6px; transform:rotate(45deg); }
+    #drawer-toggle:checked ~ header .burger span:nth-child(2){ opacity:0; }
+    #drawer-toggle:checked ~ header .burger span:nth-child(3){ top:6px; transform:rotate(-45deg); }
+
+    /* Drawer */
+    .drawer{
+      position:fixed; inset:0 auto 0 0; width:340px; max-width:86vw;
+      background:var(--paper); border-right:1px solid var(--line);
+      transform: translateX(-100%); transition: transform .45s var(--ease); z-index:60;
+    }
+    #drawer-toggle:checked ~ .drawer{ transform: translateX(0); }
+    #drawer-toggle:checked ~ .backdrop{ opacity:1; pointer-events:auto; }
+    .drawer-inner{ height:100%; padding:28px; display:flex; flex-direction:column; }
+    .brand{ font-weight:900; font-size:30px; margin:56px 0 4px; color:var(--navy); }
+    .brand-sub{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+    .drawer-nav{ display:grid; gap:6px; margin:36px 0; }
+    .nav-link{
+      font-weight:600; font-size:24px; line-height:1.5; opacity:0; transform:translateX(-14px);
+      transition: opacity .4s var(--ease), transform .4s var(--ease), color .25s;
+    }
+    #drawer-toggle:checked ~ .drawer .nav-link{ opacity:1; transform:translateX(0); }
+    .drawer-nav .nav-link:nth-child(1){ transition-delay:.08s; }
+    .drawer-nav .nav-link:nth-child(2){ transition-delay:.14s; }
+    .drawer-nav .nav-link:nth-child(3){ transition-delay:.20s; }
+    .drawer-nav .nav-link:nth-child(4){ transition-delay:.26s; }
+    .drawer-nav .nav-link:nth-child(5){ transition-delay:.32s; }
+    .nav-link:hover{ color:var(--navy); }
+    .drawer-spacer{ flex:1; }
+    .social-lines{ display:grid; gap:10px; font-size:15px; }
+    .social-lines a:hover{ color:var(--navy); }
+    .backdrop{
+      position:fixed; inset:0; background:rgba(11,23,41,.32); z-index:55;
+      opacity:0; pointer-events:none; transition:opacity .35s;
+    }
+
+    /* Reveal on scroll */
+    .reveal{ opacity:0; transform:translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+    .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+    /* Marquee */
+    .hero-marquee{ position:relative; width:100%; background:var(--paper-deep); }
+    .hero-marquee::before, .hero-marquee::after{
+      content:""; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
+    }
+    .hero-marquee::before{ left:0; background:linear-gradient(90deg, var(--paper-deep), transparent); }
+    .hero-marquee::after{ right:0; background:linear-gradient(-90deg, var(--paper-deep), transparent); }
+    .marquee{
+      height:var(--tile); min-height:var(--tile); overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none; touch-action:pan-x;
+      cursor:grab; user-select:none; overscroll-behavior:contain;
+    }
+    .marquee::-webkit-scrollbar{ display:none; }
+    .marquee.dragging{ cursor:grabbing; }
+    .track{ display:flex; gap:0; align-items:center; }
+    .group{ display:flex; gap:0; flex-shrink:0; }
+    .group img{ height:var(--tile); width:var(--tile); aspect-ratio:1/1; object-fit:cover; flex:0 0 auto; filter:saturate(.92); }
+
+    /* Sections */
+    section.content{ padding:70px 0; }
+    .h2{ font-size:26px; color:var(--navy); margin:0 0 14px; }
+    .kicker{ font-family:"Inter",sans-serif; font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+    .prose{ font-size:16.5px; line-height:1.9; color:#232A33; max-width:760px; }
+
+    .artwork-meta{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:22px 0 6px; }
+    .badge{ font-family:"Inter",sans-serif; font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:999px; border:1px solid var(--navy); color:var(--navy); }
+    .badge.sold{ border-color:var(--muted); color:var(--muted); }
+    .specs{ font-size:13.5px; color:var(--muted); }
+    .price-row{ display:flex; align-items:center; gap:18px; margin-top:16px; flex-wrap:wrap; }
+    .price{ font-family:"Playfair Display",serif; font-size:22px; color:var(--navy); }
+    .price.strike{ color:var(--muted); text-decoration:line-through; text-decoration-color:var(--muted); }
+    .btn-quote{
+      font-family:"Inter",sans-serif; font-size:13.5px; font-weight:600; letter-spacing:.03em;
+      background:var(--navy); color:#fff; border:1px solid var(--navy); padding:11px 22px; border-radius:999px;
+      cursor:pointer; transition: background .25s var(--ease), transform .25s var(--ease);
+    }
+    .btn-quote:hover{ background:#0B1729; transform:translateY(-1px); }
+    .btn-quote.ghost{ background:transparent; color:var(--navy); }
+    .btn-quote.ghost:hover{ background:var(--paper-deep); }
+
+    .card.story{ padding:44px 0 0; max-width:760px; }
+    .card.story h3{ font-size:21px; color:var(--navy); margin:0 0 10px; }
+
+    .block{
+      display:grid; grid-template-columns:1fr 1fr; align-items:center;
+      gap:clamp(24px,4vw,56px); margin:clamp(50px,7vw,86px) 0;
+    }
+    .block h3{ font-size:21px; color:var(--navy); margin:0 0 12px; }
+    .block .prose{ max-width:none; }
+    .media{ display:flex; justify-content:center; }
+    .media img{ border-radius:var(--radius); width:100%; max-width:420px; transition: transform 1s var(--ease); filter:saturate(.92); }
+    .media:hover img{ transform:scale(1.03); }
+    .block.realisation{ grid-template-areas:"media card"; }
+    .block.realisation .media{ grid-area:media; }
+    .block.realisation .card{ grid-area:card; }
+
+    @media (max-width:768px){
+      :root{ --tile:56vh; }
+      .block{ grid-template-columns:1fr; }
+      .block.realisation{ grid-template-areas:"card" "media"; }
+      .title{ font-size:17px; }
+    }
+
+    .cta{ text-align:center; margin-top:60px; padding-top:36px; border-top:1px solid var(--line); }
+    .cta .buttons{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:10px; }
+
+    /* Footer */
+    .site-footer{ padding:40px 0 26px; background:var(--navy-deep); color:#EAEEF4; }
+    .footer-top{ display:flex; gap:20px; justify-content:space-around; align-items:flex-start; padding:14px 0 26px; flex-wrap:wrap; }
+    .footer-title{ font-weight:700; font-size:17px; margin:6px 0; color:#fff; }
+    .footer-links{ display:grid; gap:12px; margin-top:16px; }
+    .footer-links a, .footer .social-lines a{ font-weight:500; font-size:15px; color:#C7D2E0; transition:color .2s; }
+    .footer-links a:hover, .footer .social-lines a:hover{ color:#fff; }
+    .footer-contact{ width:min(760px,100%); margin:0 auto; text-align:center; padding:0 20px 22px; }
+    .footer-contact .line{ font-size:15px; display:flex; gap:8px; justify-content:center; color:#C7D2E0; }
+    .footer-contact a:hover{ color:#fff; }
+    .credit{ width:220px; margin:18px auto 0; text-align:center; }
+    .credit p{ font-size:12.5px; color:#8FA0BC; }
+
+    /* Language Switcher */
+    .lang-switch{
+      display:flex; align-items:center; gap:2px; padding:3px; border:1px solid var(--line);
+      border-radius:999px; background:#fff;
+    }
+    .lang-switch button{
+      font-family:"Inter",sans-serif; font-size:11px; font-weight:600; letter-spacing:.04em;
+      border:none; background:transparent; padding:6px 11px; border-radius:999px; cursor:pointer;
+      color:var(--muted); transition: background .2s, color .2s;
+    }
+    .lang-switch button.active{ background:var(--navy); color:#fff; }
+    html[data-lang="en"] .i18n-fr{ display:none !important; }
+    html:not([data-lang="en"]) .i18n-en{ display:none !important; }
+    .topbar-right{ position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; align-items:center; gap:10px; }
+    .menu-btn{ position:static; }
+  </style>
+</head>
+
+<body>
+
+<input id="drawer-toggle" type="checkbox" hidden>
+
+<!-- Drawer -->
+<aside class="drawer" aria-label="Menu latéral">
+  <div class="drawer-inner">
+    <h1 class="brand display">TURPIN Loan</h1>
+    <div class="brand-sub"><span class="i18n-fr">Peintures &amp; récits visuels</span><span class="i18n-en">Paintings &amp; visual stories</span></div>
+    <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
+    <nav class="drawer-nav" aria-label="Navigation latérale">
+      <a href="https://loan881.github.io/loanturpin/" class="nav-link"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery" class="nav-link"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+      <a href="https://loan881.github.io/loanturpin/theartstory" class="nav-link"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+      <a href="https://loan881.github.io/loanturpin/contactme" class="nav-link"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+      <a href="https://loan881.github.io/loanturpin/gallery#devis" class="nav-link"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
+    </nav>
+    <div class="drawer-spacer"></div>
+    <h2 class="footer-title" style="color:var(--navy)"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h2>
+    <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
+    <div class="social-lines" style="margin-top:14px">
+      <div>Instagram : <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+      <div>TikTok : <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener">turpinloanart</a></div>
+    </div>
+  </div>
+</aside>
+<label class="backdrop" for="drawer-toggle" aria-hidden="true"></label>
+
+<header id="siteHeader">
+  <div class="container topbar">
+    <div class="back">
+      <a href="https://loan881.github.io/loanturpin/gallery" aria-label="Retour à la galerie" title="Retour à la galerie">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </a>
+    </div>
+    <h1 class="title display">Ocean Spirit</h1>
+    <div class="topbar-right">
+      <div class="lang-switch" role="group" aria-label="Langue">
+        <button type="button" data-lang="fr" class="active">FR</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <div class="menu-btn">
+        <label class="icon-btn" for="drawer-toggle" aria-label="Menu">
+          <span class="burger"><span></span><span></span><span></span></span>
+        </label>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Marquee : Remplace les images par tes photos de planche -->
+<div class="hero-marquee" aria-label="Bandeau d'images de la planche de surf">
+  <div class="marquee" id="marquee">
+    <div class="track" id="track">
+      <div class="group" id="group-source">
+        <img src="images/ocean-spirit-1-2000.jpg" srcset="images/ocean-spirit-1-1000.jpg 1000w, images/ocean-spirit-1-2000.jpg 2000w" alt="Ocean Spirit — vue 1" decoding="async" fetchpriority="high">
+        <img src="images/ocean-spirit-2-2000.jpg" srcset="images/ocean-spirit-2-1000.jpg 1000w, images/ocean-spirit-2-2000.jpg 2000w" alt="Ocean Spirit — vue 2" decoding="async">
+        <img src="images/ocean-spirit-3-2000.jpg" srcset="images/ocean-spirit-3-1000.jpg 1000w, images/ocean-spirit-3-2000.jpg 2000w" alt="Ocean Spirit — vue 3" decoding="async">
+        <img src="images/ocean-spirit-4-2000.jpg" srcset="images/ocean-spirit-4-1000.jpg 1000w, images/ocean-spirit-4-2000.jpg 2000w" alt="Ocean Spirit — vue 4" decoding="async">
+        <img src="images/ocean-spirit-5-2000.jpg" srcset="images/ocean-spirit-5-1000.jpg 1000w, images/ocean-spirit-5-2000.jpg 2000w" alt="Ocean Spirit — vue 5" decoding="async">
+        <img src="images/ocean-spirit-6-2000.jpg" srcset="images/ocean-spirit-6-1000.jpg 1000w, images/ocean-spirit-6-2000.jpg 2000w" alt="Ocean Spirit — vue 6" decoding="async">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="content">
+  <div class="container">
+    <!-- Pièce N° -->
+    <div class="kicker reveal"><span class="i18n-fr">Pièce N°02</span><span class="i18n-en">Piece No. 02</span></div>
+    <h2 class="h2 display reveal">Description</h2>
+    <svg class="brushstroke w225 reveal" viewBox="0 0 225 14"><path d="M4 8 C 60 2, 130 12, 220 7"/></svg>
+
+    <!-- Description principale -->
+    <p class="prose reveal">
+      <span class="i18n-fr">
+        « Ocean Spirit » incarne l'harmonie entre l'artiste et l'océan. Chaque courbe, chaque texture et chaque détail de cette planche de surf racontent une histoire de passion, de précision et de connexion profonde avec les vagues. Conçue pour glisser avec élégance, elle est bien plus qu'un simple équipement : c'est une extension de l'âme du surfeur, une œuvre d'art fonctionnelle qui transforme chaque session en une expérience unique.
+      </span>
+      <span class="i18n-en">
+        "Ocean Spirit" embodies the harmony between the artist and the ocean. Every curve, every texture, and every detail of this surfboard tell a story of passion, precision, and a deep connection with the waves. Designed to glide with elegance, it is much more than just equipment: it is an extension of the surfer's soul, a functional work of art that transforms every session into a unique experience.
+      </span>
+    </p>
+
+    <!-- Métadonnées (prix, disponibilité, specs) -->
+    <div class="artwork-meta reveal">
+      <span class="badge"><span class="i18n-fr">Disponible</span><span class="i18n-en">Available</span></span>
+      <span class="specs"><span class="i18n-fr">Époxy · 6'0" × 20" × 2.5" · Shortboard</span><span class="i18n-en">Epoxy · 6'0" × 20" × 2.5" · Shortboard</span></span>
+    </div>
+    <div class="price-row reveal">
+      <span class="price">1200 €</span>
+      <button type="button" class="btn-quote" id="quoteBtn"><span class="i18n-fr">Demander ce prix</span><span class="i18n-en">Ask for this price</span></button>
+    </div>
+
+    <!-- Story -->
+    <div class="card story reveal">
+      <h3 class="display">Story</h3>
+      <p class="prose">
+        <span class="i18n-fr">
+          L'idée d'"Ocean Spirit" est née d'une vague parfaite, un matin où la lumière dansait sur l'eau comme une invitation. J'ai voulu capturer cette sensation de liberté absolue, ce moment où le surfeur et l'océan ne font plus qu'un.
+          <br><br>
+          Chaque étape de la fabrication a été une méditation : du choix du bois léger au ponçage final, en passant par le façonnage précis des rails et du rocker. J'ai travaillé avec patience, laissant la forme émerger naturellement, comme sculptée par les vagues elles-mêmes.
+          <br><br>
+          Le design de cette planche est inspiré par les courbes organiques des vagues et la fluidité des mouvements du surfeur. Les finitions, soigneusement choisies, reflètent la lumière de manière subtile, rappelant les reflets changeants de l'eau sous le soleil.
+          <br><br>
+          "Ocean Spirit" n'est pas seulement une planche de surf. C'est une promesse : celle de rides inoubliables, de connexion avec la nature, et de moments de pure joie où tout semble possible.
+        </span>
+        <span class="i18n-en">
+          The idea for "Ocean Spirit" was born from a perfect wave, one morning when the light danced on the water like an invitation. I wanted to capture that feeling of absolute freedom, that moment when the surfer and the ocean become one.
+          <br><br>
+          Each step of the manufacturing process was a meditation: from selecting the lightweight wood to the final sanding, including the precise shaping of the rails and rocker. I worked patiently, letting the shape emerge naturally, as if sculpted by the waves themselves.
+          <br><br>
+          The design of this board is inspired by the organic curves of the waves and the fluidity of the surfer's movements. The carefully chosen finishes subtly reflect light, reminiscent of the changing reflections of water under the sun.
+          <br><br>
+          "Ocean Spirit" is not just a surfboard. It is a promise: that of unforgettable rides, connection with nature, and moments of pure joy where anything seems possible.
+        </span>
+      </p>
+    </div>
+
+    <!-- Design & Conception -->
+    <div class="block reveal">
+      <div class="card">
+        <h3 class="display">Design &amp; Conception</h3>
+        <p class="prose">
+          <span class="i18n-fr">
+            Le design d'"Ocean Spirit" allie performance et esthétique. La forme shortboard offre maniabilité et réactivité, tandis que le rocker modéré permet une entrée facile dans les vagues. Les rails fins favorisent la vitesse, et le nose légèrement pointu améliore le contrôle dans les sections critiques.
+          </span>
+          <span class="i18n-en">
+            The design of "Ocean Spirit" combines performance and aesthetics. The shortboard shape offers maneuverability and responsiveness, while the moderate rocker allows for easy wave entry. The thin rails promote speed, and the slightly pointed nose improves control in critical sections.
+          </span>
+        </p>
+      </div>
+      <div class="media">
+        <img src="images/ocean-spirit-design.jpg" alt="Design & Conception — croquis et préparation" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <!-- Réalisation -->
+    <div class="block realisation reveal">
+      <div class="media">
+        <img src="images/ocean-spirit-making.jpg" alt="Réalisation — façonnage de la planche" loading="lazy" decoding="async">
+      </div>
+      <div class="card">
+        <h3 class="display">Réalisation</h3>
+        <p class="prose">
+          <span class="i18n-fr">
+            La fabrication d'"Ocean Spirit" a suivi un processus artisanal rigoureux. Le cœur en mousse EPS a été façonné avec précision, puis recouvert de couches de fibre de verre et de résine époxy pour une résistance et une légèreté optimales. Chaque étape a été réalisée à la main, avec une attention particulière portée aux détails.
+          </span>
+          <span class="i18n-en">
+            The manufacturing of "Ocean Spirit" followed a rigorous artisanal process. The EPS foam core was shaped with precision, then covered with layers of fiberglass and epoxy resin for optimal strength and lightness. Each step was carried out by hand, with particular attention to detail.
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Final Touch -->
+    <div class="block reveal">
+      <div class="card">
+        <h3 class="display">Final Touch</h3>
+        <p class="prose">
+          <span class="i18n-fr">
+            Les finitions d'"Ocean Spirit" sont le résultat d'heures de ponçage et de polissage minutieux. La surface lisse et brillante non seulement améliore les performances hydrodynamiques, mais donne également à la planche son aspect élégant et professionnel. Le logo discret, placé près du tail, est la signature finale de cette création unique.
+          </span>
+          <span class="i18n-en">
+            The finishes of "Ocean Spirit" are the result of hours of meticulous sanding and polishing. The smooth, glossy surface not only improves hydrodynamic performance but also gives the board its elegant and professional appearance. The discreet logo, placed near the tail, is the final signature of this unique creation.
+          </span>
+        </p>
+      </div>
+      <div class="media">
+        <img src="images/ocean-spirit-finish.jpg" alt="Final Touch — détails des finitions" loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta reveal">
+      <p class="prose" style="margin:0 auto;text-align:center;color:var(--muted)">
+        <span class="i18n-fr">Une question, une envie d'essayer cette planche, ou une proposition ? Écrivez-moi.</span>
+        <span class="i18n-en">A question, a desire to try this board, or an offer? Write to me.</span>
+      </p>
+      <div class="buttons">
+        <a class="btn-quote" href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Faire une demande de devis</span><span class="i18n-en">Request a quote</span></a>
+        <a class="btn-quote ghost" href="mailto:t.loan.contact@gmail.com?subject=Information%20about%20%22Ocean%20Spirit%22%20Surfboard"><span class="i18n-fr">Écrire directement par e-mail</span><span class="i18n-en">Email me directly</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact" class="site-footer" role="contentinfo">
+  <svg class="brushstroke thin" viewBox="0 0 300 14"><path d="M4 8 C 60 2, 120 12, 180 6 S 260 4, 296 9"/></svg>
+  <div class="footer-top">
+    <div class="col">
+      <h5 class="footer-title display"><span class="i18n-fr">Page</span><span class="i18n-en">Pages</span></h5>
+      <svg class="brushstroke thin w30" viewBox="0 0 120 14"><path d="M4 8 C 30 2, 60 12, 116 7"/></svg>
+      <nav class="footer-links" aria-label="Pied de page - navigation">
+        <a href="https://loan881.github.io/loanturpin/"><span class="i18n-fr">Accueil</span><span class="i18n-en">Home</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery"><span class="i18n-fr">Galerie</span><span class="i18n-en">Gallery</span></a>
+        <a href="https://loan881.github.io/loanturpin/theartstory"><span class="i18n-fr">Mon histoire</span><span class="i18n-en">The Art Story</span></a>
+        <a href="https://loan881.github.io/loanturpin/contactme"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></a>
+        <a href="https://loan881.github.io/loanturpin/gallery#devis"><span class="i18n-fr">Demander un devis</span><span class="i18n-en">Request a quote</span></a>
+      </nav>
+    </div>
+    <div class="col">
+      <h5 class="footer-title display"><span class="i18n-fr">Réseaux sociaux</span><span class="i18n-en">Social Media</span></h5>
+      <svg class="brushstroke thin w82" viewBox="0 0 180 14"><path d="M4 8 C 40 2, 90 12, 176 7"/></svg>
+      <div class="social-lines" style="margin-top:14px">
+        <div class="line"><span>Instagram :</span> <a href="https://instagram.com/turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
+        <div class="line"><span>TikTok :</span> <a href="https://tiktok.com/@turpinloanart" target="_blank" rel="noopener noreferrer">turpinloanart</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-contact">
+    <h5 class="footer-title display"><span class="i18n-fr">Me contacter</span><span class="i18n-en">Contact Me</span></h5>
+    <svg class="brushstroke thin" style="margin:0 auto" viewBox="0 0 200 14"><path d="M4 8 C 50 2, 100 12, 196 7"/></svg>
+    <p class="line"><span>E-Mail :</span> <a href="mailto:t.loan.contact@gmail.com">t.loan.contact@gmail.com</a></p>
+    <div class="credit">
+      <svg class="brushstroke thin" viewBox="0 0 220 14"><path d="M4 8 C 55 2, 110 12, 216 7"/></svg>
+      <p>© 2026 TURPIN Loan</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar : rétrécit au scroll
+  const siteHeader = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    siteHeader.classList.toggle('shrink', window.scrollY > 60);
+  }, { passive:true });
+
+  // Reveal au scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:.14 });
+  document.querySelectorAll('.reveal, .brushstroke').forEach(el => io.observe(el));
+
+  // Bouton "Demander ce prix" → formulaire de devis
+  const quoteBtn = document.getElementById('quoteBtn');
+  if (quoteBtn){
+    quoteBtn.addEventListener('click', () => {
+      window.location.href = 'https://loan881.github.io/loanturpin/gallery?oeuvre=' +
+        encodeURIComponent('Ocean Spirit — 1200 €') + '#devis';
+    });
+  }
+
+  // Bandeau d'images en défilement continu
+  (function(){
+    const marquee = document.getElementById('marquee');
+    const track = document.getElementById('track');
+    const source = document.getElementById('group-source');
+    if(!marquee || !track || !source) return;
+
+    for(let i=0;i<2;i++){
+      const clone = source.cloneNode(true);
+      clone.id = ""; clone.setAttribute("aria-hidden","true");
+      track.appendChild(clone);
+    }
+
+    let gw = 0;
+    function measure(){ gw = source.getBoundingClientRect().width; }
+
+    function center(){
+      measure();
+      const first = source.querySelector('img');
+      if(!first) { marquee.scrollLeft = gw; return; }
+      const firstW = first.getBoundingClientRect().width;
+      const viewW  = marquee.clientWidth;
+      marquee.scrollLeft = gw + (firstW / 2) - (viewW / 2);
+    }
+
+    function waitImagesLoaded(){
+      const imgs = source.querySelectorAll('img');
+      return Promise.all([...imgs].map(img=>{
+        if (img.complete) return Promise.resolve();
+        return new Promise(res=>{
+          img.addEventListener('load', res, {once:true});
+          img.addEventListener('error', res, {once:true});
+        });
+      }));
+    }
+
+    function wrap(){
+      if (gw <= 1) return;
+      while (marquee.scrollLeft < gw * 0.25) marquee.scrollLeft += gw;
+      while (marquee.scrollLeft > gw * 1.75) marquee.scrollLeft -= gw;
+    }
+
+    let dragging = false, startX = 0, startScroll = 0, autoplay = true;
+    const SPEED = 0.6;
+
+    function step(){
+      if (autoplay && !dragging) {
+        marquee.scrollLeft += SPEED;
+        wrap();
+      }
+      requestAnimationFrame(step);
+    }
+
+    function onPointerDown(e){
+      dragging = true;
+      autoplay = false;
+      marquee.classList.add('dragging');
+      marquee.setPointerCapture?.(e.pointerId);
+      startX = e.clientX;
+      startScroll = marquee.scrollLeft;
+    }
+    function onPointerMove(e){
+      if(!dragging) return;
+      const dx = startX - e.clientX;
+      marquee.scrollLeft = startScroll + dx;
+      wrap();
+    }
+    function onPointerUp(e){
+      if(!dragging) return;
+      dragging = false;
+      marquee.classList.remove('dragging');
+      marquee.releasePointerCapture?.(e.pointerId);
+      setTimeout(()=>{ autoplay = true; }, 600);
+    }
+
+    marquee.addEventListener('pointerdown', onPointerDown);
+    marquee.addEventListener('pointermove', onPointerMove);
+    marquee.addEventListener('pointerup', onPointerUp);
+    marquee.addEventListener('pointercancel', onPointerUp);
+    marquee.addEventListener('pointerleave', e => { if(dragging) onPointerUp(e); });
+
+    marquee.addEventListener('mouseenter', ()=> autoplay = false);
+    marquee.addEventListener('mouseleave', ()=> autoplay = true);
+
+    marquee.addEventListener('wheel', (e) => {
+      const delta = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      marquee.scrollLeft += delta;
+      wrap();
+      e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('resize', center);
+
+    waitImagesLoaded().then(()=>{
+      center();
+      requestAnimationFrame(step);
+    });
+
+    setTimeout(()=>{ if (gw === 0) { center(); requestAnimationFrame(step); } }, 1500);
+  })();
+
+  // Gestion du language switcher
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.documentElement.setAttribute('data-lang', btn.dataset.lang);
+      localStorage.setItem('lang', btn.dataset.lang);
+    });
+  });
+
+  // Charger la langue sauvegardée
+  const savedLang = localStorage.getItem('lang') || 'fr';
+  document.documentElement.setAttribute('data-lang', savedLang);
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === savedLang);
+  });
+</script>
+</body>
+</html>
